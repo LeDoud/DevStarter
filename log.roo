@@ -1,3 +1,9 @@
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-05-02 16:45:34
 project --topLevelPackage isep.rose.devstarter --projectName DevStarter --java 6 --packaging JAR
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-05-02 16:45:36
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-05-02 16:47:59
+osgi start --url file:/Users/Edouard/.m2/repository/mysql/mysql-connector-java/5.1.18/mysql-connector-java-5.1.18.jar
+persistence setup --provider HIBERNATE --database MYSQL --userName root --password root --databaseName devstarter
+database introspect --schema devstarter
+database reverse engineer --schema devstarter --package ~.domain --includeNonPortableAttributes
+web mvc setup
