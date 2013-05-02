@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_isep_rose_devstarter_domain_CommentUserProject" items="${commentuserprojects}" z="ZQzRx17eXoBdGnGGDoIntrhhrHg=">
+        <table:table data="${commentuserprojects}" id="l_isep_rose_devstarter_domain_CommentUserProject" path="/commentuserprojects" typeIdFieldName="idComment" z="z7As1491BqoVlBXhNXV/+jTI/xo=">
+            <table:column id="c_isep_rose_devstarter_domain_CommentUserProject_projectId" property="projectId" z="ZYJ8lf+IWX1JfsdzeVdC1fjwpFc="/>
+            <table:column id="c_isep_rose_devstarter_domain_CommentUserProject_userId" property="userId" z="qJekgb7JKgA5LTHB8Igt/yUUAIc="/>
+            <table:column id="c_isep_rose_devstarter_domain_CommentUserProject_title" property="title" z="u8WUXPbEU8TOVMULfVz7D/sUlNw="/>
+            <table:column id="c_isep_rose_devstarter_domain_CommentUserProject_message" property="message" z="sxJhZIoF64/KctmZBopGo/CKrUc="/>
+            <table:column calendar="true" dateTimePattern="${commentUserProject_createddate_date_format}" id="c_isep_rose_devstarter_domain_CommentUserProject_createdDate" property="createdDate" z="icCzkK/IJmOOiKziXutMO8Y+5Yw="/>
+        </table:table>
+    </page:list>
+</div>

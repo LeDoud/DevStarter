@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_isep_rose_devstarter_domain_ManageUserProject" idField="idManage" modelAttribute="manageUserProject" path="/manageuserprojects" versionField="none" z="YW2ILG1ucyzC0rCl7ETt4OUfMaQ=">
+        <field:select field="userId" id="c_isep_rose_devstarter_domain_ManageUserProject_userId" itemValue="idUser" items="${users}" path="/users" z="hQM02m8OUUxe1qy94JsyGfYzR2A="/>
+        <field:select field="projectId" id="c_isep_rose_devstarter_domain_ManageUserProject_projectId" itemValue="idProject" items="${projects}" path="/projects" z="1SuNdwf15IOf0/+vf3xD41AoIeg="/>
+    </form:update>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_isep_rose_devstarter_domain_CommentUserProject" idField="idComment" modelAttribute="commentUserProject" path="/commentuserprojects" versionField="none" z="hXCvJNVdjje3ZgN6HNgcjdkDWEA=">
+        <field:select field="projectId" id="c_isep_rose_devstarter_domain_CommentUserProject_projectId" itemValue="idProject" items="${projects}" path="/projects" z="WxPXgcKW2UNaJGnpoPnCBvj5A5g="/>
+        <field:select field="userId" id="c_isep_rose_devstarter_domain_CommentUserProject_userId" itemValue="idUser" items="${users}" path="/users" z="zET9Yog8hZSV1MA/I2EwXbhRDUI="/>
+        <field:input field="title" id="c_isep_rose_devstarter_domain_CommentUserProject_title" required="true" z="wcMRdrxACARenjwN/Z9zrqERNtc="/>
+        <field:input field="message" id="c_isep_rose_devstarter_domain_CommentUserProject_message" z="X+K9a9FJwbpmeLM86JgXjnFpoUI="/>
+        <field:datetime dateTimePattern="${commentUserProject_createddate_date_format}" field="createdDate" id="c_isep_rose_devstarter_domain_CommentUserProject_createdDate" z="6x2Sxrq6vHqKBFZzGejvvbqR/tk="/>
+    </form:update>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_isep_rose_devstarter_domain_Forum" idField="idForum" modelAttribute="forum" path="/forums" versionField="none" z="5gaAf/B9uf8gnUwUyiM3X1ukEsI=">
+        <field:select field="typeEnumId" id="c_isep_rose_devstarter_domain_Forum_typeEnumId" itemValue="idEnumeration" items="${enumerations}" path="/enumerations" z="7WUfdgWvU1vwL6gcC1DqLf9Lb20="/>
+        <field:select field="userId" id="c_isep_rose_devstarter_domain_Forum_userId" itemValue="idUser" items="${users}" path="/users" z="xZB5JiDZFaCKY+mLf0i/+5ZXBGM="/>
+        <field:input field="title" id="c_isep_rose_devstarter_domain_Forum_title" z="QqRPVv/Aoz+Rr8hvo6/gZOfcBZw="/>
+        <field:input field="message" id="c_isep_rose_devstarter_domain_Forum_message" z="Q38a/ueOSSZ2GNvLP2W3R/SCNfE="/>
+        <field:datetime dateTimePattern="${forum_datecreated_date_format}" field="dateCreated" id="c_isep_rose_devstarter_domain_Forum_dateCreated" z="2kUHcFuD6sfCcfAMvmQQENIcQWU="/>
+        <field:input field="parentId" id="c_isep_rose_devstarter_domain_Forum_parentId" validationMessageCode="field_invalid_integer" z="yaeWjKQ1E+cwJDENI3x2STpIqTg="/>
+    </form:update>
+</div>

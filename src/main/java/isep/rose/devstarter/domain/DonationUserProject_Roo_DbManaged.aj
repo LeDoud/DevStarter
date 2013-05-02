@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.DonationUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.User;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,8 +29,8 @@ privileged aspect DonationUserProject_Roo_DbManaged {
     
     @Column(name = "DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date DonationUserProject.date;
+    @DateTimeFormat(style = "MM")
+    private Calendar DonationUserProject.date;
     
     @Column(name = "TRANSACTION_DETAIL", columnDefinition = "VARCHAR", length = 255)
     private String DonationUserProject.transactionDetail;
@@ -59,11 +59,11 @@ privileged aspect DonationUserProject_Roo_DbManaged {
         this.amount = amount;
     }
     
-    public Date DonationUserProject.getDate() {
+    public Calendar DonationUserProject.getDate() {
         return date;
     }
     
-    public void DonationUserProject.setDate(Date date) {
+    public void DonationUserProject.setDate(Calendar date) {
         this.date = date;
     }
     

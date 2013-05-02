@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_isep_rose_devstarter_domain_Enumeration" object="${enumeration}" path="/enumerations" z="j/R6wlTM7B5jvxnyCWjtkLzZcd0=">
+        <field:display field="name" id="s_isep_rose_devstarter_domain_Enumeration_name" object="${enumeration}" z="OYAR5193XlaMVQgqhtdrWyJvfbI="/>
+        <field:display field="value" id="s_isep_rose_devstarter_domain_Enumeration_value" object="${enumeration}" z="F9mmRBNxzB6dp8Ch80DfcBzKciY="/>
+        <field:display field="rank" id="s_isep_rose_devstarter_domain_Enumeration_rank" object="${enumeration}" z="dNPT+qn+CPPkO1TdFyD3DXSUqyM="/>
+        <field:display field="active" id="s_isep_rose_devstarter_domain_Enumeration_active" object="${enumeration}" z="IQnlRyl0xKRSAvMM4yVB2ou2gbg="/>
+        <field:display field="parentId" id="s_isep_rose_devstarter_domain_Enumeration_parentId" object="${enumeration}" z="0YCAErjx9KZDshz+6i1gZBDcyOQ="/>
+        <field:display field="typeId" id="s_isep_rose_devstarter_domain_Enumeration_typeId" object="${enumeration}" z="TnR64ju6F6PsQRX+8b/EBs+zmgk="/>
+    </page:show>
+</div>

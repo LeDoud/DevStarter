@@ -9,9 +9,9 @@
 <aspect name="isep.rose.devstarter.domain.TechnologyProjectEnumeration_Roo_Jpa_ActiveRecord"/>
 <aspect name="isep.rose.devstarter.domain.Notification_Roo_Configurable"/>
 <aspect name="isep.rose.devstarter.domain.CommentUserProject_Roo_Jpa_ActiveRecord"/>
+<aspect name="isep.rose.devstarter.domain.Project_Roo_Configurable"/>
 <aspect name="isep.rose.devstarter.domain.User_Roo_ToString"/>
 <aspect name="isep.rose.devstarter.domain.Forum_Roo_Jpa_ActiveRecord"/>
-<aspect name="isep.rose.devstarter.domain.Project_Roo_Configurable"/>
 <aspect name="isep.rose.devstarter.domain.Project_Roo_ToString"/>
 <aspect name="isep.rose.devstarter.domain.CommentUserProject_Roo_Jpa_Entity"/>
 <aspect name="isep.rose.devstarter.domain.Project_Roo_Jpa_ActiveRecord"/>

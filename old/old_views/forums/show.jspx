@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_isep_rose_devstarter_domain_Forum" object="${forum}" path="/forums" z="1OM5dOoTKWummcSHwPtrULChcIo=">
+        <field:display field="typeEnumId" id="s_isep_rose_devstarter_domain_Forum_typeEnumId" object="${forum}" z="rlSXpMoszg0qvUlv4amOYsxMiGw="/>
+        <field:display field="userId" id="s_isep_rose_devstarter_domain_Forum_userId" object="${forum}" z="67yfe+eseQtcaLBAfIv4aRLvT2U="/>
+        <field:display field="title" id="s_isep_rose_devstarter_domain_Forum_title" object="${forum}" z="HhUneue8s9PloFKmFY8lBWl2fGk="/>
+        <field:display field="message" id="s_isep_rose_devstarter_domain_Forum_message" object="${forum}" z="GZV4FOUPqgpDsQbo0RC7BdGG0i8="/>
+        <field:display calendar="true" dateTimePattern="${forum_datecreated_date_format}" field="dateCreated" id="s_isep_rose_devstarter_domain_Forum_dateCreated" object="${forum}" z="CIe3G5TXzjYIm6B91/+RVjBJ0fQ="/>
+        <field:display field="parentId" id="s_isep_rose_devstarter_domain_Forum_parentId" object="${forum}" z="kEWmOxwRzx4RET1tzAuQAtFb6Ig="/>
+    </page:show>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_isep_rose_devstarter_domain_TechnologyProjectEnumeration" items="${technologyprojectenumerations}" z="HOVFmvFCdnadSk+WittM/Hvw3Dg=">
+        <table:table data="${technologyprojectenumerations}" id="l_isep_rose_devstarter_domain_TechnologyProjectEnumeration" path="/technologyprojectenumerations" typeIdFieldName="idTechnology" z="RlL+BkdkDvH7uducAzyXMSZGMm4=">
+            <table:column id="c_isep_rose_devstarter_domain_TechnologyProjectEnumeration_projectId" property="projectId" z="+kpeIeFC4RtRzbfsjd22ptfph9k="/>
+            <table:column id="c_isep_rose_devstarter_domain_TechnologyProjectEnumeration_technoEnumId" property="technoEnumId" z="W5Y2rbMeaBt5OqWtmE81pgiS+6M="/>
+        </table:table>
+    </page:list>
+</div>

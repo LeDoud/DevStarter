@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.Forum;
 import isep.rose.devstarter.domain.User;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,8 +32,8 @@ privileged aspect Forum_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date Forum.dateCreated;
+    @DateTimeFormat(style = "MM")
+    private Calendar Forum.dateCreated;
     
     @Column(name = "PARENT_ID", columnDefinition = "INT")
     private Integer Forum.parentId;
@@ -70,11 +70,11 @@ privileged aspect Forum_Roo_DbManaged {
         this.message = message;
     }
     
-    public Date Forum.getDateCreated() {
+    public Calendar Forum.getDateCreated() {
         return dateCreated;
     }
     
-    public void Forum.setDateCreated(Date dateCreated) {
+    public void Forum.setDateCreated(Calendar dateCreated) {
         this.dateCreated = dateCreated;
     }
     

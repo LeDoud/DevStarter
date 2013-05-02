@@ -7,3 +7,9 @@ persistence setup --provider HIBERNATE --database MYSQL --userName root --passwo
 database introspect --schema devstarter
 database reverse engineer --schema devstarter --package ~.domain --includeNonPortableAttributes
 web mvc setup
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-02 17:48:07
+web mvc controller --class ~.web.HomeController
+web mvc controller --class ~.web.ProjectController
+web mvc controller --class ~.web.UserController
+web mvc controller --class ~.web.ForumController
+web mvc controller --class ~.web.AdminController

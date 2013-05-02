@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_technologyprojectenumeration" z="6CXjwprYI1UXkEZ8jARu6pUPHA4=">
+            <menu:item id="i_technologyprojectenumeration_new" messageCode="global_menu_new" url="/technologyprojectenumerations?form" z="MGwZ7LvIlAjjxzDQlmtyHGGqKMg="/>
+            <menu:item id="i_technologyprojectenumeration_list" messageCode="global_menu_list" url="/technologyprojectenumerations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GB8tv7ialBIrCMOJqK4s7CWmRgE="/>
+        </menu:category>
+        <menu:category id="c_file" z="jLGFVLcV4vBWOX5oBU59VwojRJY=">
+            <menu:item id="i_file_new" messageCode="global_menu_new" url="/files?form" z="8AM56650bTAYyCYkB24ZUGdHXwE="/>
+            <menu:item id="i_file_list" messageCode="global_menu_list" url="/files?page=1&amp;size=${empty param.size ? 10 : param.size}" z="80usN9Zabmvl0MY2NgWjcjaceGY="/>
+        </menu:category>
+        <menu:category id="c_forum" z="D9KDVFVTaC52Wnq+ToLSVxC/+jQ=">
+            <menu:item id="i_forum_new" messageCode="global_menu_new" url="/forums?form" z="x4XT78syEeWy4v0fHBCvGhDT6H8="/>
+            <menu:item id="i_forum_list" messageCode="global_menu_list" url="/forums?page=1&amp;size=${empty param.size ? 10 : param.size}" z="PEiGmDnzH9bl/kqyJ7kMHQYuZLA="/>
+        </menu:category>
+        <menu:category id="c_manageuserproject" z="3PPFgW/aYkU2MWxSNW6Lseyi46g=">
+            <menu:item id="i_manageuserproject_new" messageCode="global_menu_new" url="/manageuserprojects?form" z="tExpNz7yKDz4zqQ9RyL3vXtb1WI="/>
+            <menu:item id="i_manageuserproject_list" messageCode="global_menu_list" url="/manageuserprojects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VQs8gkhH2CitUbQdwfs8206cr8Q="/>
+        </menu:category>
+        <menu:category id="c_user" z="uoTSf/uIZ821ZppidzS9aO776yk=">
+            <menu:item id="i_user_new" messageCode="global_menu_new" url="/users?form" z="Zv1m8u2rG+JFKcvJ+AHVVK0ey24="/>
+            <menu:item id="i_user_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4MY4uybxa60Q1G2rlI5bOwg+sm0="/>
+        </menu:category>
+        <menu:category id="c_project" z="u0PzRIwMDmEv/J6b8vbKakXGIdQ=">
+            <menu:item id="i_project_new" messageCode="global_menu_new" url="/projects?form" z="1BazRC1rLnod0a+MpP1flWTvehA="/>
+            <menu:item id="i_project_list" messageCode="global_menu_list" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GHL05c3Rvr+eKDgRCk3Ttak0W+g="/>
+        </menu:category>
+        <menu:category id="c_donationuserproject" z="qw98FRISoT1eZlVsT6mb0PmWAbk=">
+            <menu:item id="i_donationuserproject_new" messageCode="global_menu_new" url="/donationuserprojects?form" z="VOh7C5LfneKoq0ZPszuMjmtKbDU="/>
+            <menu:item id="i_donationuserproject_list" messageCode="global_menu_list" url="/donationuserprojects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="RSDk/AJNNf2y0V8ExVFiK3BPKKc="/>
+        </menu:category>
+        <menu:category id="c_enumeration" z="doB+bV8F0VcVhu+PvF2zJn0Z/iI=">
+            <menu:item id="i_enumeration_new" messageCode="global_menu_new" url="/enumerations?form" z="vbhfonAYfSo0yUaFawFdY9J2FBo="/>
+            <menu:item id="i_enumeration_list" messageCode="global_menu_list" url="/enumerations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/hKcLuwExYeqsRIFF6SeXlqL7AU="/>
+        </menu:category>
+        <menu:category id="c_followuserproject" z="iZ8u/N3+ypK17it4dfx45MoOweI=">
+            <menu:item id="i_followuserproject_new" messageCode="global_menu_new" url="/followuserprojects?form" z="UUVQTGjFdF72AN/ZiWGWlX9dqCE="/>
+            <menu:item id="i_followuserproject_list" messageCode="global_menu_list" url="/followuserprojects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="OLpbJRvekobiE33+70jLaA+N9bI="/>
+        </menu:category>
+        <menu:category id="c_commentuserproject" z="bphvc5lY1xptfZJMCaOU4XfTY0s=">
+            <menu:item id="i_commentuserproject_new" messageCode="global_menu_new" url="/commentuserprojects?form" z="6BTFEESJxSG4nVHc5rnBdorzfCY="/>
+            <menu:item id="i_commentuserproject_list" messageCode="global_menu_list" url="/commentuserprojects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4V9BZmHvfFqpSlW1CaPjgpK8f9k="/>
+        </menu:category>
+    </menu:menu>
+</div>
