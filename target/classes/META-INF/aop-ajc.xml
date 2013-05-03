@@ -39,8 +39,8 @@
 <aspect name="isep.rose.devstarter.domain.TechnologyProjectEnumeration_Roo_Jpa_Entity"/>
 <aspect name="isep.rose.devstarter.domain.Enumeration_Roo_DbManaged"/>
 <aspect name="isep.rose.devstarter.domain.TechnologyProjectEnumeration_Roo_ToString"/>
-<aspect name="isep.rose.devstarter.domain.Enumeration_Roo_Jpa_Entity"/>
 <aspect name="isep.rose.devstarter.domain.File_Roo_DbManaged"/>
+<aspect name="isep.rose.devstarter.domain.Enumeration_Roo_Jpa_Entity"/>
 <aspect name="isep.rose.devstarter.domain.User_Roo_Jpa_Entity"/>
 <aspect name="isep.rose.devstarter.domain.File_Roo_Configurable"/>
 <aspect name="isep.rose.devstarter.domain.Project_Roo_DbManaged"/>

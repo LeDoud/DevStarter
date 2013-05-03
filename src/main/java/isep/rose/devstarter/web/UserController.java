@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/user/**")
 @Controller
@@ -27,7 +28,8 @@ public class UserController {
     }
     
     @RequestMapping(value = "/create", produces = "text/html")
-    public String create() {
-        return "user/create";
+    public ModelAndView create() {
+        return new ModelAndView("user/create");
     }
+
 }

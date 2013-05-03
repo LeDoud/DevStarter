@@ -4,7 +4,7 @@
     <definition extends="default" name="user/index">
         <put-attribute name="body" value="/WEB-INF/views/user/index.jspx"/>
     </definition>
-	<definition extends="default" name="user/create">
+	<definition extends="overlay" name="user/create">
         <put-attribute name="body" value="/WEB-INF/views/user/create.jspx"/>
     </definition>
 	<definition extends="default" name="user/account">

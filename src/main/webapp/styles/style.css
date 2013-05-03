@@ -43,3 +43,64 @@ footer {
 	text-align: center;
 }
 /*.content-info {color: #999;background-image: url(../img/gray_jean.png);background-color: #f8f8f8;text-align: center;}*/
+
+
+
+
+/*----------OVERLAY-----------*/
+#overlay
+{
+    background-image: url(../images/white.png);
+    color: #000000; /*height: 450px;*/
+    height: 485px;
+}
+
+/* container for external content. uses vertical scrollbar, if needed */
+div.contentWrap
+{
+    /*height: 500px;*/
+    height: 535px;
+    overflow-y: auto;
+    border: 1px solid #FFFFFF;
+    margin-top:-10px;
+}
+
+
+.apple_overlay
+{
+    display: none; /* growing background image */
+    background-image: url(../images/white.png); /*  		width after the growing animation finishes 		height is automatically calculated 	*/
+    width: 800px; /* some padding to layout nested elements nicely  */
+    padding: 35px; /* a little styling */
+    font-size: 11px;
+}
+
+/* default close button positioned on upper right corner */
+.apple_overlay .close
+{
+    background-image: url(../images/close.png);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+.overlay
+{
+    margin-left: 45px;
+    margin-top: 15px;
+    font-size: 14px;
+    margin-right: 45px;
+}
+
+.overlay input, .overlay select, .overlay a
+{
+    margin-bottom: 20px;
+}
+
+.overlay .textarea
+{
+    width: 100%;
+}
