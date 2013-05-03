@@ -25,4 +25,14 @@ public class ProjectController {
     public String search() {
         return "project/search";
     }
+    
+    @RequestMapping(value = "/show", produces = "text/html")
+    public String show() {
+        return "project/show";
+    }
+    
+    @RequestMapping(value = "/create", produces = "text/html")
+    public String create() {
+        return "project/create";
+    }
 }

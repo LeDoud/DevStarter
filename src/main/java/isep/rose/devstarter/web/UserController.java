@@ -20,4 +20,14 @@ public class UserController {
     public String index() {
         return "user/index";
     }
+    
+    @RequestMapping(value = "/account", produces = "text/html")
+    public String account() {
+        return "user/account";
+    }
+    
+    @RequestMapping(value = "/create", produces = "text/html")
+    public String create() {
+        return "user/create";
+    }
 }
