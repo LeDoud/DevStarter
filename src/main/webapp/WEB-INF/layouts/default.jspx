@@ -30,10 +30,10 @@
 		<tiles:insertAttribute name="footer" ignore="true" />
 
 	</div>
-	<div class="apple_overlay" id="overlay">
-        <!-- the external content is loaded inside this tag -->
-        <div class="contentWrap">
-        </div>
-    </div>
+	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/create" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+
+		 <div class="modal-body"><!-- content will be loaded here --></div>
+
+	</div>
 </body>
 </html>

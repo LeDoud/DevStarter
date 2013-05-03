@@ -41,7 +41,7 @@
 				<ul class="nav">
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/search'))}">
-							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/project/search">Search</a></li>
+							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><i class="icon-search"></i>Search</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/project/search">Search</a></li>
@@ -102,7 +102,7 @@
 							<li><a href="#">Facebook</a></li>
 						</ul></li>
 					
-					<li class="divider-vertical"><a href="${pageContext.request.contextPath}/user/create" rel="#overlay">New account</a></li>
+					<li class="divider-vertical"><a href="${pageContext.request.contextPath}/user/create" data-target="#myModal" data-toggle="modal">Begin with DevStarter</a></li>
 				</ul>
 				
 				<ul class="nav pull-right">
@@ -138,4 +138,5 @@
 			</nav>
 		</div>
 	</header>
+	
 </div>

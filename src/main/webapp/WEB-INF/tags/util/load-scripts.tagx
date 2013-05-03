@@ -8,8 +8,6 @@
     <spring:url value="/resources/styles/espace-bootstrap-responsive.min.css" var="espace_responsive_bootstrap_css_url" />
   <spring:url value="/resources/scripts/bootstrap.js" var="bootstrap_js_url" />
   <spring:url value="/resources/scripts/jquery-1.9.1.min.js" var="jquery_url" />
-  <spring:url value="/resources/scripts/jquery.tools.min.js" var="jquery_tools_url" />
-  <spring:url value="/resources/scripts/overlay.js" var="overlay_url" />
   <spring:url value="/resources/scripts/menu.js" var="menu_url" />
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
 
@@ -27,7 +25,6 @@
   <script src="${jquery_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${bootstrap_js_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${menu_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-  <script src="${jquery_tools_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-  <script src="${overlay_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+
   
 </jsp:root>
