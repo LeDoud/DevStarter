@@ -28,10 +28,10 @@
 				<ul class="nav">
 				<c:choose>
 					<c:when test="${(fn:contains(url,'home/index')) || (url=='/DevStarter/')}">
-						<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/home/index">Home</a></li>
+						<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/home/index"><span class="icon-home"> </span>Home</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class=" divider-vertical"><a href="${pageContext.request.contextPath}/home/index">Home</a></li>
+						<li class=" divider-vertical"><a href="${pageContext.request.contextPath}/home/index"><span class="icon-home"> </span>Home</a></li>
 					</c:otherwise>
 				</c:choose>
 				</ul>
@@ -41,10 +41,10 @@
 				<ul class="nav">
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/search'))}">
-							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><i class="icon-search"></i>Search</a></li>
+							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><span class="icon-search"> </span>Search</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/project/search">Search</a></li>
+							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><span class="icon-search"> </span>Search</a></li>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
@@ -84,9 +84,9 @@
 					
 					<c:choose>
 						<c:when test="${(fn:contains(url,'forum'))}">
-							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/forum/index">Forum</a></li>						</c:when>
+							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/forum/index"><span class="icon-comment"> </span>Forum</a></li>						</c:when>
 						<c:otherwise>
-							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/forum/index">Forum</a></li>						</c:otherwise>
+							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/forum/index"><span class="icon-comment"> </span>Forum</a></li>						</c:otherwise>
 					</c:choose>
 				</ul>
 
@@ -111,7 +111,7 @@
 					<c:choose>
 						<c:when test="${(fn:contains(url,'user/account'))}">
 							<li class="active dropdown divider-vertical">
-								<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Prenom Nom | 20$ </a>
+								<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="${pageContext.request.contextPath}/user/account">Account</a></li>
@@ -123,7 +123,7 @@
 						</c:when>						
 						<c:otherwise>
 							<li class="dropdown divider-vertical">
-							<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Prenom Nom | 20$ </a>
+							<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
 								<ul class="dropdown-menu">
 								<li><a
 									href="${pageContext.request.contextPath}/user/account">Account</a></li>
