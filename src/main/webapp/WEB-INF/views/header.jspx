@@ -20,9 +20,13 @@
 		</div>
 		<div id="menu" class="navbar-inner">
 			<a class="brand hidden-desktop">Menu</a> <a class="btn btn-navbar"
-				data-toggle="collapse" data-target=".nav-collapse"> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span>
+				data-toggle="collapse" data-target=".nav-collapse"> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
 			</a>
 			<nav id="nav-main" class="nav-collapse" role="navigation">
 				<ul class="nav">
@@ -50,33 +54,33 @@
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
 							<li class="active dropdown"><a href="" class="dropdown-toggle"
-						role="button" data-toggle="dropdown">My projects</a>
+						role="button" data-toggle="dropdown"><span class="icon-briefcase"> </span>My projects</a>
 						<ul class="dropdown-menu">
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Followed</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-star"> </span>Followed</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Funded</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-eye-open"> </span>Funded</a></li>
 							<li class="divider"></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Developped</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-wrench"> </span>Managed</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/create">New
+								href="${pageContext.request.contextPath}/project/create"><span class="icon-plus"> </span>New
 									project</a></li>
 						</ul></li>
 						</c:when>
 						<c:otherwise>
 							<li class="dropdown"><a href="" class="dropdown-toggle"
-						role="button" data-toggle="dropdown">My projects</a>
+						role="button" data-toggle="dropdown"><span class="icon-briefcase"> </span>My projects</a>
 						<ul class="dropdown-menu">
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Followed</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-star"> </span>Followed</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Funded</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-eye-open"> </span>Funded</a></li>
 							<li class="divider"></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects">Developped</a></li>
+								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-wrench"> </span>Managed</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/project/create">New
+								href="${pageContext.request.contextPath}/project/create"><span class="icon-plus"> </span>New
 									project</a></li>
 						</ul></li>
 						</c:otherwise>
@@ -89,22 +93,24 @@
 							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/forum/index"><span class="icon-comment"> </span>Forum</a></li>						</c:otherwise>
 					</c:choose>
 				</ul>
-
-				<ul class="nav pull-right">
+				
+				<div class="pull-right">
+				<ul class="nav ">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Login</a>
 						<ul class="dropdown-menu">
 							<li><form id="login-form" class="navbar-form pull-left">
-									<label href="#">Mail :</label><input type="text" /><br /> <label
-										href="#">Password :</label><input type="password" />
+									<label>Mail :</label><input type="text" /><br /> 
+									<label>Password :</label><input type="password" />
 									<button type="submit" class="btn">Login</button>
 								</form></li>
 							<li class="divider"></li>
 							<li><a href="#">Facebook</a></li>
-						</ul></li>
-					
-					<li class="divider-vertical"><a href="${pageContext.request.contextPath}/user/create" data-target="#myModal" data-toggle="modal">Begin with DevStarter</a></li>
+						</ul>
+					</li>
+				<a href="${pageContext.request.contextPath}/user/create" class="btn btn-primary" data-target="#myModal" data-toggle="modal"><strong>Begin with DevStarter</strong></a>
+
 				</ul>
-				
+				</div>
 				<ul class="nav pull-right">
 					<li><span class="btn">0</span></li>
 					
@@ -114,11 +120,11 @@
 								<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
 								<ul class="dropdown-menu">
 									<li><a
-										href="${pageContext.request.contextPath}/user/account">Account</a></li>
+										href="${pageContext.request.contextPath}/user/account"><span class="icon-cog"> </span>Account</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/user/account">Wallet</a></li>
+										href="${pageContext.request.contextPath}/user/account"><span class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Logout</a></li>
+									<li><a href="#"><span class="icon-off"> </span>Logout</a></li>
 								</ul></li>
 						</c:when>						
 						<c:otherwise>
@@ -126,11 +132,11 @@
 							<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
 								<ul class="dropdown-menu">
 								<li><a
-									href="${pageContext.request.contextPath}/user/account">Account</a></li>
+									href="${pageContext.request.contextPath}/user/account"><span class="icon-cog"> </span>Account</a></li>
 								<li><a
-									href="${pageContext.request.contextPath}/user/account">Wallet</a></li>
+									href="${pageContext.request.contextPath}/user/account"><span class="icon-shopping-cart"> </span>Wallet</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Logout</a></li>
+								<li><a href="#"><span class="icon-off"> </span>Logout</a></li>
 							</ul></li>
 						</c:otherwise>					
 					</c:choose>
