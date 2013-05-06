@@ -164,7 +164,7 @@
 							</ul>
 						</li>
 						<a href="${pageContext.request.contextPath}/user/create"
-							class="btn btn-primary" data-target="#myModal"
+							class="btn btn-primary" data-target="#myModal" data-backdrop="true"
 							data-toggle="modal"><strong>Presentation</strong></a>
 					</ul>
 				</div>
@@ -210,5 +210,4 @@
 			</nav>
 		</div>
 	</header>
-
 </div>
