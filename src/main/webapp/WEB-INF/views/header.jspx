@@ -5,9 +5,13 @@
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
+	
+	<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
+	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
+	<spring:url value="/resources/images/googleplus.png" var="googleplus_logo" />
 
-
-<c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
+	<c:set var="url"
+		value="${requestScope['javax.servlet.forward.request_uri']}" />
 
 	<header id="banner" class="navbar" role="banner">
 		<div class="banner-inner custom-banner">
@@ -20,129 +24,191 @@
 		</div>
 		<div id="menu" class="navbar-inner">
 			<a class="brand hidden-desktop">Menu</a> <a class="btn btn-navbar"
-				data-toggle="collapse" data-target=".nav-collapse"> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
+				data-toggle="collapse" data-target=".nav-collapse"> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
 			</a>
-			<nav id="nav-main" class="nav-collapse" role="navigation">
+			<nav id="nav-main" class="nav-collapse collapse" role="navigation">
 				<ul class="nav">
-				<c:choose>
-					<c:when test="${(fn:contains(url,'home/index')) || (url=='/DevStarter/')}">
-						<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/home/index"><span class="icon-home"> </span>Home</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class=" divider-vertical"><a href="${pageContext.request.contextPath}/home/index"><span class="icon-home"> </span>Home</a></li>
-					</c:otherwise>
-				</c:choose>
+					<c:choose>
+						<c:when
+							test="${(fn:contains(url,'home/index')) || (url=='/DevStarter/')}">
+							<li class="active divider-vertical"><a
+								href="${pageContext.request.contextPath}/home/index"><span
+									class="icon-home"> </span>Home</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class=" divider-vertical"><a
+								href="${pageContext.request.contextPath}/home/index"><span
+									class="icon-home"> </span>Home</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				<form class="navbar-search pull-left">
-					<input type="text" class="search-query" placeHolder="Quick search" />
+					<input type="text" class="search-query input-medium" placeHolder="Quick search" />
 				</form>
 				<ul class="nav">
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/search'))}">
-							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><span class="icon-search"> </span>Search</a></li>
+							<li class="active divider-vertical"><a
+								href="${pageContext.request.contextPath}/project/search"><span
+									class="icon-search"> </span>Search</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/project/search"><span class="icon-search"> </span>Search</a></li>
+							<li class="divider-vertical"><a
+								href="${pageContext.request.contextPath}/project/search"><span
+									class="icon-search"> </span>Search</a></li>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
-							<li class="active dropdown"><a href="" class="dropdown-toggle"
-						role="button" data-toggle="dropdown"><span class="icon-briefcase"> </span>My projects</a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-star"> </span>Followed</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-eye-open"> </span>Funded</a></li>
-							<li class="divider"></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-wrench"> </span>Managed</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/create"><span class="icon-plus"> </span>New
-									project</a></li>
-						</ul></li>
+						<c:when
+							test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
+							<li class="active dropdown"><a href=""
+								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
+									class="icon-briefcase"> </span>My projects</a>
+								<ul class="dropdown-menu">
+									<li><a
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-star"> </span>Followed</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-eye-open"> </span>Funded</a></li>
+									<li class="divider"></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-wrench"> </span>Managed</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/create"><span
+											class="icon-plus"> </span>New project</a></li>
+								</ul></li>
 						</c:when>
 						<c:otherwise>
 							<li class="dropdown"><a href="" class="dropdown-toggle"
-						role="button" data-toggle="dropdown"><span class="icon-briefcase"> </span>My projects</a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-star"> </span>Followed</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-eye-open"> </span>Funded</a></li>
-							<li class="divider"></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/myprojects"><span class="icon-wrench"> </span>Managed</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/project/create"><span class="icon-plus"> </span>New
-									project</a></li>
-						</ul></li>
-						</c:otherwise>
-					</c:choose>
-					
-					<c:choose>
-						<c:when test="${(fn:contains(url,'forum'))}">
-							<li class="active divider-vertical"><a href="${pageContext.request.contextPath}/forum/index"><span class="icon-comment"> </span>Forum</a></li>						</c:when>
-						<c:otherwise>
-							<li class="divider-vertical"><a href="${pageContext.request.contextPath}/forum/index"><span class="icon-comment"> </span>Forum</a></li>						</c:otherwise>
-					</c:choose>
-				</ul>
-				
-				<div class="pull-right">
-				<ul class="nav ">
-					<li class="dropdown"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">Login</a>
-						<ul class="dropdown-menu">
-							<li><form id="login-form" class="navbar-form pull-left">
-									<label>Mail :</label><input type="text" /><br /> 
-									<label>Password :</label><input type="password" />
-									<button type="submit" class="btn">Login</button>
-								</form></li>
-							<li class="divider"></li>
-							<li><a href="#">Facebook</a></li>
-						</ul>
-					</li>
-				<a href="${pageContext.request.contextPath}/user/create" class="btn btn-primary" data-target="#myModal" data-toggle="modal"><strong>Begin with DevStarter</strong></a>
-
-				</ul>
-				</div>
-				<ul class="nav pull-right">
-					<li><span class="btn">0</span></li>
-					
-					<c:choose>
-						<c:when test="${(fn:contains(url,'user/account'))}">
-							<li class="active dropdown divider-vertical">
-								<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
+								role="button" data-toggle="dropdown"><span
+									class="icon-briefcase"> </span>My projects</a>
 								<ul class="dropdown-menu">
 									<li><a
-										href="${pageContext.request.contextPath}/user/account"><span class="icon-cog"> </span>Account</a></li>
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-star"> </span>Followed</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/user/account"><span class="icon-shopping-cart"> </span>Wallet</a></li>
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-eye-open"> </span>Funded</a></li>
+									<li class="divider"></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/myprojects"><span
+											class="icon-wrench"> </span>Managed</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/create"><span
+											class="icon-plus"> </span>New project</a></li>
+								</ul></li>
+						</c:otherwise>
+					</c:choose>
+
+					<c:choose>
+						<c:when test="${(fn:contains(url,'forum'))}">
+							<li class="active divider-vertical"><a
+								href="${pageContext.request.contextPath}/forum/index"><span
+									class="icon-comment"> </span>Forum</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="divider-vertical"><a
+								href="${pageContext.request.contextPath}/forum/index"><span
+									class="icon-comment"> </span>Forum</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+
+
+				<div class="pull-right decal-menu">
+					<ul class="nav pull-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							role="button" data-toggle="dropdown">Sign in</a>
+							<ul class="dropdown-menu login">
+								<li class="nav-header2">Login with</li>
+								<div class="social-icons">
+									<a href="#"><img src="${facebook_logo}" /></a>
+									<a href="#"><img src="${twitter_logo}" /></a>
+									<a href="#"><img src="${googleplus_logo}" /></a>
+								</div>
+								<li class="nav-header2">or</li>
+								<li>
+									<form class="form-horizontal-menu login-form">
+										<div class="control-group">
+											<label class="control-label" for="inputEmail">Email</label>
+											<div class="controls">
+												<input type="text" id="inputEmail" placeholder="Email" />
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="inputPassword">Password</label>
+											<div class="controls">
+												<input type="password" id="inputPassword"
+													placeholder="Password" />
+											</div>
+										</div>
+										<div class="control-group">
+											<button type="submit" class="btn" style="margin-top: -25px;">Sign
+												in</button>
+											<label class="checkbox remember-me"> <input
+												type="checkbox" /> Remember me
+											</label>
+										</div>
+									</form>
+								</li>
+								<li class="divider2"></li>
+								<li class="nav-header2">Not a member yet?</li>
+								<a href="${pageContext.request.contextPath}/user/create"
+									data-target="#myModal" class="btn sign-up" data-toggle="modal">Create
+											an account</a>
+							</ul>
+						</li>
+						<a href="${pageContext.request.contextPath}/user/create"
+							class="btn btn-primary" data-target="#myModal"
+							data-toggle="modal"><strong>Presentation</strong></a>
+					</ul>
+				</div>
+				
+				
+				
+				<ul class="nav pull-right">
+					<li><span class="btn">0</span></li>
+
+					<c:choose>
+						<c:when test="${(fn:contains(url,'user/account'))}">
+							<li class="active dropdown divider-vertical"><a href="#"
+								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
+									class="icon-user"> </span>Prenom Nom | 20$ </a>
+								<ul class="dropdown-menu">
+									<li><a
+										href="${pageContext.request.contextPath}/user/account"><span
+											class="icon-cog"> </span>Account</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/user/account"><span
+											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
 									<li><a href="#"><span class="icon-off"> </span>Logout</a></li>
 								</ul></li>
-						</c:when>						
+						</c:when>
 						<c:otherwise>
-							<li class="dropdown divider-vertical">
-							<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"><span class="icon-user"> </span>Prenom Nom | 20$ </a>
+							<li class="dropdown divider-vertical"><a href="#"
+								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
+									class="icon-user"> </span>Prenom Nom | 20$ </a>
 								<ul class="dropdown-menu">
-								<li><a
-									href="${pageContext.request.contextPath}/user/account"><span class="icon-cog"> </span>Account</a></li>
-								<li><a
-									href="${pageContext.request.contextPath}/user/account"><span class="icon-shopping-cart"> </span>Wallet</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><span class="icon-off"> </span>Logout</a></li>
-							</ul></li>
-						</c:otherwise>					
+									<li><a
+										href="${pageContext.request.contextPath}/user/account"><span
+											class="icon-cog"> </span>Account</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/user/account"><span
+											class="icon-shopping-cart"> </span>Wallet</a></li>
+									<li class="divider"></li>
+									<li><a href="#"><span class="icon-off"> </span>Logout</a></li>
+								</ul></li>
+						</c:otherwise>
 					</c:choose>
 				</ul>
 			</nav>
 		</div>
 	</header>
-	
+
 </div>
