@@ -1,28 +1,120 @@
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" class="create-account">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
-	<h3>Create an account</h3>
-	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-		diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-		erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-		tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-		consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-		velit esse molestie consequat, vel illum dolore eu feugiat nulla
-		facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
-		praesent luptatum zzril delenit augue duis dolore te feugait nulla
-		facilisi. Nam liber tempor cum soluta nobis eleifend option congue
-		nihil imperdiet doming id quod mazim placerat facer possim assum. Typi
-		non habent claritatem insitam; est usus legentis in iis qui facit
-		eorum claritatem. Investigationes demonstraverunt lectores legere me
-		lius quod ii legunt saepius. Claritas est etiam processus dynamicus,
-		qui sequitur mutationem consuetudium lectorum. Mirum est notare quam
-		littera gothica, quam nunc putamus parum claram, anteposuerit
-		litterarum formas humanitatis per seacula quarta decima et quinta
-		decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant
-		sollemnes in futurum.</p>
-		
+<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
+	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
+	<spring:url value="/resources/images/googleplus.png" var="googleplus_logo" />
 	
+  <span class="nav-header3">Sign up with</span>
+	
+	<div class="social-icons">
+		<a href="#"><img src="${facebook_logo}" /></a>
+		<a href="#"><img src="${twitter_logo}" /></a>
+		<a href="#"><img src="${googleplus_logo}" /></a>
+	</div>
+	
+	<span class="nav-header3">or</span>
+  <div class="">
+
+    <form id="signup-with-email" method="post" class="form-horizontal-signup" action="/fr/signup/plain/" data-error="Oups! Une erreur s'est produite. Réessayez ou consultez notre rubrique d'aide.">
+
+      <fieldset>
+          <div class="control-group" id="div-firstname">
+	          <label for="signup-firstname" class="control-label">Firstname </label>
+	          <div class="controls">
+	          	<input maxlength="100"  type="text" id="signup-firstname" name="firstname" autofocus="autofocus"/>
+	          </div>
+          </div>
+
+          <div class="control-group" id="div-lastname">
+	          <label for="signup-lastname" class="control-label">Lastname </label>
+	          <div class="controls">
+	          	<input maxlength="100" type="text" id="signup-lastname" name="lastname"/>
+	          </div>
+          </div>
+
+		<div class="control-group" id="div-age">
+	          <label for="signup-age" class="control-label">Birth date </label>
+	          <div class="controls">
+	          	
+	           	<select class="span1">
+	           	</select>
+	           	<select class="span1">
+	           	</select>
+	           	<select class="span2">
+	           	</select>
+	          </div>
+          </div>
+          
+          <div class="control-group" id="div-password" >
+	          <label for="signup-password" class="control-label">Password </label>
+	          <div class="controls">
+	          	<input maxlength="100" type="password" id="signup-password" name="password"/>
+	          </div>
+          </div>
+
+          <div class="control-group" id="div-email" >
+	          <label for="signup-email" class="control-label">Email </label>
+	          <div class="controls">
+	          	<input maxlength="100" type="text" id="signup-email" name="email"/>
+	          </div>
+          </div>
+
+          <div class="control-group nospace" id="div-cemail">
+	          <label for="signup-confirm-email" class="control-label">Confirm email </label>
+	          <div class="controls">
+	          	<input maxlength="100" type="text" id="signup-cemail" name="confirm_email"/>
+	          </div>
+          </div>
+
+          
+         <p><small>By clicking Register, you accept the <a href="/legal/end-user-agreement/" target="_blank">Conditions d'utilisation</a> and the <a href="/legal/privacy-policy/" target="_blank">Politique de confidentialité</a> of DevStarter</small></p>
+		<button type="submit" class="btn register">Register</button>
+      </fieldset>
+    </form>
+  </div>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+	 
+	 $('#signup-with-email').validate(
+	 {
+	  rules: {
+	    firstname: {
+	      minlength: 2,
+	      required: true
+	    },
+	    lastname: {
+		      minlength: 2,
+		      required: true
+		    },
+		password: {
+			  minlength: 6,
+			  maxlength: 10,
+			  required: true
+			},
+	    email: {
+	      required: true,
+	      email: true
+	    },
+	    confirm_email: {
+		      required: true,
+		      equalTo: "#signup-email"
+		    }		    		
+	  
+	  },
+	  highlight: function(element) {
+	    $(element).closest('.control-group').removeClass('success').addClass('error');
+	  },
+	  success: function(element) {
+	    element
+	    .text('OK!').addClass('valid')
+	    .closest('.control-group').removeClass('error').addClass('success');
+	  }
+	 });
+	});
+</script>
 </div>
