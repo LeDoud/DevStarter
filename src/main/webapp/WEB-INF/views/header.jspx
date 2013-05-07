@@ -10,8 +10,7 @@
 	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
 	<spring:url value="/resources/images/googleplus.png" var="googleplus_logo" />
 
-	<c:set var="url"
-		value="${requestScope['javax.servlet.forward.request_uri']}" />
+	<c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
 
 	<header id="banner" class="navbar" role="banner">
 		<div class="banner-inner custom-banner">
@@ -62,10 +61,8 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when
-							test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
-							<li class="active dropdown"><a href=""
-								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
+						<c:when test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
+							<li class="active dropdown"><a href="" class="dropdown-toggle" role="button" data-toggle="dropdown"><span
 									class="icon-briefcase"> </span>My projects</a>
 								<ul class="dropdown-menu">
 									<li><a

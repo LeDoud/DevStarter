@@ -7,9 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 import isep.rose.devstarter.domain.User;
+import isep.rose.devstarter.domain.Enumeration;
 @RequestMapping("/user/**")
 @Controller
 public class UserController {
@@ -33,6 +35,7 @@ public class UserController {
         return new ModelAndView("user/signup");
     }
     
+    /*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL*/
     @RequestMapping(value = "/signupEmail", produces = "text/html",method = RequestMethod.POST)
     public String signupEmail(@RequestParam("firstname") String firstName,@RequestParam("lastname") 
     String lastName,@RequestParam("email") String email,@RequestParam("password") String password ) {
@@ -42,9 +45,25 @@ public class UserController {
     	user.setName(lastName);
     	user.setEmail(email);
     	user.setPassword(password);
+    	user.setJobEnumId(Enumeration.findEnumeration(8));
+    	user.setCompteEnumId(Enumeration.findEnumeration(6));
+    	user.setActive(1);
     	
     	user.persist();
-        return "redirect: user/account";
+        return "redirect:/user/account";
+    }
+    
+    
+    
+    /*------VERIFICATION DE LUNICITE DU MAIL POUR INSCRIPTION--------------*/
+    @RequestMapping(value = "/checkEmailUnicity", produces = "text/html",method = RequestMethod.POST)
+    @ResponseBody
+    public String checkEmailUnicity(@RequestParam("subEmail") String subEmail) {
+    	User user =new User().getUserByEmail(subEmail);
+    	if(user!=null){
+    		return user.getEmail().toString();
+    	}
+        return "";
     }
 
 }
