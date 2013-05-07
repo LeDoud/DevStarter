@@ -158,12 +158,12 @@
 								</li>
 								<li class="divider2"></li>
 								<li class="nav-header2">Not a member yet?</li>
-								<a href="${pageContext.request.contextPath}/user/create"
+								<a href="${pageContext.request.contextPath}/user/signup"
 									data-target="#myModal" class="btn sign-up" data-toggle="modal">Create
 											an account</a>
 							</ul>
 						</li>
-						<a href="${pageContext.request.contextPath}/user/create"
+						<a href="${pageContext.request.contextPath}/user/signup"
 							class="btn btn-primary" data-target="#myModal" data-backdrop="true"
 							data-toggle="modal"><strong>Presentation</strong></a>
 					</ul>

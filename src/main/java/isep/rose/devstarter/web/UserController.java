@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import isep.rose.devstarter.domain.User;
 @RequestMapping("/user/**")
 @Controller
 public class UserController {
@@ -27,9 +28,23 @@ public class UserController {
         return "user/account";
     }
     
-    @RequestMapping(value = "/create", produces = "text/html")
-    public ModelAndView create() {
-        return new ModelAndView("user/create");
+    @RequestMapping(value = "/signup", produces = "text/html")
+    public ModelAndView signup() {
+        return new ModelAndView("user/signup");
+    }
+    
+    @RequestMapping(value = "/signupEmail", produces = "text/html",method = RequestMethod.POST)
+    public String signupEmail(@RequestParam("firstname") String firstName,@RequestParam("lastname") 
+    String lastName,@RequestParam("email") String email,@RequestParam("password") String password ) {
+    	User user =new User();
+    	
+    	user.setFirstname(firstName);
+    	user.setName(lastName);
+    	user.setEmail(email);
+    	user.setPassword(password);
+    	
+    	user.persist();
+        return "redirect: user/account";
     }
 
 }

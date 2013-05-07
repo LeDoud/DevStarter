@@ -30,7 +30,7 @@
 		<tiles:insertAttribute name="footer" ignore="true" />
 
 	</div>
-	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/create" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/signup" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 
 		 <div class="modal-body"><!-- content will be loaded here --></div>
 

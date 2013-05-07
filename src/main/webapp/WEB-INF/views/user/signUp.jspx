@@ -22,8 +22,7 @@
 	<div class="">
 
 		<form id="signup-with-email" method="post"
-			class="form-horizontal-signup" action="/fr/signup/plain/"
-			data-error="Oups! Une erreur s'est produite. Réessayez ou consultez notre rubrique d'aide.">
+			class="form-horizontal-signup" action="/fr/signup/plain/">
 
 			<fieldset>
 				<div class="control-group" id="div-firstname">
