@@ -289,7 +289,8 @@
             min: $.validator.format("Please enter a value greater than or equal to {0}."),
             double: $.validator.format("Merci de saisir un nombre à virgule"),
             heure: $.validator.format("Merci de saisir une heure au bon format"),
-            nom: $.validator.format("Merci de ne pas mettre d'accents")
+            nom: $.validator.format("Merci de ne pas mettre d'accents"),
+            age13: $.validator.format("You must be over 13 yo to sign-up"),
         },
 
         autoCreateRanges: false,
@@ -1103,7 +1104,7 @@
 
             // http://docs.jquery.com/Plugins/Validation/Methods/date
             date: function (value, element) {
-                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+                return this.optional(element) || /^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4}$/.test(value);
             },
 
             // http://docs.jquery.com/Plugins/Validation/Methods/dateISO
@@ -1172,14 +1173,28 @@
             return this.optional(element) || /^[0-9]*,?[0-9]+$/.test(value);
         },
 
-        heure: function (value, element) {
-            return this.optional(element) || /^[0-9]{2}\:[0-9]{2}/.test(value);
-            },
+	        heure: function (value, element) {
+	            return this.optional(element) || /^[0-9]{2}\:[0-9]{2}/.test(value);
+	            },
 
-        nom: function (value, element) {
-            return this.optional(element) || /^\s*[a-zA-Z\s]+\s*$/.test(value);
-            }
-  
+	        nom: function (value, element) {
+	            return this.optional(element) || /^\s*[a-zA-Z\s]+\s*$/.test(value);
+	            },
+
+            age13: function (value, element) {
+            	var day = value.substring(0,2);
+            	var month = value.substring(3,5);
+            	var year = value.substring(6,10);
+            	var age =  13;
+             
+            	var mydate = new Date();
+            	mydate.setFullYear(year, month-1, day);
+             
+            	var currdate = new Date();
+            	currdate.setFullYear(currdate.getFullYear() - age);
+             
+            	return (currdate - mydate < 0 ? false : true);
+                },
         },
 
     });

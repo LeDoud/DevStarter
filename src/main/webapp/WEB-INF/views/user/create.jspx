@@ -1,120 +1,143 @@
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" class="create-account">
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	class="create-account">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
-<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
+	<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
 	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
-	<spring:url value="/resources/images/googleplus.png" var="googleplus_logo" />
-	
-  <span class="nav-header3">Sign up with</span>
-	
+	<spring:url value="/resources/images/googleplus.png"
+		var="googleplus_logo" />
+
+	<span class="nav-header3">Sign up with</span>
+
 	<div class="social-icons">
-		<a href="#"><img src="${facebook_logo}" /></a>
-		<a href="#"><img src="${twitter_logo}" /></a>
-		<a href="#"><img src="${googleplus_logo}" /></a>
+		<a href="#"><img src="${facebook_logo}" /></a> <a href="#"><img
+			src="${twitter_logo}" /></a> <a href="#"><img
+			src="${googleplus_logo}" /></a>
 	</div>
-	
+
 	<span class="nav-header3">or</span>
-  <div class="">
+	<div class="">
 
-    <form id="signup-with-email" method="post" class="form-horizontal-signup" action="/fr/signup/plain/" data-error="Oups! Une erreur s'est produite. Réessayez ou consultez notre rubrique d'aide.">
+		<form id="signup-with-email" method="post"
+			class="form-horizontal-signup" action="/fr/signup/plain/"
+			data-error="Oups! Une erreur s'est produite. Réessayez ou consultez notre rubrique d'aide.">
 
-      <fieldset>
-          <div class="control-group" id="div-firstname">
-	          <label for="signup-firstname" class="control-label">Firstname </label>
-	          <div class="controls">
-	          	<input maxlength="100"  type="text" id="signup-firstname" name="firstname" autofocus="autofocus"/>
-	          </div>
-          </div>
+			<fieldset>
+				<div class="control-group" id="div-firstname">
+					<label for="signup-firstname" class="control-label">Firstname
+					</label>
+					<div class="controls">
+						<input maxlength="100" type="text" id="signup-firstname"
+							name="firstname" autofocus="autofocus" />
+					</div>
+				</div>
 
-          <div class="control-group" id="div-lastname">
-	          <label for="signup-lastname" class="control-label">Lastname </label>
-	          <div class="controls">
-	          	<input maxlength="100" type="text" id="signup-lastname" name="lastname"/>
-	          </div>
-          </div>
+				<div class="control-group" id="div-lastname">
+					<label for="signup-lastname" class="control-label">Lastname
+					</label>
+					<div class="controls">
+						<input maxlength="100" type="text" id="signup-lastname"
+							name="lastname" />
+					</div>
+				</div>
 
-		<div class="control-group" id="div-age">
-	          <label for="signup-age" class="control-label">Birth date </label>
-	          <div class="controls">
-	          	
-	           	<select class="span1">
-	           	</select>
-	           	<select class="span1">
-	           	</select>
-	           	<select class="span2">
-	           	</select>
-	          </div>
-          </div>
-          
-          <div class="control-group" id="div-password" >
-	          <label for="signup-password" class="control-label">Password </label>
-	          <div class="controls">
-	          	<input maxlength="100" type="password" id="signup-password" name="password"/>
-	          </div>
-          </div>
+				<div class="control-group" id="div-age">
+					<label for="signup-age" class="control-label">Birth date </label>
+					<div class="controls">
+						<input maxlength="10" type="text" id="signup-birth_date"
+							name="birth_date" placeholder="dd/mm/yyyya"/>
+					</div>
+				</div>
 
-          <div class="control-group" id="div-email" >
-	          <label for="signup-email" class="control-label">Email </label>
-	          <div class="controls">
-	          	<input maxlength="100" type="text" id="signup-email" name="email"/>
-	          </div>
-          </div>
+				<div class="control-group" id="div-password">
+					<label for="signup-password" class="control-label">Password
+					</label>
+					<div class="controls">
+						<input maxlength="100" type="password" id="signup-password"
+							name="password" />
+					</div>
+				</div>
 
-          <div class="control-group nospace" id="div-cemail">
-	          <label for="signup-confirm-email" class="control-label">Confirm email </label>
-	          <div class="controls">
-	          	<input maxlength="100" type="text" id="signup-cemail" name="confirm_email"/>
-	          </div>
-          </div>
+				<div class="control-group" id="div-email">
+					<label for="signup-email" class="control-label">Email </label>
+					<div class="controls">
+						<input maxlength="100" type="text" id="signup-email" name="email" />
+					</div>
+				</div>
 
-          
-         <p><small>By clicking Register, you accept the <a href="/legal/end-user-agreement/" target="_blank">Conditions d'utilisation</a> and the <a href="/legal/privacy-policy/" target="_blank">Politique de confidentialité</a> of DevStarter</small></p>
-		<button type="submit" class="btn register">Register</button>
-      </fieldset>
-    </form>
-  </div>
+				<div class="control-group nospace" id="div-cemail">
+					<label for="signup-confirm-email" class="control-label">Confirm
+						email </label>
+					<div class="controls">
+						<input maxlength="100" type="text" id="signup-cemail"
+							name="confirm_email" />
+					</div>
+				</div>
 
-<script type="text/javascript">
-		$(document).ready(function(){
-	 
-	 $('#signup-with-email').validate(
-	 {
-	  rules: {
-	    firstname: {
-	      minlength: 2,
-	      required: true
-	    },
-	    lastname: {
-		      minlength: 2,
-		      required: true
-		    },
-		password: {
-			  minlength: 6,
-			  maxlength: 10,
-			  required: true
-			},
-	    email: {
-	      required: true,
-	      email: true
-	    },
-	    confirm_email: {
-		      required: true,
-		      equalTo: "#signup-email"
-		    }		    		
-	  
-	  },
-	  highlight: function(element) {
-	    $(element).closest('.control-group').removeClass('success').addClass('error');
-	  },
-	  success: function(element) {
-	    element
-	    .text('OK!').addClass('valid')
-	    .closest('.control-group').removeClass('error').addClass('success');
-	  }
-	 });
-	});
-</script>
+
+				<p>
+					<small>By clicking Register, you accept the <a
+						href="/legal/end-user-agreement/" target="_blank">Conditions
+							d'utilisation</a> and the <a href="/legal/privacy-policy/"
+						target="_blank">Politique de confidentialité</a> of DevStarter
+					</small>
+				</p>
+				<button type="submit" class="btn register">Register</button>
+			</fieldset>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+
+					$('#signup-with-email').validate(
+							{
+								rules : {
+									firstname : {
+										minlength : 2,
+										required : true
+									},
+									lastname : {
+										minlength : 2,
+										required : true
+									},
+									password : {
+										minlength : 6,
+										maxlength : 10,
+										required : true
+									},
+									email : {
+										required : true,
+										email : true
+									},
+									confirm_email : {
+										required : true,
+										equalTo : "#signup-email"
+									},
+
+									birth_date : {
+										required : true,
+										age13 : true,
+										date : true
+									},
+				
+								},
+								highlight : function(element) {
+									$(element).closest('.control-group')
+											.removeClass('success').addClass(
+													'error');
+								},
+								success : function(element) {
+									element.text('OK!').addClass('valid')
+											.closest('.control-group')
+											.removeClass('error').addClass(
+													'success');
+								}
+							});
+				});
+	</script>
 </div>
