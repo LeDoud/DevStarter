@@ -16,4 +16,7 @@
 	<definition extends="default" name="project/donate">
         <put-attribute name="body" value="/WEB-INF/views/project/donate.jspx"/>
     </definition>
+    <definition extends="default" name="project/allprojects">
+        <put-attribute name="body" value="/WEB-INF/views/project/allprojects.jspx"/>
+    </definition>
 </tiles-definitions>

@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/home/**")
 @Controller
@@ -16,8 +17,9 @@ public class HomeController {
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
     }
 
-    @RequestMapping
-    public String index() {
-        return "home/index";
+    @RequestMapping(method = RequestMethod.GET, value = "/index")
+    public ModelAndView index() {
+    	ModelAndView mav =new ModelAndView("home/index");
+        return mav;
     }
 }
