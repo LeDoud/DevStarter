@@ -14,3 +14,4 @@ web mvc controller --class ~.web.UserController
 web mvc controller --class ~.web.ForumController
 web mvc controller --class ~.web.AdminController
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-09 17:14:08
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-09 18:03:30

@@ -9,7 +9,7 @@
        My account
     </h3>
     <p>
-     
+     ${prenom}
     </p>
   </util:panel>
 </div>

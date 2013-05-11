@@ -14,7 +14,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooDbManaged(automaticallyDelete = true)
 public class User {
 
-    public isep.rose.devstarter.domain.User getUserByEmail(String email) {
+    public isep.rose.devstarter.domain.User findUserByEmail(String email) {
         List<User> users = new ArrayList<User>();
         Query query = entityManager().createQuery("select user from User user " + "where email = :email", User.class);
         query.setParameter("email", email);

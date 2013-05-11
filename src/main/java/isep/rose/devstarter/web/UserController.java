@@ -32,8 +32,14 @@ public class UserController {
     }
     
     @RequestMapping(value = "/account", produces = "text/html")
-    public String account() {
-        return "user/account";
+    public String account(HttpServletRequest request,ModelMap model) {
+    	
+    	if(request.getSession().getAttribute("idUser")!=null){
+    		User user = new User().findUser((Integer)(request.getSession().getAttribute("idUser")));
+    		model.addAttribute("firstName",user.getFirstname());
+    		return "user/account";
+    	}
+        return "resourceNotFound";
     }
     
     @RequestMapping(value = "/signup", produces = "text/html")
@@ -58,6 +64,7 @@ public class UserController {
     	user.setPassword(hashedPass);
     	user.setJobEnumId(Enumeration.findEnumeration(8));
     	user.setCompteEnumId(Enumeration.findEnumeration(6));
+    	user.setWallet(0);
     	user.setActive(1);
     	
     	user.persist();
@@ -73,7 +80,7 @@ public class UserController {
     @RequestMapping(value = "/checkEmailUnicity", produces = "text/html",method = RequestMethod.POST)
     @ResponseBody
     public String checkEmailUnicity(@RequestParam("subEmail") String subEmail) {
-    	User user =new User().getUserByEmail(subEmail);
+    	User user =new User().findUserByEmail(subEmail);
     	if(user!=null){
     		return user.getEmail().toString();
     	}
@@ -91,8 +98,12 @@ public class UserController {
     	if(user!=null){
     		request.getSession().invalidate();
     		request.getSession().setAttribute("logged", "true");
+    		request.getSession().setAttribute("idUser", user.getIdUser());
     		request.getSession().setAttribute("firstName", user.getFirstname());
     		request.getSession().setAttribute("lastName", user.getName());
+    		request.getSession().setAttribute("active", user.getActive());
+    		request.getSession().setAttribute("wallet", user.getWallet());
+   
     		return "redirect:/home/index";
     	}else{
     		

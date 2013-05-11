@@ -203,7 +203,7 @@
 						<c:when test="${(fn:contains(url,'user/account'))}">
 							<li class="active dropdown divider-vertical"><a href="#"
 								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
-									class="icon-user"> </span>${sessionScope.firstName} ${sessionScope.lastName} | 20$ </a>
+									class="icon-user"> </span>${sessionScope.firstName} ${sessionScope.lastName} | ${sessionScope.wallet}$ </a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="${pageContext.request.contextPath}/user/account"><span
@@ -218,7 +218,7 @@
 						<c:otherwise>
 							<li class="dropdown divider-vertical"><a href="#"
 								class="dropdown-toggle" role="button" data-toggle="dropdown"><span
-									class="icon-user"> </span>${sessionScope.firstName} ${sessionScope.lastName} | 20$ </a>
+									class="icon-user"> </span>${sessionScope.firstName} ${sessionScope.lastName} | ${sessionScope.wallet}$ </a>
 								<ul class="dropdown-menu">
 									<li><a
 										href="${pageContext.request.contextPath}/user/account"><span
