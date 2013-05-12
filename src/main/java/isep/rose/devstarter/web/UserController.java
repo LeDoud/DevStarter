@@ -70,8 +70,8 @@ public class UserController {
     	user.setName(lastName);
     	user.setEmail(email);
     	user.setPassword(hashedPass);
-    	user.setJobEnumId(Enumeration.findEnumeration(8));
-    	user.setCompteEnumId(Enumeration.findEnumeration(6));
+    	user.setJobEnumId(Enumeration.findEnumerationByNameAndType("No job","job"));
+    	user.setCompteEnumId(Enumeration.findEnumerationByNameAndType("normal","account"));
     	user.setWallet(0);
     	user.setActive(1);
     	

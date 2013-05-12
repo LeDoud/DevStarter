@@ -1,6 +1,8 @@
 use devstarter;
 
+delete from user;
 delete from enumeration;
+
 INSERT INTO enumeration(name) Values('account');
 
 INSERT INTO enumeration(name,type_id) 
