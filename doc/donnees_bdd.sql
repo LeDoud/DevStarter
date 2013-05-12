@@ -7,6 +7,15 @@ INSERT INTO enumeration(name,type_id)
 Values('normal',(SELECT id_enumeration from enumeration e where e.name='account'));
 
 INSERT INTO enumeration(name,type_id) 
+Values('facebook',(SELECT id_enumeration from enumeration e where e.name='account'));
+
+INSERT INTO enumeration(name,type_id) 
+Values('twitter',(SELECT id_enumeration from enumeration e where e.name='account'));
+
+INSERT INTO enumeration(name,type_id) 
+Values('google',(SELECT id_enumeration from enumeration e where e.name='account'));
+
+INSERT INTO enumeration(name,type_id) 
 Values('admin',(SELECT id_enumeration from enumeration e where e.name='account'));
 
 INSERT INTO enumeration(name) Values('job');

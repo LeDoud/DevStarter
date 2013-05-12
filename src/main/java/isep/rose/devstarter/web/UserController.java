@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import isep.rose.devstarter.domain.Email;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.domain.Enumeration;
 @RequestMapping("/user/**")
@@ -31,25 +35,29 @@ public class UserController {
         return "user/index";
     }
     
-    @RequestMapping(value = "/account", produces = "text/html")
-    public String account(HttpServletRequest request,ModelMap model) {
-    	
-    	if(request.getSession().getAttribute("idUser")!=null){
-    		User user = new User().findUser((Integer)(request.getSession().getAttribute("idUser")));
-    		model.addAttribute("firstName",user.getFirstname());
-    		return "user/account";
-    	}
-        return "resourceNotFound";
-    }
-    
     @RequestMapping(value = "/signup", produces = "text/html")
     public ModelAndView signup() {
         return new ModelAndView("user/signup");
     }
     
+    /*----------accès a la page account-------------*/
+    @RequestMapping(value = "/account", produces = "text/html")
+    public String account(HttpServletRequest request,ModelMap model) {
+    	
+    	/*on verifie que l'user a une session ouverte et on recupere le user correspondant à l'id*/
+    	if(request.getSession().getAttribute("idUser")!=null){
+    		User user = new User().findUser((Integer)(request.getSession().getAttribute("idUser")));
+    		model.addAttribute("firstName",user.getFirstname());
+    		model.addAttribute("lastName",user.getName());
+    		model.addAttribute("idUser",user.getIdUser());
+    		return "user/account";
+    	}
+    	/*si l'utilisateur n'est pas loggé, il ne doit pas avoir accès à cette page => redirection vers page notfound*/
+        return "resourceNotFound";
+    }
     
-    
-    /*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL*/
+   
+    /*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
     @RequestMapping(value = "/signupEmail", produces = "text/html",method = RequestMethod.POST)
     public String signupEmail(@RequestParam("firstname") String firstName,@RequestParam("lastname") 
     String lastName,@RequestParam("email") String email,@RequestParam("password") String password,RedirectAttributes redirectAttributes) {
@@ -67,10 +75,20 @@ public class UserController {
     	user.setWallet(0);
     	user.setActive(1);
     	
+    	/*enregistrement en bdd*/
     	user.persist();
     	
+    	/*envoi d'un mail pour confirmer et lien de redirection pour valider compte*/
+    	ApplicationContext context = new ClassPathXmlApplicationContext("springEmail.xml");
+    	Email mm = (Email) context.getBean("email");
+        mm.sendMail("from@no-spam.com",
+    		   email,
+    		   "Testing123", 
+    		   "Testing only \n\n Hello Spring Email Sender");
+    	
+        
+        /*message de confirmation lors du retour sur l'accueil*/
 		String accountCreated="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your account has been created. You can sign in now !</strong> However, we have sent you an email so you can validate your account for good.</div>";
-
     	redirectAttributes.addFlashAttribute("message", accountCreated);
     	return "redirect:/home/index";
     }
@@ -94,6 +112,7 @@ public class UserController {
     	
     	PasswordEncoder encoder = new Md5PasswordEncoder();
     	String hashedPass = encoder.encodePassword(password, "DevStarter");
+    	
     	User user =new User().getUserAfterAuthentification(email,hashedPass);
     	if(user!=null){
     		request.getSession().invalidate();
@@ -104,10 +123,14 @@ public class UserController {
     		request.getSession().setAttribute("active", user.getActive());
     		request.getSession().setAttribute("wallet", user.getWallet());
    
+    		if(user.getActive()==1){
+    			String infoMessage="<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Warning !</strong> You didn't validate your account yet. Please follow the instructions sent by mail. <a href=\"\">Re-send email.</a></div>";
+        		redirectAttributes.addFlashAttribute("message", infoMessage);
+    		}
     		return "redirect:/home/index";
     	}else{
     		
-    		String errorMessage="<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in !</strong> Wrong email or password.</div>";
+    		String errorMessage="<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in !</strong> Wrong email or password. Forgot your password ? <a href=\"\">Click here.</a></div>";
     		redirectAttributes.addFlashAttribute("message", errorMessage);
 
     		return "redirect:/home/index";
