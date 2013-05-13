@@ -97,8 +97,8 @@ public class UserController {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"springEmail.xml");
 		Email mm = (Email) context.getBean("email");
-		mm.sendMail("from@no-spam.com", email, "Testing123",
-				"Testing only \n\n Hello Spring Email Sender");
+		mm.sendMail("from@no-spam.com", email, "[DevStarter] Création de votre compte",
+				"Votre compte a bien été crée.");
 
 		/* message de confirmation lors du retour sur l'accueil */
 		String accountCreated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your account has been created. You can sign in now !</strong> However, we have sent you an email so you can validate your account for good.</div>";
