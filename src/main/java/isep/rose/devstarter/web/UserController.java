@@ -143,7 +143,7 @@ public class UserController {
 			return "redirect:/home/index";
 		} else {
 
-			String errorMessage = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in !</strong> Wrong email or password. Forgot your password ? <a href=\"/DevStarter/user/forgotPassword\" class=\"btn btn-primary\" data-target=\"#myModal2\" data-backdrop=\"true\" data-toggle=\"modal\">Click here.</a></div>";
+			String errorMessage = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in !</strong> Wrong email or password. Forgot your password ? <a href=\"/DevStarter/user/forgotPassword\" data-target=\"#myModal2\" data-backdrop=\"true\" data-toggle=\"modal\">Click here.</a></div>";
 			redirectAttributes.addFlashAttribute("message", errorMessage);
 
 			return "redirect:/home/index";
