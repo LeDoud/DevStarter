@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="user/index">
-        <put-attribute name="body" value="/WEB-INF/views/user/index.jspx"/>
-    </definition>
+	<definition extends="default" name="user/index">
+		<put-attribute name="body" value="/WEB-INF/views/user/index.jspx" />
+	</definition>
 	<definition extends="overlay" name="user/signup">
-        <put-attribute name="body" value="/WEB-INF/views/user/signUp.jspx"/>
-    </definition>
+		<put-attribute name="body" value="/WEB-INF/views/user/signUp.jspx" />
+	</definition>
 	<definition extends="default" name="user/account">
-        <put-attribute name="body" value="/WEB-INF/views/user/account.jspx"/>
-    </definition>
+		<put-attribute name="body" value="/WEB-INF/views/user/account.jspx" />
+	</definition>
 	<definition extends="default" name="user/myprojects">
-        <put-attribute name="body" value="/WEB-INF/views/user/myProjects.jspx"/>
-    </definition>
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/myProjects.jspx" />
+	</definition>
+	<definition extends="overlay" name="user/forgotPassword">
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/forgotPassword.jspx" />
+	</definition>
 </tiles-definitions>

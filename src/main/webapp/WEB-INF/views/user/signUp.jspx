@@ -50,7 +50,7 @@
 					<label for="signup-age" class="control-label">Birth date </label>
 					<div class="controls">
 						<input maxlength="10" type="text" id="signup-birth_date"
-							name="birth_date" placeholder="dd/mm/yyyya"/>
+							name="birth_date" placeholder="dd/mm/yyyy"/>
 					</div>
 				</div>
 
