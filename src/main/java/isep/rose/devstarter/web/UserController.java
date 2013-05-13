@@ -174,6 +174,7 @@ public class UserController {
 		User user = new User().findUserByEmail(email);
 		if (user != null) {
 			user.setPassword(hashedPass);
+			user.persist();
 		}
 
 		/*
