@@ -4,8 +4,8 @@
 	<definition extends="default" name="user/index">
 		<put-attribute name="body" value="/WEB-INF/views/user/index.jspx" />
 	</definition>
-	<definition extends="overlay" name="user/signup">
-		<put-attribute name="body" value="/WEB-INF/views/user/signUp.jspx" />
+	<definition extends="overlay" name="user/signupForm">
+		<put-attribute name="body" value="/WEB-INF/views/user/signupForm.jspx" />
 	</definition>
 	<definition extends="default" name="user/account">
 		<put-attribute name="body" value="/WEB-INF/views/user/account.jspx" />

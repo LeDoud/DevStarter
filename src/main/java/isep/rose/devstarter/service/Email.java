@@ -1,4 +1,4 @@
-package isep.rose.devstarter.domain;
+package isep.rose.devstarter.service;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 

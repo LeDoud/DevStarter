@@ -16,7 +16,7 @@
 	<span class="nav-header3">Sign up with</span>
 
 	<div class="social-icons">
-		<a href="#"><img src="${facebook_logo}" /></a> <a href="#"><img
+		<a href="${pageContext.request.contextPath}/user/signupFacebook"><img src="${facebook_logo}" /></a> <a href="#"><img
 			src="${twitter_logo}" /></a> <a href="#"><img
 			src="${googleplus_logo}" /></a>
 	</div>

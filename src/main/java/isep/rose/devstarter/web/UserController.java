@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import isep.rose.devstarter.domain.Email;
+import isep.rose.devstarter.service.Email;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.domain.Enumeration;
 
@@ -36,9 +36,9 @@ public class UserController {
 		return "user/index";
 	}
 
-	@RequestMapping(value = "/signup", produces = "text/html")
-	public ModelAndView signup() {
-		return new ModelAndView("user/signup");
+	@RequestMapping(value = "/signupForm", produces = "text/html")
+	public ModelAndView signupForm() {
+		return new ModelAndView("user/signupForm");
 	}
 
 	/*----------accès a la page account-------------*/
