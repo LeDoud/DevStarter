@@ -153,7 +153,7 @@
 							<ul class="dropdown-menu login">
 								<li class="nav-header2">Login with</li>
 								<div class="social-icons">
-									<a href="#"><img src="${facebook_logo}" /></a>
+									<a href="#" onclick="FB.login(function(response) {}, {scope: 'email'})"><img src="${facebook_logo}" /></a>
 									<a href="#"><img src="${twitter_logo}" /></a>
 									<a href="#"><img src="${googleplus_logo}" /></a>
 								</div>
@@ -191,7 +191,7 @@
 						</li>
 						<a href="${pageContext.request.contextPath}/user/signupForm"
 							class="btn btn-primary" data-target="#myModal" data-backdrop="true"
-							data-toggle="modal"><strong>Presentation</strong></a>
+							data-toggle="modal"><strong>Register</strong></a>
 					</ul>
 				</div>
 				</c:if>
@@ -212,7 +212,7 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
-									<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/logout" onclick="FB.api('/me', 'delete', function(response) {console.log(response);});"><span class="icon-off"> </span>Logout</a></li>
 								</ul></li>
 						</c:when>
 						<c:otherwise>
@@ -227,7 +227,7 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
-									<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
+									<li><a href="#" onclick="logout()"><span class="icon-off"> </span>Logout</a></li>
 								</ul></li>
 						</c:otherwise>
 					</c:choose>

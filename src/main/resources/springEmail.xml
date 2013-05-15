@@ -17,7 +17,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	</property>
 </bean>
  
-<bean id="email" class="isep.rose.devstarter.domain.Email">
+<bean id="email" class="isep.rose.devstarter.service.Email">
 	<property name="mailSender" ref="mailSender" />
 </bean>
  

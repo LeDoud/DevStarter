@@ -20,6 +20,9 @@
 </head>
 
 <body>
+
+<spring:url value="/resources/scripts/facebook.js" var="facebook_url" />
+<script type="text/javascript" src="${facebook_url}"><!-- required for FF3 and Opera --></script>
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" ignore="true" />
 		<div class="row-fluid">
