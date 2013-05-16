@@ -16,9 +16,9 @@
 	<span class="nav-header3">Sign up with</span>
 
 	<div class="social-icons">
-		<a href="#" onclick="FB.login(function(response) {}, {scope: 'email'})"><img src="${facebook_logo}" /></a> 
-		<a href="#"><img src="${twitter_logo}" /></a>
-		<a href="#"><img src="${googleplus_logo}" /></a>
+		<span class="link" onclick="FB.login(function(response) {}, {scope: 'email'})"><img src="${facebook_logo}" /></span>
+		<span class="link"><img src="${twitter_logo}" /></span>
+		<span id="btnGoogle" class="customGPlusSignIn link" data-gapiattached="true"><img src="${googleplus_logo}" /> <span class="icon"><!-- --></span><span class="buttonText"><!-- --></span></span>
 	</div>
 
 	<span class="nav-header3">or</span>

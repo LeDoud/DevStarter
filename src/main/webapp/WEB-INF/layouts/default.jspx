@@ -21,8 +21,85 @@
 
 <body>
 
-<spring:url value="/resources/scripts/facebook.js" var="facebook_url" />
-<script type="text/javascript" src="${facebook_url}"><!-- required for FF3 and Opera --></script>
+<script>
+window.fbAsyncInit = function() {
+	FB.init({
+		appId : '190681314417918', // App ID
+		channelUrl : '${pageContext.request.contextPath}', // Channel File
+		status : true, // check login status
+		cookie : true, // enable cookies to allow the server to access the
+						// session
+		xfbml : true
+	// parse XFBML
+	});
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+
+		if (response.status === 'connected') {
+
+			loginFacebook();
+		} else if (response.status === 'not_authorized') {
+
+			FB.login();
+		} else {
+
+			FB.login();
+		}
+	});
+};
+// Load the SDK asynchronously
+(function(d) {
+	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	if (d.getElementById(id)) {
+		return;
+	}
+	js = d.createElement('script');
+	js.id = id;
+	js.async = true;
+	js.src = "//connect.facebook.net/en_US/all.js";
+	ref.parentNode.insertBefore(js, ref);
+}(document));
+
+function loginFacebook() {
+	console.log('Welcome!  Fetching your information.... ');
+
+	FB.api('/me', function(response) {
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/signinProvider',
+			data : {
+				firstName : response.first_name,
+				lastName : response.last_name,
+				email : response.email,
+				password : response.id,
+				provider : 'facebook'
+			},
+			async : false,
+			type : "POST",
+			success : function(result) {
+				if (result === 'refresh') {
+					window.location.reload();
+				}
+			}
+		});
+	});
+}
+function logoutFacebook() {
+	FB.api('/me/permissions', 'delete', function(response) {
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/logout',
+			data : {},
+			async : false,
+			type : "POST",
+			success : function(result) {
+				window.location.reload();
+			}
+		});
+	});
+}
+</script>
+
+
+    
+    
 	<div id="wrapper">
 		<tiles:insertAttribute name="header" ignore="true" />
 		<div class="row-fluid">
@@ -43,5 +120,107 @@
 		 <div class="modal-body"><!-- content will be loaded here --></div>
 
 	</div>
+	
+	
+	<script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+      
+      function render() {
+    	    gapi.signin.render('btnGoogle', {
+    	      'callback': 'loginGoogle',
+    	      'clientid': '850028130802.apps.googleusercontent.com',
+    	      'cookiepolicy': 'http://localhost:8080/DevStarter',
+    	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+    	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+    	    });
+    	  }
+      
+      function loginGoogle(authResult) {
+    	  if (authResult['access_token']) {
+    		  gapi.client.load('oauth2', 'v2', function() {
+    	          var request = gapi.client.oauth2.userinfo.get();
+    	          request.execute(function getEmailCallback(obj){
+    	        	  var email = '';
+    	        	  var el = document.getElementById('googleEmail');
+    	        	    if (obj['email']) {
+    	        	      email = obj['email'];
+    	        	      el.value=email;
+    	        	    }
+    	        	  });
+    	        });
+    		  
+    		  gapi.client.load('plus','v1', function(){
+    			  var request = gapi.client.plus.people.get({
+    				   'userId': 'me'
+    				 });
+    				 request.execute(function(response) {
+    					 var el = document.getElementById('googleEmail');
+    					 var googleEmail = el.value;
+    					 console.log('Welcome!  Fetching your information.... '+googleEmail+' '+response.id+response.familyName+response.givenName);
+    					 $.ajax({
+    							url : '${pageContext.request.contextPath}/user/signinProvider',
+    							data : {
+    								firstName : response.name.givenName,
+    								lastName : response.name.familyName,
+    								email : googleEmail,
+    								password : response.id,
+    								provider : 'google'
+    							},
+    							async : false,
+    							type : "POST",
+    							success : function(result) {
+    								if (result === 'refresh') {
+    									window.location.reload();
+    								}
+    							}
+    						});
+    				 });
+    		 	 });
+    	  } else if (authResult['error']) {
+    	    // There was an error.
+    	    // Possible error codes:
+    	    //   "access_denied" - User denied access to your app
+    	    //   "immediate_failed" - Could not automatically log in the user
+    	    console.log('There was an error: ' + authResult['error']);
+    	  }
+    	}
+
+      function logoutGoogle(access_token) {
+    	  var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
+    	      access_token;
+
+    	  // Perform an asynchronous GET request.
+    	  $.ajax({
+    	    type: 'GET',
+    	    url: revokeUrl,
+    	    async: false,
+    	    contentType: "application/json",
+    	    dataType: 'jsonp',
+    	    success: function(nullResponse) {
+    	    	$.ajax({
+    				url : '${pageContext.request.contextPath}/user/logout',
+    				data : {},
+    				async : false,
+    				type : "POST",
+    				success : function(result) {
+    					window.location.reload();
+    				}
+    			});
+    	    },
+    	    error: function(e) {
+    	      // Handle the error
+    	      // console.log(e);
+    	      // You could point users to manually disconnect if unsuccessful
+    	      // https://plus.google.com/apps
+    	    }
+    	  });
+    	}
+    	// Could trigger the disconnect on a button click
+    </script>
+    <input type="hidden" id="googleEmail"/>
 </body>
 </html>

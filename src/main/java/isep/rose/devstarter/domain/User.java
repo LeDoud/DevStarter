@@ -24,6 +24,17 @@ public class User {
         }
         return users.get(0);
     }
+    
+    public isep.rose.devstarter.domain.User findUserByEmailAndAccount(String email,String account) {
+        List<User> users = new ArrayList<User>();
+        Query query = entityManager().createQuery("select user from User user " + "where email = :email", User.class);
+        query.setParameter("email", email);
+        users = query.getResultList();
+        if (users.isEmpty()) {
+            return null;
+        }
+        return users.get(0);
+    }
 
     public isep.rose.devstarter.domain.User getUserAfterAuthentification(String email, String password) {
         List<User> users = new ArrayList<User>();

@@ -118,12 +118,12 @@ public class UserController {
 	}
 
 	/*---------INSCRIPT ET LOGIN AVEC FACEBOOK----------*/
-	@RequestMapping(value = "/signinFacebook", produces = "text/html", method = RequestMethod.POST)
+	@RequestMapping(value = "/signinProvider", produces = "text/html", method = RequestMethod.POST)
 	@ResponseBody
-	public String signinFacebook(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,@RequestParam("email") String email,@RequestParam("password") String password,HttpServletRequest request) {
+	public String signinProvider(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,@RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("provider") String provider,HttpServletRequest request) {
 		String action="a";
 
-		if((request.getSession().getAttribute("account") == null) || !(String.valueOf(request.getSession().getAttribute("account")).contains("facebook"))){
+		if((request.getSession().getAttribute("account") == null) || !(String.valueOf(request.getSession().getAttribute("account")).contains(provider))){
 			User userTest = new User().findUserByEmail(email);
 			PasswordEncoder encoder = new Md5PasswordEncoder();
 			String hashedPass = encoder.encodePassword(password, "DevStarter");
@@ -135,7 +135,7 @@ public class UserController {
 				userInsert.setPassword(hashedPass);
 				userInsert.setJobEnumId(Enumeration.findEnumerationByNameAndType("No job",
 						"job"));
-				userInsert.setCompteEnumId(Enumeration.findEnumerationByNameAndType("facebook",
+				userInsert.setCompteEnumId(Enumeration.findEnumerationByNameAndType(provider,
 						"account"));
 				userInsert.setWallet(0);
 				userInsert.setActive(2);
@@ -152,9 +152,9 @@ public class UserController {
 				request.getSession().setAttribute("active", user.getActive());
 				request.getSession().setAttribute("wallet", user.getWallet());
 				request.getSession().setAttribute("account", user.getCompteEnumId().getName());	
-				
+				action="refresh";
 			}
-			action="refresh";
+			
 		}
 
 		return action;
@@ -245,11 +245,5 @@ public class UserController {
 		return "redirect:/home/index";
 	}
 	
-	@RequestMapping(value = "/logoutFacebook", produces = "text/html",method = RequestMethod.POST)
-	@ResponseBody
-	public String logoutFacebook(HttpServletRequest request) {
 
-		request.getSession().invalidate();
-		return "ok";
-	}
 }
