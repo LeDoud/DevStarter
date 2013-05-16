@@ -117,7 +117,7 @@ public class UserController {
 		return "";
 	}
 
-	/*---------INSCRIPT ET LOGIN AVEC FACEBOOK----------*/
+	/*---------INSCRIPT ET LOGIN AVEC SERVICE EXTERNE----------*/
 	@RequestMapping(value = "/signinProvider", produces = "text/html", method = RequestMethod.POST)
 	@ResponseBody
 	public String signinProvider(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,@RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("provider") String provider,HttpServletRequest request) {
