@@ -41,7 +41,7 @@ public class UserController {
 		return new ModelAndView("user/signupForm");
 	}
 
-	/*----------accès a la page account-------------*/
+	/*----------ACCES A LA PAGE ACCOUNT-------------*/
 	@RequestMapping(value = "/account", produces = "text/html")
 	public String account(HttpServletRequest request, ModelMap model) {
 
@@ -121,7 +121,7 @@ public class UserController {
 	@RequestMapping(value = "/signinProvider", produces = "text/html", method = RequestMethod.POST)
 	@ResponseBody
 	public String signinProvider(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,@RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("provider") String provider,HttpServletRequest request) {
-		String action="a";
+		String action="";
 
 		if((request.getSession().getAttribute("account") == null) || !(String.valueOf(request.getSession().getAttribute("account")).contains(provider))){
 			User userTest = new User().findUserByEmail(email);
@@ -153,10 +153,10 @@ public class UserController {
 				request.getSession().setAttribute("wallet", user.getWallet());
 				request.getSession().setAttribute("account", user.getCompteEnumId().getName());	
 				action="refresh";
+			}else{
+				action = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in ! The email address is already associated with a "+userTest.getCompteEnumId().getName()+" account.</strong></div>";
 			}
-			
 		}
-
 		return action;
 	}
 	

@@ -20,13 +20,35 @@
 </head>
 
 <body>
-
-<script>
+	<div id="wrapper">
+		<tiles:insertAttribute name="header" ignore="true" />
+		<div class="row-fluid">
+			<div class="span20 offset2">
+				<div class="message">
+					${message}
+				</div>
+				<tiles:insertAttribute name="body" />
+			</div>
+		</div>
+		<tiles:insertAttribute name="footer" ignore="true" />
+	</div>
+	
+	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/signupForm" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+		 <div class="modal-body"><!-- content will be loaded here --></div>
+	</div>
+	<div id="myModal2" data-remote="${pageContext.request.contextPath}/user/forgotPassword" class="modal modal2 hide fade" style="height:120px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+		 <div class="modal-body"><!-- content will be loaded here --></div>
+	</div>
+	
+	
+	
+	<script>
+//------FACEBOOK--------//
 window.fbAsyncInit = function() {
 	FB.init({
 		appId : '190681314417918', // App ID
 		channelUrl : '${pageContext.request.contextPath}', // Channel File
-		status : true, // check login status
+		status : false, // check login status
 		cookie : true, // enable cookies to allow the server to access the
 						// session
 		xfbml : true
@@ -35,13 +57,10 @@ window.fbAsyncInit = function() {
 	FB.Event.subscribe('auth.authResponseChange', function(response) {
 
 		if (response.status === 'connected') {
-
 			loginFacebook();
 		} else if (response.status === 'not_authorized') {
-
 			FB.login();
 		} else {
-
 			FB.login();
 		}
 	});
@@ -77,6 +96,8 @@ function loginFacebook() {
 			success : function(result) {
 				if (result === 'refresh') {
 					window.location.reload();
+				}else{
+					$('.message').html(result);
 				}
 			}
 		});
@@ -97,39 +118,16 @@ function logoutFacebook() {
 }
 </script>
 
-
-    
-    
-	<div id="wrapper">
-		<tiles:insertAttribute name="header" ignore="true" />
-		<div class="row-fluid">
-			<div class="span20 offset2">
-				<tiles:insertAttribute name="body" />
-			</div>
-		</div>
-		<tiles:insertAttribute name="footer" ignore="true" />
-
-	</div>
-	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/signupForm" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-
-		 <div class="modal-body"><!-- content will be loaded here --></div>
-
-	</div>
-	<div id="myModal2" data-remote="${pageContext.request.contextPath}/user/forgotPassword" class="modal modal2 hide fade" style="height:120px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-
-		 <div class="modal-body"><!-- content will be loaded here --></div>
-
-	</div>
-	
 	
 	<script type="text/javascript">
+	//--------------GOOGLE--------------------------//
       (function() {
        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
        po.src = 'https://apis.google.com/js/client:plusone.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
       
-      function render() {
+      function btnGoogle() {
     	    gapi.signin.render('btnGoogle', {
     	      'callback': 'loginGoogle',
     	      'clientid': '850028130802.apps.googleusercontent.com',
@@ -160,7 +158,6 @@ function logoutFacebook() {
     				 request.execute(function(response) {
     					 var el = document.getElementById('googleEmail');
     					 var googleEmail = el.value;
-    					 console.log('Welcome!  Fetching your information.... '+googleEmail+' '+response.id+response.familyName+response.givenName);
     					 $.ajax({
     							url : '${pageContext.request.contextPath}/user/signinProvider',
     							data : {
@@ -175,16 +172,14 @@ function logoutFacebook() {
     							success : function(result) {
     								if (result === 'refresh') {
     									window.location.reload();
+    								}else{
+    									$('.message').html(result);
     								}
     							}
     						});
     				 });
     		 	 });
     	  } else if (authResult['error']) {
-    	    // There was an error.
-    	    // Possible error codes:
-    	    //   "access_denied" - User denied access to your app
-    	    //   "immediate_failed" - Could not automatically log in the user
     	    console.log('There was an error: ' + authResult['error']);
     	  }
     	}
@@ -192,7 +187,6 @@ function logoutFacebook() {
       function logoutGoogle(access_token) {
     	  var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
     	      access_token;
-
     	  // Perform an asynchronous GET request.
     	  $.ajax({
     	    type: 'GET',
@@ -205,22 +199,18 @@ function logoutFacebook() {
     				url : '${pageContext.request.contextPath}/user/logout',
     				data : {},
     				async : false,
-    				type : "POST",
+    				type : "GET",
     				success : function(result) {
     					window.location.reload();
     				}
     			});
     	    },
     	    error: function(e) {
-    	      // Handle the error
-    	      // console.log(e);
-    	      // You could point users to manually disconnect if unsuccessful
-    	      // https://plus.google.com/apps
     	    }
     	  });
     	}
-    	// Could trigger the disconnect on a button click
     </script>
     <input type="hidden" id="googleEmail"/>
+    
 </body>
 </html>

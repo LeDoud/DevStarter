@@ -153,9 +153,8 @@
 							<ul class="dropdown-menu login">
 								<li class="nav-header2">Login with</li>
 								<div class="social-icons">
-									<span class="link" onclick="FB.login(function(response) {}, {scope: 'email'})"><img src="${facebook_logo}" /></span>
-									<span class="link"><img src="${twitter_logo}" /></span>
-									<span id="btnGoogle" onclick="render()" class="customGPlusSignIn link" data-gapiattached="true"><img src="${googleplus_logo}" /> <span class="icon"><!-- --></span><span class="buttonText"><!-- --></span></span>
+									<span id="btnFacebook" onclick="FB.login(function(response) {}, {scope: 'email'})"><span class="iconFacebook"><!-- --></span><span class="buttonText">Facebook</span></span>
+									<span id="btnGoogle" onclick="btnGoogle()" class="customGPlusSignIn" data-gapiattached="true"><span class="iconGoogle"><!-- --></span><span class="buttonText">Google</span></span>
 								</div>
 								<li class="nav-header2">or</li>
 								<li>

@@ -55,17 +55,54 @@ box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
 
 .divider2{*width:100%;height:1px;margin:9px 1px;*margin:-5px 0 5px;overflow:hidden;background-color:#b1bab9;border-bottom:1px solid #ffffff;}
 
-.login .social-icons .link{
-	display:inline;
-	margin-left:16%;
-	padding:0px;
-}
-.login .social-icons .link:hover,.login .social-icons img:hover {
+ #btnGoogle {
+      display: inline-block;
+      background: #cc3732;
+      color: white;
+     width: 35%;
+      margin-left:6%;
+      padding-right:5%;
+      border-radius: 5px;
+    }
+    #btnGoogle:hover {
+      background: #e74b37;
       cursor: pointer;
     }
-.login .social-icons img{
-	width:40px;
-}
+    span.iconGoogle {
+      background: url('btn_google_32.png') transparent 10px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+    }
+   
+   #btnFacebook {
+      display: inline-block;
+      background: #34609e;
+      color: white;
+      width: 35%;
+      margin-left:7%;
+      padding-right:5%;
+      border-radius: 5px;
+    }
+    #btnFacebook:hover {
+      background: #4179be;
+      cursor: pointer;
+    }
+    span.iconFacebook {
+      background: url('btn_facebook_32.png') transparent 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 38px;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      horizontal-align:center;
+      margin-left:12%;
+    }
+
 
 .login .sign-up{
 	margin-left: 25%;
@@ -87,17 +124,7 @@ margin-bottom:10px;
 
 .create-account .divider2{*width:100%;height:1px;margin:9px 1px;*margin:-5px 0 5px;overflow:hidden;background-color:#b1bab9;border-bottom:1px solid #ffffff;}
 
-.create-account .social-icons .link{
-	display:inline;
-	margin-left:17%;
-	padding:0px;
-}
-.create-account .social-icons .link:hover ,.create-account .social-icons img:hover {
-      cursor: pointer;
-    }
-.create-account .social-icons img{
-	width:42px;
-}
+
 
 .create-account .register{
 	margin-left: 35%;
