@@ -211,6 +211,9 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
+									<c:if test="${sessionScope.account =='normal'}">
+										<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
+									</c:if>
 									<c:if test="${sessionScope.account =='facebook'}">
 										<li><a href="#" onclick="logoutFacebook()"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
@@ -231,6 +234,9 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
+									<c:if test="${sessionScope.account =='normal'}">
+										<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
+									</c:if>
 									<c:if test="${sessionScope.account =='facebook'}">
 										<li><a href="#" onclick="logoutFacebook()"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
