@@ -123,9 +123,19 @@ function logoutFacebook() {
 	//--------------GOOGLE--------------------------//
       (function() {
        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/client:plusone.js';
+       po.src = 'https://apis.google.com/js/client:plusone.js?onload=renderGoogle';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
+      
+      function renderGoogle() {
+  	    gapi.signin.render('btnGoogle', {
+  	      'clientid': '850028130802.apps.googleusercontent.com',
+  	      'cookiepolicy': 'http://localhost:8080/DevStarter',
+  	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+  	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+  	      'approvalprompt': 'auto'
+  	    });
+  	  }
       
       function btnGoogle() {
     	    gapi.signin.render('btnGoogle', {
@@ -133,7 +143,8 @@ function logoutFacebook() {
     	      'clientid': '850028130802.apps.googleusercontent.com',
     	      'cookiepolicy': 'http://localhost:8080/DevStarter',
     	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-    	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+    	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+    	      'approvalprompt': 'auto'
     	    });
     	  }
       
