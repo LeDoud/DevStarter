@@ -45,22 +45,13 @@ public class UserController {
 	@RequestMapping(value = "/account", produces = "text/html")
 	public String account(HttpServletRequest request, ModelMap model) {
 
-		/*
-		 * on verifie que l'user a une session ouverte et on recupere le user
-		 * correspondant à l'id
-		 */
 		if (request.getSession().getAttribute("idUser") != null) {
-			User user = new User().findUser((Integer) (request.getSession()
-					.getAttribute("idUser")));
+			User user = new User().findUser((Integer) (request.getSession().getAttribute("idUser")));
 			model.addAttribute("firstName", user.getFirstname());
 			model.addAttribute("lastName", user.getName());
 			model.addAttribute("idUser", user.getIdUser());
 			return "user/account";
 		}
-		/*
-		 * si l'utilisateur n'est pas loggé, il ne doit pas avoir accès à cette
-		 * page => redirection vers page notfound
-		 */
 		return "resourceNotFound";
 	}
 
@@ -159,7 +150,6 @@ public class UserController {
 		}
 		return action;
 	}
-	
 	
 	/*----------LOGIN AVEC MAIL-----------------*/
 	@RequestMapping(value = "/signin", produces = "text/html", method = RequestMethod.POST)
