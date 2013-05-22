@@ -47,9 +47,10 @@ public class UserController {
 
 		if (request.getSession().getAttribute("idUser") != null) {
 			User user = new User().findUser((Integer) (request.getSession().getAttribute("idUser")));
-			model.addAttribute("firstName", user.getFirstname());
-			model.addAttribute("lastName", user.getName());
-			model.addAttribute("idUser", user.getIdUser());
+			//model.addAttribute("firstName", user.getFirstname());
+			//model.addAttribute("lastName", user.getName());
+			//model.addAttribute("idUser", user.getIdUser());
+			model.addAttribute("user",user);
 			return "user/account";
 		}
 		return "resourceNotFound";
