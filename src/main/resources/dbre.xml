@@ -12,13 +12,13 @@
         <column name="TITLE" primaryKey="false" required="true" scale="0" size="255" type="12,VARCHAR"/>
         <column name="MESSAGE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="CREATED_DATE" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
-        <foreign-key foreignTable="USER" name="FK_COMMENT_USER_PROJECT" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_USER" local="USER_ID"/>
-        </foreign-key>
         <foreign-key foreignTable="PROJECT" name="FK_COMMENT_USER_PROJECT2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="USER" name="FK_COMMENT_USER_PROJECT" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_USER" local="USER_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_COMMENT"/>
@@ -33,17 +33,18 @@
     <table name="DONATION_USER_PROJECT">
         <column name="ID_DONATION" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="USER_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
+        <column name="PROJECT_ID" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="AMOUNT" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="DATE" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
         <column name="TRANSACTION_DETAIL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
-        <foreign-key foreignTable="USER" name="FK_DONATION_USER_PROJECT" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_USER" local="USER_ID"/>
-        </foreign-key>
+        <column name="TYPE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <foreign-key foreignTable="PROJECT" name="FK_DONATION_USER_PROJECT2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="USER" name="FK_DONATION_USER_PROJECT" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_USER" local="USER_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_DONATION"/>
@@ -67,15 +68,19 @@
             <option key="exported" value="true"/>
             <reference foreign="TYPE_ENUM_ID" local="ID_ENUMERATION"/>
         </foreign-key>
+        <foreign-key foreignTable="PROJECT" name="FK_TYPE_PROJET" onDelete="none" onUpdate="none">
+            <option key="exported" value="true"/>
+            <reference foreign="TYPE_ID" local="ID_ENUMERATION"/>
+        </foreign-key>
         <foreign-key foreignTable="TECHNOLOGY_PROJECT_ENUMERATION" name="FK_TECHNOLOGY_PROJECT_ENUMERATION" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="TECHNO_ENUM_ID" local="ID_ENUMERATION"/>
         </foreign-key>
-        <foreign-key foreignTable="USER" name="FK_EXERCE" onDelete="none" onUpdate="none">
+        <foreign-key foreignTable="USER" name="FK_S_AUTHENTIFIE" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="COMPTE_ENUM_ID" local="ID_ENUMERATION"/>
         </foreign-key>
-        <foreign-key foreignTable="USER" name="FK_S_AUTHENTIFIE" onDelete="none" onUpdate="none">
+        <foreign-key foreignTable="USER" name="FK_EXERCE" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="JOB_ENUM_ID" local="ID_ENUMERATION"/>
         </foreign-key>
@@ -105,13 +110,13 @@
         <column name="ID_FOLLOW" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
         <column name="USER_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <foreign-key foreignTable="PROJECT" name="FK_FOLLOW_USER_PROJECT" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
-        </foreign-key>
         <foreign-key foreignTable="USER" name="FK_FOLLOW_USER_PROJECT2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_USER" local="USER_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="PROJECT" name="FK_FOLLOW_USER_PROJECT" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_FOLLOW"/>
@@ -131,13 +136,13 @@
         <column name="MESSAGE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
         <column name="PARENT_ID" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
-        <foreign-key foreignTable="USER" name="FK_ECHANGE" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_USER" local="USER_ID"/>
-        </foreign-key>
         <foreign-key foreignTable="ENUMERATION" name="FK_SE_DEFINIT2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_ENUMERATION" local="TYPE_ENUM_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="USER" name="FK_ECHANGE" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_USER" local="USER_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_FORUM"/>
@@ -153,13 +158,13 @@
         <column name="ID_MANAGE" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
         <column name="USER_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <foreign-key foreignTable="PROJECT" name="FK_MANAGE_USER_PROJECT" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
-        </foreign-key>
         <foreign-key foreignTable="USER" name="FK_MANAGE_USER_PROJECT2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_USER" local="USER_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="PROJECT" name="FK_MANAGE_USER_PROJECT" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_MANAGE"/>
@@ -190,6 +195,7 @@
     </table>
     <table name="PROJECT">
         <column name="ID_PROJECT" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
+        <column name="TYPE_ID" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="NAME" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="DESCRIPTION" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="PICTURE_URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
@@ -198,6 +204,12 @@
         <column name="SALARY" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="RANK" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="ACTIVE" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
+        <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
+        <column name="DATE_UPDATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
+        <foreign-key foreignTable="ENUMERATION" name="FK_TYPE_PROJET" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_ENUMERATION" local="TYPE_ID"/>
+        </foreign-key>
         <foreign-key foreignTable="COMMENT_USER_PROJECT" name="FK_COMMENT_USER_PROJECT2" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
@@ -225,18 +237,21 @@
         <unique name="PRIMARY">
             <unique-column name="ID_PROJECT"/>
         </unique>
+        <index name="FK_TYPE_PROJET">
+            <index-column name="TYPE_ID"/>
+        </index>
     </table>
     <table name="TECHNOLOGY_PROJECT_ENUMERATION">
         <column name="ID_TECHNOLOGY" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="TECHNO_ENUM_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
         <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <foreign-key foreignTable="ENUMERATION" name="FK_TECHNOLOGY_PROJECT_ENUMERATION" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_ENUMERATION" local="TECHNO_ENUM_ID"/>
-        </foreign-key>
         <foreign-key foreignTable="PROJECT" name="FK_TECHNOLOGY_PROJECT_ENUMERATION2" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
+        </foreign-key>
+        <foreign-key foreignTable="ENUMERATION" name="FK_TECHNOLOGY_PROJECT_ENUMERATION" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_ENUMERATION" local="TECHNO_ENUM_ID"/>
         </foreign-key>
         <unique name="PRIMARY">
             <unique-column name="ID_TECHNOLOGY"/>
@@ -250,8 +265,8 @@
     </table>
     <table name="USER">
         <column name="ID_USER" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
+        <column name="JOB_ENUM_ID" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="COMPTE_ENUM_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <column name="JOB_ENUM_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
         <column name="NAME" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="FIRSTNAME" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="EMAIL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
@@ -261,11 +276,11 @@
         <column name="ACTIVE" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="CREATED_DATE" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
         <column name="NOTIFICATION" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
-        <foreign-key foreignTable="ENUMERATION" name="FK_EXERCE" onDelete="none" onUpdate="none">
+        <foreign-key foreignTable="ENUMERATION" name="FK_S_AUTHENTIFIE" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_ENUMERATION" local="COMPTE_ENUM_ID"/>
         </foreign-key>
-        <foreign-key foreignTable="ENUMERATION" name="FK_S_AUTHENTIFIE" onDelete="none" onUpdate="none">
+        <foreign-key foreignTable="ENUMERATION" name="FK_EXERCE" onDelete="none" onUpdate="none">
             <option key="exported" value="false"/>
             <reference foreign="ID_ENUMERATION" local="JOB_ENUM_ID"/>
         </foreign-key>
@@ -297,10 +312,10 @@
             <unique-column name="ID_USER"/>
         </unique>
         <index name="FK_EXERCE">
-            <index-column name="COMPTE_ENUM_ID"/>
+            <index-column name="JOB_ENUM_ID"/>
         </index>
         <index name="FK_S_AUTHENTIFIE">
-            <index-column name="JOB_ENUM_ID"/>
+            <index-column name="COMPTE_ENUM_ID"/>
         </index>
     </table>
 </database>

@@ -5,6 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.CommentUserProject;
 import isep.rose.devstarter.domain.DonationUserProject;
+import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.File;
 import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.ManageUserProject;
@@ -13,6 +14,8 @@ import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +40,10 @@ privileged aspect Project_Roo_DbManaged {
     
     @OneToMany(mappedBy = "projectId")
     private Set<TechnologyProjectEnumeration> Project.technologyProjectEnumerations;
+    
+    @ManyToOne
+    @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID_ENUMERATION")
+    private Enumeration Project.typeId;
     
     @Column(name = "NAME", columnDefinition = "VARCHAR", length = 255)
     private String Project.name;
@@ -65,6 +72,16 @@ privileged aspect Project_Roo_DbManaged {
     
     @Column(name = "ACTIVE", columnDefinition = "INT")
     private Integer Project.active;
+    
+    @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateCreated;
+    
+    @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateUpdated;
     
     public Set<CommentUserProject> Project.getCommentUserProjects() {
         return commentUserProjects;
@@ -112,6 +129,14 @@ privileged aspect Project_Roo_DbManaged {
     
     public void Project.setTechnologyProjectEnumerations(Set<TechnologyProjectEnumeration> technologyProjectEnumerations) {
         this.technologyProjectEnumerations = technologyProjectEnumerations;
+    }
+    
+    public Enumeration Project.getTypeId() {
+        return typeId;
+    }
+    
+    public void Project.setTypeId(Enumeration typeId) {
+        this.typeId = typeId;
     }
     
     public String Project.getName() {
@@ -176,6 +201,22 @@ privileged aspect Project_Roo_DbManaged {
     
     public void Project.setActive(Integer active) {
         this.active = active;
+    }
+    
+    public Date Project.getDateCreated() {
+        return dateCreated;
+    }
+    
+    public void Project.setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+    
+    public Date Project.getDateUpdated() {
+        return dateUpdated;
+    }
+    
+    public void Project.setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
     
 }

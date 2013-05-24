@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.DonationUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.User;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,31 +17,26 @@ import org.springframework.format.annotation.DateTimeFormat;
 privileged aspect DonationUserProject_Roo_DbManaged {
     
     @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
-    private User DonationUserProject.userId;
+    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT")
+    private Project DonationUserProject.projectId;
     
     @ManyToOne
-    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
-    private Project DonationUserProject.projectId;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
+    private User DonationUserProject.userId;
     
     @Column(name = "AMOUNT", columnDefinition = "INT")
     private Integer DonationUserProject.amount;
     
     @Column(name = "DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar DonationUserProject.date;
+    @DateTimeFormat(style = "M-")
+    private Date DonationUserProject.date;
     
     @Column(name = "TRANSACTION_DETAIL", columnDefinition = "VARCHAR", length = 255)
     private String DonationUserProject.transactionDetail;
     
-    public User DonationUserProject.getUserId() {
-        return userId;
-    }
-    
-    public void DonationUserProject.setUserId(User userId) {
-        this.userId = userId;
-    }
+    @Column(name = "TYPE", columnDefinition = "VARCHAR", length = 255)
+    private String DonationUserProject.type;
     
     public Project DonationUserProject.getProjectId() {
         return projectId;
@@ -49,6 +44,14 @@ privileged aspect DonationUserProject_Roo_DbManaged {
     
     public void DonationUserProject.setProjectId(Project projectId) {
         this.projectId = projectId;
+    }
+    
+    public User DonationUserProject.getUserId() {
+        return userId;
+    }
+    
+    public void DonationUserProject.setUserId(User userId) {
+        this.userId = userId;
     }
     
     public Integer DonationUserProject.getAmount() {
@@ -59,11 +62,11 @@ privileged aspect DonationUserProject_Roo_DbManaged {
         this.amount = amount;
     }
     
-    public Calendar DonationUserProject.getDate() {
+    public Date DonationUserProject.getDate() {
         return date;
     }
     
-    public void DonationUserProject.setDate(Calendar date) {
+    public void DonationUserProject.setDate(Date date) {
         this.date = date;
     }
     
@@ -73,6 +76,14 @@ privileged aspect DonationUserProject_Roo_DbManaged {
     
     public void DonationUserProject.setTransactionDetail(String transactionDetail) {
         this.transactionDetail = transactionDetail;
+    }
+    
+    public String DonationUserProject.getType() {
+        return type;
+    }
+    
+    public void DonationUserProject.setType(String type) {
+        this.type = type;
     }
     
 }

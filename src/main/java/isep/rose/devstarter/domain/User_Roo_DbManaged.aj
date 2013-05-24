@@ -11,7 +11,7 @@ import isep.rose.devstarter.domain.Forum;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Notification;
 import isep.rose.devstarter.domain.User;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -46,7 +46,7 @@ privileged aspect User_Roo_DbManaged {
     private Enumeration User.compteEnumId;
     
     @ManyToOne
-    @JoinColumn(name = "JOB_ENUM_ID", referencedColumnName = "ID_ENUMERATION", nullable = false)
+    @JoinColumn(name = "JOB_ENUM_ID", referencedColumnName = "ID_ENUMERATION")
     private Enumeration User.jobEnumId;
     
     @Column(name = "NAME", columnDefinition = "VARCHAR", length = 255)
@@ -72,8 +72,8 @@ privileged aspect User_Roo_DbManaged {
     
     @Column(name = "CREATED_DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar User.createdDate;
+    @DateTimeFormat(style = "M-")
+    private Date User.createdDate;
     
     @Column(name = "NOTIFICATION", columnDefinition = "INT")
     private Integer User.notification;
@@ -198,11 +198,11 @@ privileged aspect User_Roo_DbManaged {
         this.active = active;
     }
     
-    public Calendar User.getCreatedDate() {
+    public Date User.getCreatedDate() {
         return createdDate;
     }
     
-    public void User.setCreatedDate(Calendar createdDate) {
+    public void User.setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
     

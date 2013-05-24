@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.Forum;
 import isep.rose.devstarter.domain.User;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,12 +17,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 privileged aspect Forum_Roo_DbManaged {
     
     @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
-    private User Forum.userId;
-    
-    @ManyToOne
     @JoinColumn(name = "TYPE_ENUM_ID", referencedColumnName = "ID_ENUMERATION", nullable = false)
     private Enumeration Forum.typeEnumId;
+    
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
+    private User Forum.userId;
     
     @Column(name = "TITLE", columnDefinition = "VARCHAR", length = 255)
     private String Forum.title;
@@ -32,19 +32,11 @@ privileged aspect Forum_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Forum.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date Forum.dateCreated;
     
     @Column(name = "PARENT_ID", columnDefinition = "INT")
     private Integer Forum.parentId;
-    
-    public User Forum.getUserId() {
-        return userId;
-    }
-    
-    public void Forum.setUserId(User userId) {
-        this.userId = userId;
-    }
     
     public Enumeration Forum.getTypeEnumId() {
         return typeEnumId;
@@ -52,6 +44,14 @@ privileged aspect Forum_Roo_DbManaged {
     
     public void Forum.setTypeEnumId(Enumeration typeEnumId) {
         this.typeEnumId = typeEnumId;
+    }
+    
+    public User Forum.getUserId() {
+        return userId;
+    }
+    
+    public void Forum.setUserId(User userId) {
+        this.userId = userId;
     }
     
     public String Forum.getTitle() {
@@ -70,11 +70,11 @@ privileged aspect Forum_Roo_DbManaged {
         this.message = message;
     }
     
-    public Calendar Forum.getDateCreated() {
+    public Date Forum.getDateCreated() {
         return dateCreated;
     }
     
-    public void Forum.setDateCreated(Calendar dateCreated) {
+    public void Forum.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     

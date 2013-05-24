@@ -12,20 +12,12 @@ import javax.persistence.ManyToOne;
 privileged aspect TechnologyProjectEnumeration_Roo_DbManaged {
     
     @ManyToOne
-    @JoinColumn(name = "TECHNO_ENUM_ID", referencedColumnName = "ID_ENUMERATION", nullable = false)
-    private Enumeration TechnologyProjectEnumeration.technoEnumId;
-    
-    @ManyToOne
     @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
     private Project TechnologyProjectEnumeration.projectId;
     
-    public Enumeration TechnologyProjectEnumeration.getTechnoEnumId() {
-        return technoEnumId;
-    }
-    
-    public void TechnologyProjectEnumeration.setTechnoEnumId(Enumeration technoEnumId) {
-        this.technoEnumId = technoEnumId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "TECHNO_ENUM_ID", referencedColumnName = "ID_ENUMERATION", nullable = false)
+    private Enumeration TechnologyProjectEnumeration.technoEnumId;
     
     public Project TechnologyProjectEnumeration.getProjectId() {
         return projectId;
@@ -33,6 +25,14 @@ privileged aspect TechnologyProjectEnumeration_Roo_DbManaged {
     
     public void TechnologyProjectEnumeration.setProjectId(Project projectId) {
         this.projectId = projectId;
+    }
+    
+    public Enumeration TechnologyProjectEnumeration.getTechnoEnumId() {
+        return technoEnumId;
+    }
+    
+    public void TechnologyProjectEnumeration.setTechnoEnumId(Enumeration technoEnumId) {
+        this.technoEnumId = technoEnumId;
     }
     
 }

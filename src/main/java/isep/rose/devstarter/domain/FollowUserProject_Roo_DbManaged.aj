@@ -12,20 +12,12 @@ import javax.persistence.ManyToOne;
 privileged aspect FollowUserProject_Roo_DbManaged {
     
     @ManyToOne
-    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
-    private Project FollowUserProject.projectId;
-    
-    @ManyToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
     private User FollowUserProject.userId;
     
-    public Project FollowUserProject.getProjectId() {
-        return projectId;
-    }
-    
-    public void FollowUserProject.setProjectId(Project projectId) {
-        this.projectId = projectId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
+    private Project FollowUserProject.projectId;
     
     public User FollowUserProject.getUserId() {
         return userId;
@@ -33,6 +25,14 @@ privileged aspect FollowUserProject_Roo_DbManaged {
     
     public void FollowUserProject.setUserId(User userId) {
         this.userId = userId;
+    }
+    
+    public Project FollowUserProject.getProjectId() {
+        return projectId;
+    }
+    
+    public void FollowUserProject.setProjectId(Project projectId) {
+        this.projectId = projectId;
     }
     
 }

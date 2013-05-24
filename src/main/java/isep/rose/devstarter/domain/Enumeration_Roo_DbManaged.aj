@@ -5,6 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.Forum;
+import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import isep.rose.devstarter.domain.User;
 import java.util.Set;
@@ -15,6 +16,9 @@ privileged aspect Enumeration_Roo_DbManaged {
     
     @OneToMany(mappedBy = "typeEnumId")
     private Set<Forum> Enumeration.forums;
+    
+    @OneToMany(mappedBy = "typeId")
+    private Set<Project> Enumeration.projects;
     
     @OneToMany(mappedBy = "technoEnumId")
     private Set<TechnologyProjectEnumeration> Enumeration.technologyProjectEnumerations;
@@ -49,6 +53,14 @@ privileged aspect Enumeration_Roo_DbManaged {
     
     public void Enumeration.setForums(Set<Forum> forums) {
         this.forums = forums;
+    }
+    
+    public Set<Project> Enumeration.getProjects() {
+        return projects;
+    }
+    
+    public void Enumeration.setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
     
     public Set<TechnologyProjectEnumeration> Enumeration.getTechnologyProjectEnumerations() {

@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.CommentUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.User;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +18,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 privileged aspect CommentUserProject_Roo_DbManaged {
     
     @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
-    private User CommentUserProject.userId;
-    
-    @ManyToOne
     @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
     private Project CommentUserProject.projectId;
+    
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID_USER", nullable = false)
+    private User CommentUserProject.userId;
     
     @Column(name = "TITLE", columnDefinition = "VARCHAR", length = 255)
     @NotNull
@@ -34,16 +34,8 @@ privileged aspect CommentUserProject_Roo_DbManaged {
     
     @Column(name = "CREATED_DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar CommentUserProject.createdDate;
-    
-    public User CommentUserProject.getUserId() {
-        return userId;
-    }
-    
-    public void CommentUserProject.setUserId(User userId) {
-        this.userId = userId;
-    }
+    @DateTimeFormat(style = "M-")
+    private Date CommentUserProject.createdDate;
     
     public Project CommentUserProject.getProjectId() {
         return projectId;
@@ -51,6 +43,14 @@ privileged aspect CommentUserProject_Roo_DbManaged {
     
     public void CommentUserProject.setProjectId(Project projectId) {
         this.projectId = projectId;
+    }
+    
+    public User CommentUserProject.getUserId() {
+        return userId;
+    }
+    
+    public void CommentUserProject.setUserId(User userId) {
+        this.userId = userId;
     }
     
     public String CommentUserProject.getTitle() {
@@ -69,11 +69,11 @@ privileged aspect CommentUserProject_Roo_DbManaged {
         this.message = message;
     }
     
-    public Calendar CommentUserProject.getCreatedDate() {
+    public Date CommentUserProject.getCreatedDate() {
         return createdDate;
     }
     
-    public void CommentUserProject.setCreatedDate(Calendar createdDate) {
+    public void CommentUserProject.setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
     
