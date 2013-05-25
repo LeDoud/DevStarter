@@ -18,6 +18,34 @@
 <body>
 
 	<tiles:insertAttribute name="body" />
-
+	
+	<script type="text/javascript">
+	//--------------GOOGLE--------------------------//
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js?onload=renderGoogle2';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+      
+      function renderGoogle2() {
+  	    gapi.signin.render('btnGoogle2', {
+  	      'clientid': '850028130802.apps.googleusercontent.com',
+  	      'cookiepolicy': 'http://localhost:8080/DevStarter',
+  	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+  	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+  	    });
+  	  }
+      
+      function btnGoogle2() {
+  	    gapi.signin.render('btnGoogle2', {
+  	      'callback': 'loginGoogle',
+  	      'clientid': '850028130802.apps.googleusercontent.com',
+  	      'cookiepolicy': 'http://localhost:8080/DevStarter',
+  	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+  	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+  	      'approvalprompt': 'auto'
+  	    });
+  	  }
+      </script>
 </body>
 </html>

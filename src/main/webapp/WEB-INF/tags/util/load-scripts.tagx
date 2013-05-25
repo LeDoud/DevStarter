@@ -6,17 +6,24 @@
   <spring:url value="/${roo_css}" var="roo_css_url" />
   <spring:url value="/resources/styles/espace-bootstrap.min.css" var="espace_bootstrap_css_url" />
     <spring:url value="/resources/styles/espace-bootstrap-responsive.min.css" var="espace_responsive_bootstrap_css_url" />
+    <spring:url value="/resources/styles/bootstrap-wysihtml5.css" var="wysihtml_css_url" />
+    <spring:url value="/resources/styles/bootstrap-fileupload.css" var="fileupload_css" />
+    
   <spring:url value="/resources/scripts/bootstrap.js" var="bootstrap_js_url" />
   <spring:url value="/resources/scripts/jquery-1.9.1.min.js" var="jquery_url" />
   <spring:url value="/resources/scripts/query.validate.js" var="query_validate_url" />
-   <spring:url value="/resources/scripts/query.validate.js" var="form_validate_create_url" />
+	<spring:url value="/resources/scripts/wysihtml5-0.3.0.min.js" var="wysihtml_url" />
   <spring:url value="/resources/scripts/menu.js" var="menu_url" />
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
 
+
+	
   <link rel="stylesheet" type="text/css"  href="${tundra_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${espace_bootstrap_css_url}" />
-  <link rel="stylesheet" type="text/css" media="screen" href="${espace_responsive_bootstrap_css_url}" />
+
+  <link rel="stylesheet" type="text/css" media="screen" href="${wysihtml_css_url}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${fileupload_css}" />  
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <c:set var="userLocale">
@@ -28,6 +35,7 @@
   <script src="${bootstrap_js_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${menu_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
     <script src="${query_validate_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+    <script src="${wysihtml_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
 
   
 </jsp:root>

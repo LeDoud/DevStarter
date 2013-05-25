@@ -3,13 +3,54 @@
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
+
   
-    <h3>
-       Create a project
-    </h3>
-    <p>
-     
-    </p>
-  </util:panel>
+<spring:url value="/resources/scripts/bootstrap-wysihtml5.js" var="bootstrap_wysi_url" />
+<script type="text/javascript" src="${bootstrap_wysi_url}"><!-- --></script>
+<spring:url value="/resources/scripts/bootstrap-fileupload.js" var="bootstrap_fileupload_url" />
+<script type="text/javascript" src="${bootstrap_fileupload_url}"><!-- --></script>
+	
+    <div class="row-fluid">
+    	<div class="well-small">
+			<h2>Fund your project. </h2>
+			<p><spring:message code="create_project_message" /></p>
+		</div>
+		<form>
+		<div class="well">
+			<h3>Informations</h3><br/>
+			<div class="row-fluid">
+				<div class="span9 inline">
+					<label class="label-big">Title</label>
+					<input class="span21" type="text"/>
+					<br/><br/>
+					<div class="row-fluid">
+						<label class="label-big inline span6">Logo</label>
+						<div class="fileupload fileupload-new span18" data-provides="fileupload">
+						  <div class="fileupload-preview thumbnail" style="width: 175px; height: 175px;"><!-- --></div>
+						  <div>
+						    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+						    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="span15">
+					<label class="label-big">Description</label>
+					<textarea name="content" id="description" class="span23" style="height:250px;"><!-- --></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="well">
+			<h3>Documentation</h3>
+	
+		</div>	
+		<div class="well">
+			<h3>Funding</h3>
+	
+		</div>
+		</form>
+	</div>
+	<script type="text/javascript" >
+		$('#description').wysihtml5();
+	</script>
 </div>

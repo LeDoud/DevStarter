@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<div id="wrapper">
+	<div id="wrapper" style="min-width:960px;">
 		<tiles:insertAttribute name="header" ignore="true" />
 		<div class="row-fluid">
 			<div class="span20 offset2">
@@ -129,11 +129,11 @@ function logoutFacebook() {
       
       function renderGoogle() {
   	    gapi.signin.render('btnGoogle', {
+  	      //'callback': 'loginGoogle',
   	      'clientid': '850028130802.apps.googleusercontent.com',
   	      'cookiepolicy': 'http://localhost:8080/DevStarter',
   	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-  	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
-  	      'approvalprompt': 'auto'
+  	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
   	    });
   	  }
       

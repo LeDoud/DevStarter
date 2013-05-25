@@ -6,7 +6,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 
 	<spring:url value="/resources/scripts/signupValidationForm.js" var="signupValidationForm_url" />
-	<script type="text/javascript" src="${signupValidationForm_url}"></script>
+	<script type="text/javascript" src="${signupValidationForm_url}"><!-- --></script>
 	
 	<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
 	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
@@ -16,9 +16,9 @@
 	<span class="nav-header3">Sign up with</span>
 
 	<div class="social-icons">
-									<span id="btnFacebook" onclick="FB.login(function(response) {}, {scope: 'email'})"><span class="iconFacebook"><!-- --></span><span class="buttonText">Facebook</span></span>
-									<span id="btnGoogle" onclick="btnGoogle()" class="customGPlusSignIn" data-gapiattached="true"><span class="iconGoogle"><!-- --></span><span class="buttonText">Google</span></span>
-								</div>
+		<span id="btnFacebook" onclick="FB.login(function(response) {}, {scope: 'email'})"><span class="iconFacebook"><!-- --></span><span class="buttonText">Facebook</span></span>
+		<span id="btnGoogle2" onclick="btnGoogle2()" class="customGPlusSignIn btnGoogle" data-gapiattached="true"><span class="iconGoogle"><!-- --></span><span class="buttonText">Google</span></span>
+	</div>
 
 	<span class="nav-header3">or</span>
 	<div class="">
