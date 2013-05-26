@@ -47,6 +47,13 @@ public class ProjectController {
         return "project/create";
     }
     
+    @RequestMapping(value = "/persistProject", produces = "text/html")
+    public String persistProject(org.springframework.web.context.request.WebRequest webRequest) {
+    	
+    	
+  
+        return "project/create";
+    }
     
     @RequestMapping(value = "/languageAutocomplete", method = RequestMethod.POST)
     @ResponseBody
