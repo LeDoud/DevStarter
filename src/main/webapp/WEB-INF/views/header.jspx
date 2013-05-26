@@ -86,7 +86,7 @@
 												class="icon-wrench"> </span>Managed</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/project/create"><span
-												class="icon-plus"> </span>New project</a></li>
+												class="icon-plus"> </span>Create project</a></li>
 								</c:if>
 								</ul></li>
 						</c:when>
@@ -119,7 +119,7 @@
 												class="icon-wrench"> </span>Managed</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/project/create"><span
-												class="icon-plus"> </span>New project</a></li>
+												class="icon-plus"> </span>Create project</a></li>
 								</c:if>
 								
 								</ul></li>

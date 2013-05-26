@@ -1,9 +1,9 @@
   .myTag
   {
-    background: none repeat scroll 0 0 #CDE69C;
-    border: 1px solid #A5D24A;
+    background: none repeat scroll 0 0 #d9edf7;
+    border: 1px solid #b7d9ff;
     border-radius: 3px 3px 3px 3px;
-    color: #638421;
+    color: #11549a;
 
 // to be tested    
 	display: block;
@@ -31,7 +31,7 @@
   }      
   .myTagRemover
   {
-    color:silver;
+    color:black;
   }
   .tagManager
   {

@@ -1,9 +1,9 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  24/05/2013 10:53:41                      */
+/* Date de création :  26/05/2013 21:42:51                      */
 /*==============================================================*/
 
-use devstarter;
+
 DROP TABLE IF EXISTS COMMENT_USER_PROJECT;
 
 DROP TABLE IF EXISTS DONATION_USER_PROJECT;
@@ -142,11 +142,13 @@ CREATE TABLE PROJECT
    ID_PROJECT           INT NOT NULL AUTO_INCREMENT,
    TYPE_ID              INT,
    NAME                 VARCHAR(255),
-   DESCRIPTION          VARCHAR(255),
+   DESCRIPTION          TEXT,
    PICTURE_URL          VARCHAR(255),
    START_DATE           DATE,
-   END_DATE             DATE,
-   SALARY               INT,
+   MIN_END_DATE         DATE,
+   EFFECTIVE_END_DATE   DATE,
+   MAX_END_DATE         DATE,
+   FUND                 INT,
    RANK                 INT,
    ACTIVE               INT,
    DATE_CREATED         DATETIME,

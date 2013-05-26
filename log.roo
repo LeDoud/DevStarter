@@ -19,3 +19,4 @@ web mvc controller --class ~.web.AdminController
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-05-24 20:50:40
 database reverse engineer --schema devstarter --package ~.domain --includeNonPortableAttributes
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-26 14:25:46
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-26 18:00:56
