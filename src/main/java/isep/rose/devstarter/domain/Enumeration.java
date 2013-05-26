@@ -25,4 +25,40 @@ public class Enumeration {
         }
         return enums.get(0);
     }
+
+    public static List<isep.rose.devstarter.domain.Enumeration> findEnumerationsByNameAndType(String name, String type) {
+        List<Enumeration> enums = new ArrayList<Enumeration>();
+        Query query = entityManager().createQuery("select enumeration from Enumeration enumeration " + "where name = :name " + " and type_id=(SELECT type.idEnumeration from Enumeration type where name= :type)", Enumeration.class);
+        query.setParameter("name", name);
+        query.setParameter("type", type);
+        enums = query.getResultList();
+        if (enums.isEmpty()) {
+            return null;
+        }
+        return enums;
+    }
+
+    public static List<isep.rose.devstarter.domain.Enumeration> searchEnumerationsByNameAndType(String name, String type) {
+        List<Enumeration> enums = new ArrayList<Enumeration>();
+        String param = "%" + name + "%";
+        Query query = entityManager().createQuery("select enumeration from Enumeration enumeration " + "where name LIKE :param " + " and type_id=(SELECT type.idEnumeration from Enumeration type where name= :type)", Enumeration.class);
+        query.setParameter("param", param);
+        query.setParameter("type", type);
+        enums = query.getResultList();
+        if (enums.isEmpty()) {
+            return null;
+        }
+        return enums;
+    }
+
+    public static List<isep.rose.devstarter.domain.Enumeration> findEnumerationsByType(String type) {
+        List<Enumeration> enums = new ArrayList<Enumeration>();
+        Query query = entityManager().createQuery("select enumeration from Enumeration enumeration " + "where type_id=(SELECT type.idEnumeration from Enumeration type where name= :type)", Enumeration.class);
+        query.setParameter("type", type);
+        enums = query.getResultList();
+        if (enums.isEmpty()) {
+            return null;
+        }
+        return enums;
+    }
 }

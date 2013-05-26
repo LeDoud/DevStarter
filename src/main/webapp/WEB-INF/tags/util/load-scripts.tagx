@@ -8,6 +8,7 @@
     <spring:url value="/resources/styles/espace-bootstrap-responsive.min.css" var="espace_responsive_bootstrap_css_url" />
     <spring:url value="/resources/styles/bootstrap-wysihtml5.css" var="wysihtml_css_url" />
     <spring:url value="/resources/styles/bootstrap-fileupload.css" var="fileupload_css" />
+    <spring:url value="/resources/styles/bootstrap-tagmanager.css" var="tagmanager_css" />
     
   <spring:url value="/resources/scripts/bootstrap.js" var="bootstrap_js_url" />
   <spring:url value="/resources/scripts/jquery-1.9.1.min.js" var="jquery_url" />
@@ -21,9 +22,9 @@
   <link rel="stylesheet" type="text/css"  href="${tundra_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${espace_bootstrap_css_url}" />
-
+<link rel="stylesheet" type="text/css" media="screen" href="${tagmanager_css}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${wysihtml_css_url}" />
-  <link rel="stylesheet" type="text/css" media="screen" href="${fileupload_css}" />  
+  <link rel="stylesheet" type="text/css" media="screen" href="${fileupload_css}" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <c:set var="userLocale">

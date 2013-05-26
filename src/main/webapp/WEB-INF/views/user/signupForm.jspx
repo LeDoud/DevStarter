@@ -5,8 +5,7 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
-	<spring:url value="/resources/scripts/signupValidationForm.js" var="signupValidationForm_url" />
-	<script type="text/javascript" src="${signupValidationForm_url}"><!-- --></script>
+	
 	
 	<spring:url value="/resources/images/facebook.png" var="facebook_logo" />
 	<spring:url value="/resources/images/twitter.png" var="twitter_logo" />
@@ -91,5 +90,78 @@
 		</form>
 	</div>
 
+	<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.validator.addMethod("email-unicity",
+						function(value, element) {
+							var test=true;
+							$.ajax({
+		                        url: '${pageContext.request.contextPath}/user/checkEmailUnicity',
+		                                data: {subEmail:value},
+		                                async: false,
+		                                type: "POST",
+		                                success: function (result) {
+		                                	if(result === value)
+											  {
+												test= false;
+											  }
+											  else
+											  {
+												test= true;
+										      }
+		                                }
+		                        });	
+							
+			        		return test;
+			    		},"This mail is already used");	
+
+				$('#signup-with-email').validate(
+						{
+							rules : {
+								firstname : {
+									minlength : 2,
+									required : true,
+								},
+								lastname : {
+									minlength : 2,
+									required : true,
+								},
+								password : {
+									minlength : 6,
+									maxlength : 10,
+									required : true,
+								},
+								email : {
+									required : true,
+									email : true,
+									"email-unicity" : true,
+								},
+								confirm_email : {
+									required : true,
+									equalTo : "#signup-email",
+								},
+
+								birth_date : {
+									required : true,
+									age13 : true,
+									date : true,
+								},
+			
+							},
+							highlight : function(element) {
+								$(element).closest('.control-group')
+										.removeClass('success').addClass(
+												'error');
+							},
+							success : function(element) {
+								element.text('OK!').addClass('valid')
+										.closest('.control-group')
+										.removeClass('error').addClass(
+												'success');
+							}
+						});
+			});
+	</script>
 	
 </div>

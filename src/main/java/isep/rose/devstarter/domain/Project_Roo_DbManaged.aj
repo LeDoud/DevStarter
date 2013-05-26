@@ -11,6 +11,7 @@ import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -75,13 +76,13 @@ privileged aspect Project_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date Project.dateCreated;
+    @DateTimeFormat(style = "MM")
+    private Calendar Project.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date Project.dateUpdated;
+    @DateTimeFormat(style = "MM")
+    private Calendar Project.dateUpdated;
     
     public Set<CommentUserProject> Project.getCommentUserProjects() {
         return commentUserProjects;
@@ -203,19 +204,19 @@ privileged aspect Project_Roo_DbManaged {
         this.active = active;
     }
     
-    public Date Project.getDateCreated() {
+    public Calendar Project.getDateCreated() {
         return dateCreated;
     }
     
-    public void Project.setDateCreated(Date dateCreated) {
+    public void Project.setDateCreated(Calendar dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Date Project.getDateUpdated() {
+    public Calendar Project.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void Project.setDateUpdated(Date dateUpdated) {
+    public void Project.setDateUpdated(Calendar dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

@@ -6,7 +6,7 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.CommentUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.User;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,8 +34,8 @@ privileged aspect CommentUserProject_Roo_DbManaged {
     
     @Column(name = "CREATED_DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date CommentUserProject.createdDate;
+    @DateTimeFormat(style = "MM")
+    private Calendar CommentUserProject.createdDate;
     
     public Project CommentUserProject.getProjectId() {
         return projectId;
@@ -69,11 +69,11 @@ privileged aspect CommentUserProject_Roo_DbManaged {
         this.message = message;
     }
     
-    public Date CommentUserProject.getCreatedDate() {
+    public Calendar CommentUserProject.getCreatedDate() {
         return createdDate;
     }
     
-    public void CommentUserProject.setCreatedDate(Date createdDate) {
+    public void CommentUserProject.setCreatedDate(Calendar createdDate) {
         this.createdDate = createdDate;
     }
     

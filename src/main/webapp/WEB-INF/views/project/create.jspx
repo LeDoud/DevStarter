@@ -1,4 +1,7 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
@@ -9,24 +12,26 @@
 <script type="text/javascript" src="${bootstrap_wysi_url}"><!-- --></script>
 <spring:url value="/resources/scripts/bootstrap-fileupload.js" var="bootstrap_fileupload_url" />
 <script type="text/javascript" src="${bootstrap_fileupload_url}"><!-- --></script>
+<spring:url value="/resources/scripts/bootstrap-tagmanager.js" var="bootstrap_tagmanager_url" />
+<script type="text/javascript" src="${bootstrap_tagmanager_url}"><!-- --></script>
 	
     <div class="row-fluid">
     	<div class="well-small">
-			<h2>Fund your project. </h2>
+			<h3>Fund your project. </h3>
 			<p><spring:message code="create_project_message" /></p>
 		</div>
 		<form>
 		<div class="well">
-			<h3>Informations</h3><br/>
+			<h4>Informations</h4>
 			<div class="row-fluid">
-				<div class="span9 inline">
+				<div class="span8 inline">
 					<label class="label-big">Title</label>
-					<input class="span21" type="text"/>
+					<input class="span21" name="title" id="title" type="text"/>
 					<br/><br/>
 					<div class="row-fluid">
 						<label class="label-big inline span6">Logo</label>
 						<div class="fileupload fileupload-new span18" data-provides="fileupload">
-						  <div class="fileupload-preview thumbnail" style="width: 175px; height: 175px;"><!-- --></div>
+						  <div class="fileupload-preview thumbnail" style="width: 170px; height: 170px;"><!-- --></div>
 						  <div>
 						    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
 						    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
@@ -34,23 +39,62 @@
 						</div>
 					</div>
 				</div>
-				<div class="span15">
+				<div class="span16">
 					<label class="label-big">Description</label>
-					<textarea name="content" id="description" class="span23" style="height:250px;"><!-- --></textarea>
+					<textarea name="description" id="description" class="span23" style="height:230px;"><!-- --></textarea>
+				</div>
+			</div>
+			<br/>
+			<div class="row-fluid">
+				<div class="span8">
+					<label class="label-big">Application type</label>
+					<select name="project_type" id="project_type">
+						<c:forEach var="project_type" items="${project_types}">
+							<option value="${project_type.idEnumeration}">${project_type.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="span8">
+					<label class="label-big">Languages</label>
+					<input type="text" name="languages" id="languages" style="display:block;" class="tagManager"/>
+				</div>
+				<div class="span8">
+					<label class="label-big">Frameworks</label>
+					<input type="text" name="frameworks" id="frameworks" style="display:block;" class="tagManager"/>
 				</div>
 			</div>
 		</div>
+		
 		<div class="well">
-			<h3>Documentation</h3>
+			<h4>Documentation</h4>
 	
 		</div>	
 		<div class="well">
-			<h3>Funding</h3>
-	
+			<h4>Funding</h4>
+			
 		</div>
+		<button type="submit" class="btn btn-primary pull-right">Submit</button>
 		</form>
 	</div>
-	<script type="text/javascript" >
-		$('#description').wysihtml5();
+	<script type="text/javascript">
+		$("#description").wysihtml5();
+		jQuery("#languages").tagsManager({
+			preventSubmitOnEnter: true,
+	        typeahead: true,
+	        typeaheadAjaxSource: '${pageContext.request.contextPath}/project/languageAutocomplete',
+	        typeaheadAjaxPolling: true,
+	        blinkBGColor_1: '#FFFF9C',
+	        blinkBGColor_2: '#CDE69C'
+		        });
+		jQuery("#frameworks").tagsManager({
+			preventSubmitOnEnter: true,
+	        typeahead: true,
+	        typeaheadAjaxSource: '${pageContext.request.contextPath}/project/frameworkAutocomplete',
+	        typeaheadAjaxPolling: true,
+	        blinkBGColor_1: '#FFFF9C',
+	        blinkBGColor_2: '#CDE69C'
+		        });
+		
+		
 	</script>
 </div>
