@@ -48,33 +48,64 @@ public class UserController {
 	public String account(HttpServletRequest request, ModelMap model) {
 
 		if (request.getSession().getAttribute("idUser") != null) {
-			User user = new User().findUser((Integer) (request.getSession().getAttribute("idUser")));
-			//model.addAttribute("firstName", user.getFirstname());
-			//model.addAttribute("lastName", user.getName());
-			//model.addAttribute("idUser", user.getIdUser());
-			model.addAttribute("user",user);
-			
-	    	List<Enumeration> job= Enumeration.findEnumerationsByType("job");
-	    	model.addAttribute("jobs",job);
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			// model.addAttribute("firstName", user.getFirstname());
+			// model.addAttribute("lastName", user.getName());
+			// model.addAttribute("idUser", user.getIdUser());
+			model.addAttribute("user", user);
+
+			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
+			model.addAttribute("jobs", job);
 			return "user/account";
 		}
 		return "resourceNotFound";
 	}
-	
+
 	/*----------UPDATE ACCOUNT-------------*/
 	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)
-	public String updateAccount(@RequestParam("firstName") String firstName,
+	public String update(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName,
 			@RequestParam("email") String email,
 			@RequestParam("passwordOld") String passwordOld,
 			@RequestParam("passwordNew") String passwordNew,
 			@RequestParam("job") int job,
 			@RequestParam("experience") String experience,
-			RedirectAttributes redirectAttributes, HttpServletRequest request) {
-		
-		
-		return"";
+			@RequestParam("token") int userId) {
+
+		if (userId != 0) {
+			User user = new User().findUser((Integer) userId);
+			if (user != null) {
+
+				// user.persist();
+				if (user.getCompteEnumId().getName() != "facebook"
+						|| user.getCompteEnumId().getName() != "google") {
+					if (passwordOld != "") {
+						String pass = user.getPassword();
+						PasswordEncoder encoder = new Md5PasswordEncoder();
+						String hashedPass = encoder.encodePassword(passwordOld,
+								"DevStarter");
+						if (hashedPass == pass) {
+							user.setPassword(passwordNew);
+						}
+
+					}
+				}
+
+				user.setEmail(email);
+				user.setFirstname(firstName);
+				user.setName(lastName);
+				user.setJobEnumId(Enumeration.findEnumeration(job));
+				user.setProfil(experience);
+
+				user.persist();
+			}
+			return "redirect:/user/account";
+		} else {
+			return "redirect:/home/index";
+		}
 	}
+
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
 	@RequestMapping(value = "/signupEmail", produces = "text/html", method = RequestMethod.POST)
 	public String signupEmail(@RequestParam("firstname") String firstName,
@@ -108,7 +139,8 @@ public class UserController {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"springEmail.xml");
 		Email mm = (Email) context.getBean("email");
-		mm.sendMail("from@no-spam.com", email, "[DevStarter] Création de votre compte",
+		mm.sendMail("from@no-spam.com", email,
+				"[DevStarter] Création de votre compte",
 				"Votre compte a bien été crée.");
 
 		/* message de confirmation lors du retour sur l'accueil */
@@ -131,46 +163,58 @@ public class UserController {
 	/*---------INSCRIPT ET LOGIN AVEC SERVICE EXTERNE----------*/
 	@RequestMapping(value = "/signinProvider", produces = "text/html", method = RequestMethod.POST)
 	@ResponseBody
-	public String signinProvider(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,@RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("provider") String provider,HttpServletRequest request) {
-		String action="";
+	public String signinProvider(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("provider") String provider,
+			HttpServletRequest request) {
+		String action = "";
 
-		if((request.getSession().getAttribute("account") == null) || !(String.valueOf(request.getSession().getAttribute("account")).contains(provider))){
+		if ((request.getSession().getAttribute("account") == null)
+				|| !(String.valueOf(request.getSession()
+						.getAttribute("account")).contains(provider))) {
 			User userTest = new User().findUserByEmail(email);
 			PasswordEncoder encoder = new Md5PasswordEncoder();
 			String hashedPass = encoder.encodePassword(password, "DevStarter");
-			if (userTest == null) {	
+			if (userTest == null) {
 				User userInsert = new User();
 				userInsert.setFirstname(firstName);
 				userInsert.setName(lastName);
 				userInsert.setEmail(email);
 				userInsert.setPassword(hashedPass);
-				userInsert.setJobEnumId(Enumeration.findEnumerationByNameAndType("No job",
-						"job"));
-				userInsert.setCompteEnumId(Enumeration.findEnumerationByNameAndType(provider,
-						"account"));
+				userInsert.setJobEnumId(Enumeration
+						.findEnumerationByNameAndType("No job", "job"));
+				userInsert.setCompteEnumId(Enumeration
+						.findEnumerationByNameAndType(provider, "account"));
 				userInsert.setWallet(0);
 				userInsert.setActive(2);
 				userInsert.persist();
 
 			}
-			User user = new User().getUserAfterAuthentification(email, hashedPass);
+			User user = new User().getUserAfterAuthentification(email,
+					hashedPass);
 			if (user != null) {
 				request.getSession().invalidate();
 				request.getSession().setAttribute("logged", "true");
 				request.getSession().setAttribute("idUser", user.getIdUser());
-				request.getSession().setAttribute("firstName", user.getFirstname());
+				request.getSession().setAttribute("firstName",
+						user.getFirstname());
 				request.getSession().setAttribute("lastName", user.getName());
 				request.getSession().setAttribute("active", user.getActive());
 				request.getSession().setAttribute("wallet", user.getWallet());
-				request.getSession().setAttribute("account", user.getCompteEnumId().getName());	
-				action="refresh";
-			}else{
-				action = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in ! The email address is already associated with a "+userTest.getCompteEnumId().getName()+" account.</strong></div>";
+				request.getSession().setAttribute("account",
+						user.getCompteEnumId().getName());
+				action = "refresh";
+			} else {
+				action = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in ! The email address is already associated with a "
+						+ userTest.getCompteEnumId().getName()
+						+ " account.</strong></div>";
 			}
 		}
 		return action;
 	}
-	
+
 	/*----------LOGIN AVEC MAIL-----------------*/
 	@RequestMapping(value = "/signin", produces = "text/html", method = RequestMethod.POST)
 	public String signin(@RequestParam("email") String email,
@@ -189,7 +233,8 @@ public class UserController {
 			request.getSession().setAttribute("lastName", user.getName());
 			request.getSession().setAttribute("active", user.getActive());
 			request.getSession().setAttribute("wallet", user.getWallet());
-			request.getSession().setAttribute("account", user.getCompteEnumId().getName());
+			request.getSession().setAttribute("account",
+					user.getCompteEnumId().getName());
 
 			if (user.getActive() == 1) {
 				String infoMessage = "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Warning !</strong> You didn't validate your account yet. Please follow the instructions sent by mail. <a href=\"\">Re-send email.</a></div>";
@@ -248,12 +293,11 @@ public class UserController {
 	}
 
 	/*----------LOGOUT---------------*/
-	@RequestMapping(value = "/logout", produces = "text/html" )
+	@RequestMapping(value = "/logout", produces = "text/html")
 	public String logout(HttpServletRequest request) {
 
 		request.getSession().invalidate();
 		return "redirect:/home/index";
 	}
-	
 
 }
