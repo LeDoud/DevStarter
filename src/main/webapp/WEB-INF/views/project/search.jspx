@@ -1,15 +1,95 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8" />
-  <jsp:output omit-xml-declaration="yes" />
-  <spring:message var="app_name" code="application_name" htmlEscape="false" />
-  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name"
+		htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane"
+		arguments="${app_name}" htmlEscape="false" />
 
-  
-    <h3>
-       Search a project
-    </h3>
-    <p>
-     
-    </p>
+	<spring:url value="/resources/scripts/bootstrap-tagmanager.js"
+		var="bootstrap_tagmanager_url" />
+	<script type="text/javascript" src="${bootstrap_tagmanager_url}">
+	<!-- -->
+		
+	</script>
+	<spring:url value="/resources/scripts/bootstrap-datepicker.js"
+		var="bootstrap_datepicker_url" />
+	<script type="text/javascript" src="${bootstrap_datepicker_url}">
+	<!-- -->
+		
+	</script>
+	<div class="row-fluid">
+		<div class="well-small">
+			<!--  les champs c'est "type d'application" "framework" "langage" "titre" "date de départ" -->
+			<h3>Search a project</h3>
+			<p>
+				<spring:message code="search_project_message" />
+			</p>
+		</div>
+		<form ENCTYPE="multipart/form-data" method="POST">
+			<div class="well">
+				<h4>Search by :</h4>
+				<div class="row-fluid">
+					<div class="span8 inline">
+						<label class="label-big">Title</label> <input class="span21"
+							name="title" id="title" type="text" /> <br /> <br />
+					</div>
+					<div class="span8">
+						<label class="label-big">Date</label> <input type="text"
+							name="search_date" class="datepicker" id="search_date" />
+					</div>
 
+				</div>
+				<br />
+				<div class="row-fluid">
+					<div class="span8">
+						<label class="label-big">Application type</label> <select
+							name="project_type" id="project_type">
+							<!--  	<c:forEach var="project_type" items="${project_types}">-->
+							<option value="Not implemented">Not Implemented</option>
+							<!-- </c:forEach> -->
+						</select>
+					</div>
+					<div class="span8">
+						<label class="label-big">Languages</label> <input type="text"
+							name="languages" id="languages" style="display: block;"
+							class="tagManager" />
+					</div>
+					<div class="span8">
+						<label class="label-big">Frameworks</label><input type="text" name="frameworks" id="frameworks" style="display: block;" class="tagManager" />
+					</div>
+
+				</div>
+
+			</div>
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+
+	</div>
+
+	<script type="text/javascript">
+		$(".datepicker").datepicker();
+		jQuery("#languages")
+				.tagsManager(
+						{
+							preventSubmitOnEnter : true,
+							typeahead : true,
+							typeaheadAjaxSource : '${pageContext.request.contextPath}/project/languageAutocomplete',
+							typeaheadAjaxPolling : true,
+							blinkBGColor_1 : '#b1cdea',
+							blinkBGColor_2 : '#8fb8d6'
+						});
+		jQuery("#frameworks")
+				.tagsManager(
+						{
+							preventSubmitOnEnter : true,
+							typeahead : true,
+							typeaheadAjaxSource : '${pageContext.request.contextPath}/project/frameworkAutocomplete',
+							typeaheadAjaxPolling : true,
+							blinkBGColor_1 : '#b1cdea',
+							blinkBGColor_2 : '#8fb8d6'
+						});
+	</script>
 </div>
