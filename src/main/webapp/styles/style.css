@@ -168,6 +168,45 @@ footer {
 
 /*---------autre-------*/
 
+/*-----FORUM-----------*/
+.forum table tr{
+	height:50px;
+	
+	
+}.forum table tr:first-child{
+	
+	font-weight:bold;
+	 background-color: #F5F5F5;
+    border-bottom: 1px solid #E3E3E3;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+	
+}
+	
+.forum table tr td{
+	padding-left:20px;
+	
+}
+.forum table tr td a{
+	color:black;
+	
+	
+}
+.forum table tr td a:hover{
+	color:#3C73BE;
+    cursor:pointer;
+    text-decoration:none;
+	
+}
+.forum table tr td:first-child{
+	width:800px;
+	
+}
+	
+
+/*---------autre-------*/
+
 
 
 

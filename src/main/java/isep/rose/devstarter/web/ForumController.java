@@ -20,4 +20,9 @@ public class ForumController {
     public String index() {
         return "forum/index";
     }
+
+@RequestMapping(value = "/top", produces = "text/html")
+public String seetopic() {
+	return "forum/topics";
+}
 }

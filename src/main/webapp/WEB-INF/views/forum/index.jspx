@@ -8,8 +8,13 @@
     <h3>
       Forum
     </h3>
-    <p>
-     
-    </p>
+    <br />
+    <div class="forum">
+    <table cellspacing="0" cellpadding="0" width="100%" border="0" class="well" style="background-color:white;">
+        <tr ><td class="divider-vertical" >Categories</td><td>Posts</td><td>Last Post </td></tr>
+       <tr><td><a href="${pageContext.request.contextPath}/forum/topics">Projets</a></td><td>12</td><td><a><i>le 27/05/13 à 10 h <br />par gus</i></a></td></tr>
+             <tr><td><a>Projets</a></td><td>12</td><td><a><i>le 27/05/13 à 10 h <br />par gus</i></a></td></tr>
+                    </table>
+                    </div>
   </util:panel>
 </div>
