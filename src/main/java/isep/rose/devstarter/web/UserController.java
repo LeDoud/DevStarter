@@ -64,17 +64,17 @@ public class UserController {
 
 	/*----------UPDATE ACCOUNT-------------*/
 	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)
-	public String update(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName,
+	public String update(@RequestParam("firstname") String firstName,
+			@RequestParam("name") String lastName,
 			@RequestParam("email") String email,
 			@RequestParam("passwordOld") String passwordOld,
 			@RequestParam("passwordNew") String passwordNew,
 			@RequestParam("job") int job,
-			@RequestParam("experience") String experience,
-			@RequestParam("token") int userId) {
+			@RequestParam("profil") String experience,
+			@RequestParam("userId") int userId) {
 
 		if (userId != 0) {
-			User user = new User().findUser((Integer) userId);
+			User user = new User().findUser((Integer) (userId));
 			if (user != null) {
 
 				// user.persist();
