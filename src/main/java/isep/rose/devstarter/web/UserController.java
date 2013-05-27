@@ -1,5 +1,7 @@
 package isep.rose.devstarter.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,11 +53,28 @@ public class UserController {
 			//model.addAttribute("lastName", user.getName());
 			//model.addAttribute("idUser", user.getIdUser());
 			model.addAttribute("user",user);
+			
+	    	List<Enumeration> job= Enumeration.findEnumerationsByType("job");
+	    	model.addAttribute("jobs",job);
 			return "user/account";
 		}
 		return "resourceNotFound";
 	}
-
+	
+	/*----------UPDATE ACCOUNT-------------*/
+	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)
+	public String updateAccount(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName,
+			@RequestParam("email") String email,
+			@RequestParam("passwordOld") String passwordOld,
+			@RequestParam("passwordNew") String passwordNew,
+			@RequestParam("job") int job,
+			@RequestParam("experience") String experience,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		
+		
+		return"";
+	}
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
 	@RequestMapping(value = "/signupEmail", produces = "text/html", method = RequestMethod.POST)
 	public String signupEmail(@RequestParam("firstname") String firstName,
