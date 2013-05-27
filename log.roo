@@ -22,3 +22,4 @@ database reverse engineer --schema devstarter --package ~.domain --includeNonPor
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-05-26 18:00:56
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-05-27 08:50:07
 database reverse engineer --schema devstarter --package ~.domain --includeNonPortableAttributes
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-05-27 10:39:46
