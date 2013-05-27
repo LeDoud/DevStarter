@@ -11,7 +11,6 @@ import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -49,7 +48,7 @@ privileged aspect Project_Roo_DbManaged {
     @Column(name = "NAME", columnDefinition = "VARCHAR", length = 255)
     private String Project.name;
     
-    @Column(name = "DESCRIPTION", columnDefinition = "VARCHAR", length = 255)
+    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String Project.description;
     
     @Column(name = "PICTURE_URL", columnDefinition = "VARCHAR", length = 255)
@@ -60,13 +59,23 @@ privileged aspect Project_Roo_DbManaged {
     @DateTimeFormat(style = "M-")
     private Date Project.startDate;
     
-    @Column(name = "END_DATE", columnDefinition = "DATE")
+    @Column(name = "MIN_END_DATE", columnDefinition = "DATE")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
-    private Date Project.endDate;
+    private Date Project.minEndDate;
     
-    @Column(name = "SALARY", columnDefinition = "INT")
-    private Integer Project.salary;
+    @Column(name = "EFFECTIVE_END_DATE", columnDefinition = "DATE")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Date Project.effectiveEndDate;
+    
+    @Column(name = "MAX_END_DATE", columnDefinition = "DATE")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Date Project.maxEndDate;
+    
+    @Column(name = "FUND", columnDefinition = "INT")
+    private Integer Project.fund;
     
     @Column(name = "RANK", columnDefinition = "INT")
     private Integer Project.rank;
@@ -76,13 +85,13 @@ privileged aspect Project_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateUpdated;
     
     public Set<CommentUserProject> Project.getCommentUserProjects() {
         return commentUserProjects;
@@ -172,20 +181,36 @@ privileged aspect Project_Roo_DbManaged {
         this.startDate = startDate;
     }
     
-    public Date Project.getEndDate() {
-        return endDate;
+    public Date Project.getMinEndDate() {
+        return minEndDate;
     }
     
-    public void Project.setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void Project.setMinEndDate(Date minEndDate) {
+        this.minEndDate = minEndDate;
     }
     
-    public Integer Project.getSalary() {
-        return salary;
+    public Date Project.getEffectiveEndDate() {
+        return effectiveEndDate;
     }
     
-    public void Project.setSalary(Integer salary) {
-        this.salary = salary;
+    public void Project.setEffectiveEndDate(Date effectiveEndDate) {
+        this.effectiveEndDate = effectiveEndDate;
+    }
+    
+    public Date Project.getMaxEndDate() {
+        return maxEndDate;
+    }
+    
+    public void Project.setMaxEndDate(Date maxEndDate) {
+        this.maxEndDate = maxEndDate;
+    }
+    
+    public Integer Project.getFund() {
+        return fund;
+    }
+    
+    public void Project.setFund(Integer fund) {
+        this.fund = fund;
     }
     
     public Integer Project.getRank() {
@@ -204,19 +229,19 @@ privileged aspect Project_Roo_DbManaged {
         this.active = active;
     }
     
-    public Calendar Project.getDateCreated() {
+    public Date Project.getDateCreated() {
         return dateCreated;
     }
     
-    public void Project.setDateCreated(Calendar dateCreated) {
+    public void Project.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar Project.getDateUpdated() {
+    public Date Project.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void Project.setDateUpdated(Calendar dateUpdated) {
+    public void Project.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

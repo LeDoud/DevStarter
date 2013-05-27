@@ -5,7 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.File;
 import isep.rose.devstarter.domain.Project;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,13 +27,13 @@ privileged aspect File_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar File.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date File.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar File.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date File.dateUpdated;
     
     public Project File.getProjectId() {
         return projectId;
@@ -59,19 +59,19 @@ privileged aspect File_Roo_DbManaged {
         this.title = title;
     }
     
-    public Calendar File.getDateCreated() {
+    public Date File.getDateCreated() {
         return dateCreated;
     }
     
-    public void File.setDateCreated(Calendar dateCreated) {
+    public void File.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar File.getDateUpdated() {
+    public Date File.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void File.setDateUpdated(Calendar dateUpdated) {
+    public void File.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

@@ -197,11 +197,13 @@
         <column name="ID_PROJECT" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="TYPE_ID" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="NAME" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
-        <column name="DESCRIPTION" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
+        <column name="DESCRIPTION" primaryKey="false" required="false" scale="0" size="65535" type="-1,TEXT"/>
         <column name="PICTURE_URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="START_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
-        <column name="END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
-        <column name="SALARY" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
+        <column name="MIN_END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
+        <column name="EFFECTIVE_END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
+        <column name="MAX_END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
+        <column name="FUND" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="RANK" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="ACTIVE" primaryKey="false" required="false" scale="0" size="10" type="4,INT"/>
         <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
