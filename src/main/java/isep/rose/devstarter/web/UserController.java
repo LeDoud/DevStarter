@@ -54,6 +54,7 @@ public class UserController {
 			// model.addAttribute("lastName", user.getName());
 			// model.addAttribute("idUser", user.getIdUser());
 			model.addAttribute("user", user);
+			model.addAttribute("compte", user.getCompteEnumId().getName());
 
 			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
 			model.addAttribute("jobs", job);
@@ -77,21 +78,21 @@ public class UserController {
 			User user = new User().findUser((Integer) (userId));
 			if (user != null) {
 
-				// user.persist();
-				if (user.getCompteEnumId().getName() != "facebook"
-						|| user.getCompteEnumId().getName() != "google") {
-					if (passwordOld != "") {
+				if (!user.getCompteEnumId().getName().equals("facebook")
+						|| !user.getCompteEnumId().getName().equals("google")) {
+					if (!passwordOld.equals("") && !passwordNew.equals("")) {
 						String pass = user.getPassword();
 						PasswordEncoder encoder = new Md5PasswordEncoder();
 						String hashedPass = encoder.encodePassword(passwordOld,
 								"DevStarter");
 						if (hashedPass == pass) {
-							user.setPassword(passwordNew);
+							user.setPassword(encoder.encodePassword(
+									passwordNew, "DevStarter"));
 						}
 
 					}
 				}
-
+				
 				user.setEmail(email);
 				user.setFirstname(firstName);
 				user.setName(lastName);
@@ -104,6 +105,22 @@ public class UserController {
 		} else {
 			return "redirect:/home/index";
 		}
+	}
+	
+	/*----------ACCES A LA PAGE WALLET-------------*/
+	@RequestMapping(value = "/wallet", produces = "text/html")
+	public String wallet(HttpServletRequest request, ModelMap model) {
+		if (request.getSession().getAttribute("idUser") != null) {
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			model.addAttribute("user", user);
+			model.addAttribute("compte", user.getCompteEnumId().getName());
+
+			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
+			model.addAttribute("jobs", job);
+			return "user/wallet";
+		}
+		return "resourceNotFound";
 	}
 
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
@@ -140,8 +157,8 @@ public class UserController {
 				"springEmail.xml");
 		Email mm = (Email) context.getBean("email");
 		mm.sendMail("from@no-spam.com", email,
-				"[DevStarter] Création de votre compte",
-				"Votre compte a bien été crée.");
+				"[DevStarter] Creation of your account",
+				"Your account has been successfully created!");
 
 		/* message de confirmation lors du retour sur l'accueil */
 		String accountCreated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your account has been created. You can sign in now !</strong> However, we have sent you an email so you can validate your account for good.</div>";

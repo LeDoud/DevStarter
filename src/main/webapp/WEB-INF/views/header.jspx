@@ -203,17 +203,17 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-cog"> </span>Account</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/user/account"><span
+										href="${pageContext.request.contextPath}/user/wallet"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
 									<c:if test="${sessionScope.account =='normal'}">
 										<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 									<c:if test="${sessionScope.account =='facebook'}">
-										<li><a href="#" onclick="logoutFacebook()"><span class="icon-off"> </span>Logout</a></li>
+										<li><a href="#" onclick="logoutFacebook();location.href='${pageContext.request.contextPath}/home/index';"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 									<c:if test="${sessionScope.account =='google'}">
-										<li><a href="#" onclick="logoutGoogle()"><span class="icon-off"> </span>Logout</a></li>
+										<li><a href="#" onclick="logoutGoogle();location.href='${pageContext.request.contextPath}/home/index';"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 								</ul></li>
 						</c:when>
@@ -226,17 +226,17 @@
 										href="${pageContext.request.contextPath}/user/account"><span
 											class="icon-cog"> </span>Account</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/user/account"><span
+										href="${pageContext.request.contextPath}/user/wallet"><span
 											class="icon-shopping-cart"> </span>Wallet</a></li>
 									<li class="divider"></li>
 									<c:if test="${sessionScope.account =='normal'}">
 										<li><a href="${pageContext.request.contextPath}/user/logout"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 									<c:if test="${sessionScope.account =='facebook'}">
-										<li><a href="#" onclick="logoutFacebook()"><span class="icon-off"> </span>Logout</a></li>
+										<li><a href="" onclick="logoutFacebook();location.href='${pageContext.request.contextPath}/home/index';"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 									<c:if test="${sessionScope.account =='google'}">
-										<li><a href="#" onclick="logoutGoogle()"><span class="icon-off"> </span>Logout</a></li>
+										<li><a href="#" onclick="logoutGoogle();location.href='${pageContext.request.contextPath}/home/index';"><span class="icon-off"> </span>Logout</a></li>
 									</c:if>
 								</ul></li>
 						</c:otherwise>
