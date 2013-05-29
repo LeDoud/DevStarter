@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import isep.rose.devstarter.domain.Enumeration;
+import isep.rose.devstarter.domain.File;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
@@ -21,11 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/project/**")
 @Controller
@@ -59,7 +62,10 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/persistProject", produces = "text/html")
-    public String persistProject(org.springframework.web.context.request.WebRequest webRequest) {
+    public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") List<MultipartFile> files) {
+    	
+    	/*sauvegarde des fichiers*/
+    	
     	
     	/*dates*/
     	DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -97,14 +103,15 @@ public class ProjectController {
     	project.setFund(Integer.parseInt(webRequest.getParameter("amount_fund")));
     	project.setDateCreated(Calendar.getInstance());
     	project.setActive(1);
+    	if(files.get(0) != null){
+    		project.setPictureUrl(files.get(0).getOriginalFilename());
+    	}
     	project.persist();
-    	
     	
     	ManageUserProject manageUserProject = new ManageUserProject();
     	manageUserProject.setProjectId(Project.findProject(project.getIdProject()));
     	manageUserProject.setUserId(User.findUser(Integer.parseInt(webRequest.getParameter("user_id"))));
     	manageUserProject.persist();
-    	
     	
     	String languages=webRequest.getParameter("hidden-languages");
     	String frameworks=webRequest.getParameter("hidden-frameworks"); 	
@@ -127,9 +134,15 @@ public class ProjectController {
     	}
     	}
     	
-
-    	if(webRequest.getParameter("description") != null){
-    		
+    	for(int i=1;i<=5;i++){
+	    	if((webRequest.getParameter("doc"+i+"_title") != null) && (files.get(i) != null)){
+	    	
+	    		File file = new File();
+	    		file.setProjectId(Project.findProject(project.getIdProject()));
+	    		file.setTitle(webRequest.getParameter("doc"+i+"_title"));
+	    		file.setUrl(files.get(i).getOriginalFilename());
+	    		file.persist();
+	    	}
     	}
         return "home/index";
     }

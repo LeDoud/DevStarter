@@ -22,7 +22,7 @@
 			<h3>Fund your project. </h3>
 			<p><spring:message code="create_project_message" /></p>
 		</div>
-		<form  method="POST" action="${pageContext.request.contextPath}/project/persistProject">
+		<form  method="POST" action="${pageContext.request.contextPath}/project/persistProject" modelAttribute="uploadForm" enctype="multipart/form-data">
 		<div class="well">
 			<h4>Informations</h4>
 			<div class="row-fluid">
@@ -35,7 +35,7 @@
 						<div class="fileupload fileupload-new span18" data-provides="fileupload">
 						  <div class="fileupload-preview thumbnail" style="width: 170px; height: 170px;"><!-- --></div>
 						  <div>
-						    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="logo" id="logo"/></span>
+						    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="files[0]" id="logo"/></span>
 						    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
 						  </div>
 						</div>
