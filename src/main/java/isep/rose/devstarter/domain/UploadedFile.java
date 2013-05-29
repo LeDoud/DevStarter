@@ -7,7 +7,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(versionField = "", table = "FILE")
+@RooJpaActiveRecord(versionField = "", table = "UPLOADED_FILE")
 @RooDbManaged(automaticallyDelete = true)
-public class File {
+public class UploadedFile {
 }

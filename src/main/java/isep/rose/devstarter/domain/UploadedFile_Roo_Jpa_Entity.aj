@@ -3,7 +3,7 @@
 
 package isep.rose.devstarter.domain;
 
-import isep.rose.devstarter.domain.File;
+import isep.rose.devstarter.domain.UploadedFile;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,22 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-privileged aspect File_Roo_Jpa_Entity {
+privileged aspect UploadedFile_Roo_Jpa_Entity {
     
-    declare @type: File: @Entity;
+    declare @type: UploadedFile: @Entity;
     
-    declare @type: File: @Table(name = "FILE");
+    declare @type: UploadedFile: @Table(name = "UPLOADED_FILE");
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_FILE", columnDefinition = "INT")
-    private Integer File.idFile;
+    private Integer UploadedFile.idFile;
     
-    public Integer File.getIdFile() {
+    public Integer UploadedFile.getIdFile() {
         return this.idFile;
     }
     
-    public void File.setIdFile(Integer id) {
+    public void UploadedFile.setIdFile(Integer id) {
         this.idFile = id;
     }
     

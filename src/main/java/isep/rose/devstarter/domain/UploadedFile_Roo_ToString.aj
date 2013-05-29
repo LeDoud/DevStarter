@@ -3,13 +3,13 @@
 
 package isep.rose.devstarter.domain;
 
-import isep.rose.devstarter.domain.File;
+import isep.rose.devstarter.domain.UploadedFile;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect File_Roo_ToString {
+privileged aspect UploadedFile_Roo_ToString {
     
-    public String File.toString() {
+    public String UploadedFile.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

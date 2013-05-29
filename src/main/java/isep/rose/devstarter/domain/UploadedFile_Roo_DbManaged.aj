@@ -3,9 +3,9 @@
 
 package isep.rose.devstarter.domain;
 
-import isep.rose.devstarter.domain.File;
 import isep.rose.devstarter.domain.Project;
-import java.util.Calendar;
+import isep.rose.devstarter.domain.UploadedFile;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,65 +13,65 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-privileged aspect File_Roo_DbManaged {
+privileged aspect UploadedFile_Roo_DbManaged {
     
     @ManyToOne
     @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID_PROJECT", nullable = false)
-    private Project File.projectId;
+    private Project UploadedFile.projectId;
     
     @Column(name = "URL", columnDefinition = "VARCHAR", length = 255)
-    private String File.url;
+    private String UploadedFile.url;
     
     @Column(name = "TITLE", columnDefinition = "VARCHAR", length = 255)
-    private String File.title;
+    private String UploadedFile.title;
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar File.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date UploadedFile.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar File.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date UploadedFile.dateUpdated;
     
-    public Project File.getProjectId() {
+    public Project UploadedFile.getProjectId() {
         return projectId;
     }
     
-    public void File.setProjectId(Project projectId) {
+    public void UploadedFile.setProjectId(Project projectId) {
         this.projectId = projectId;
     }
     
-    public String File.getUrl() {
+    public String UploadedFile.getUrl() {
         return url;
     }
     
-    public void File.setUrl(String url) {
+    public void UploadedFile.setUrl(String url) {
         this.url = url;
     }
     
-    public String File.getTitle() {
+    public String UploadedFile.getTitle() {
         return title;
     }
     
-    public void File.setTitle(String title) {
+    public void UploadedFile.setTitle(String title) {
         this.title = title;
     }
     
-    public Calendar File.getDateCreated() {
+    public Date UploadedFile.getDateCreated() {
         return dateCreated;
     }
     
-    public void File.setDateCreated(Calendar dateCreated) {
+    public void UploadedFile.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar File.getDateUpdated() {
+    public Date UploadedFile.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void File.setDateUpdated(Calendar dateUpdated) {
+    public void UploadedFile.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

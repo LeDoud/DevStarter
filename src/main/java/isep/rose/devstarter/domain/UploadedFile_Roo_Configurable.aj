@@ -3,11 +3,11 @@
 
 package isep.rose.devstarter.domain;
 
-import isep.rose.devstarter.domain.File;
+import isep.rose.devstarter.domain.UploadedFile;
 import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect File_Roo_Configurable {
+privileged aspect UploadedFile_Roo_Configurable {
     
-    declare @type: File: @Configurable;
+    declare @type: UploadedFile: @Configurable;
     
 }

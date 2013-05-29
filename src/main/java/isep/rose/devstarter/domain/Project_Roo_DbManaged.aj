@@ -6,12 +6,11 @@ package isep.rose.devstarter.domain;
 import isep.rose.devstarter.domain.CommentUserProject;
 import isep.rose.devstarter.domain.DonationUserProject;
 import isep.rose.devstarter.domain.Enumeration;
-import isep.rose.devstarter.domain.File;
 import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
-import java.util.Calendar;
+import isep.rose.devstarter.domain.UploadedFile;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -31,9 +30,6 @@ privileged aspect Project_Roo_DbManaged {
     private Set<DonationUserProject> Project.donationUserProjects;
     
     @OneToMany(mappedBy = "projectId")
-    private Set<File> Project.files;
-    
-    @OneToMany(mappedBy = "projectId")
     private Set<FollowUserProject> Project.followUserProjects;
     
     @OneToMany(mappedBy = "projectId")
@@ -41,6 +37,9 @@ privileged aspect Project_Roo_DbManaged {
     
     @OneToMany(mappedBy = "projectId")
     private Set<TechnologyProjectEnumeration> Project.technologyProjectEnumerations;
+    
+    @OneToMany(mappedBy = "projectId")
+    private Set<UploadedFile> Project.uploadedFiles;
     
     @ManyToOne
     @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID_ENUMERATION")
@@ -86,13 +85,13 @@ privileged aspect Project_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateUpdated;
     
     public Set<CommentUserProject> Project.getCommentUserProjects() {
         return commentUserProjects;
@@ -108,14 +107,6 @@ privileged aspect Project_Roo_DbManaged {
     
     public void Project.setDonationUserProjects(Set<DonationUserProject> donationUserProjects) {
         this.donationUserProjects = donationUserProjects;
-    }
-    
-    public Set<File> Project.getFiles() {
-        return files;
-    }
-    
-    public void Project.setFiles(Set<File> files) {
-        this.files = files;
     }
     
     public Set<FollowUserProject> Project.getFollowUserProjects() {
@@ -140,6 +131,14 @@ privileged aspect Project_Roo_DbManaged {
     
     public void Project.setTechnologyProjectEnumerations(Set<TechnologyProjectEnumeration> technologyProjectEnumerations) {
         this.technologyProjectEnumerations = technologyProjectEnumerations;
+    }
+    
+    public Set<UploadedFile> Project.getUploadedFiles() {
+        return uploadedFiles;
+    }
+    
+    public void Project.setUploadedFiles(Set<UploadedFile> uploadedFiles) {
+        this.uploadedFiles = uploadedFiles;
     }
     
     public Enumeration Project.getTypeId() {
@@ -230,19 +229,19 @@ privileged aspect Project_Roo_DbManaged {
         this.active = active;
     }
     
-    public Calendar Project.getDateCreated() {
+    public Date Project.getDateCreated() {
         return dateCreated;
     }
     
-    public void Project.setDateCreated(Calendar dateCreated) {
+    public void Project.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar Project.getDateUpdated() {
+    public Date Project.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void Project.setDateUpdated(Calendar dateUpdated) {
+    public void Project.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

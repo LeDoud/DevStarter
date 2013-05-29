@@ -3,73 +3,73 @@
 
 package isep.rose.devstarter.domain;
 
-import isep.rose.devstarter.domain.File;
+import isep.rose.devstarter.domain.UploadedFile;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect File_Roo_Jpa_ActiveRecord {
+privileged aspect UploadedFile_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager File.entityManager;
+    transient EntityManager UploadedFile.entityManager;
     
-    public static final EntityManager File.entityManager() {
-        EntityManager em = new File().entityManager;
+    public static final EntityManager UploadedFile.entityManager() {
+        EntityManager em = new UploadedFile().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long File.countFiles() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM File o", Long.class).getSingleResult();
+    public static long UploadedFile.countUploadedFiles() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM UploadedFile o", Long.class).getSingleResult();
     }
     
-    public static List<File> File.findAllFiles() {
-        return entityManager().createQuery("SELECT o FROM File o", File.class).getResultList();
+    public static List<UploadedFile> UploadedFile.findAllUploadedFiles() {
+        return entityManager().createQuery("SELECT o FROM UploadedFile o", UploadedFile.class).getResultList();
     }
     
-    public static File File.findFile(Integer idFile) {
+    public static UploadedFile UploadedFile.findUploadedFile(Integer idFile) {
         if (idFile == null) return null;
-        return entityManager().find(File.class, idFile);
+        return entityManager().find(UploadedFile.class, idFile);
     }
     
-    public static List<File> File.findFileEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM File o", File.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<UploadedFile> UploadedFile.findUploadedFileEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM UploadedFile o", UploadedFile.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void File.persist() {
+    public void UploadedFile.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void File.remove() {
+    public void UploadedFile.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            File attached = File.findFile(this.idFile);
+            UploadedFile attached = UploadedFile.findUploadedFile(this.idFile);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void File.flush() {
+    public void UploadedFile.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void File.clear() {
+    public void UploadedFile.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public File File.merge() {
+    public UploadedFile UploadedFile.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        File merged = this.entityManager.merge(this);
+        UploadedFile merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

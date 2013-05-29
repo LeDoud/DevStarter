@@ -88,24 +88,6 @@
             <unique-column name="ID_ENUMERATION"/>
         </unique>
     </table>
-    <table name="FILE">
-        <column name="ID_FILE" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
-        <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
-        <column name="URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
-        <column name="TITLE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
-        <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
-        <column name="DATE_UPDATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
-        <foreign-key foreignTable="PROJECT" name="FK_JOIN_PROJECT_FILE" onDelete="none" onUpdate="none">
-            <option key="exported" value="false"/>
-            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
-        </foreign-key>
-        <unique name="PRIMARY">
-            <unique-column name="ID_FILE"/>
-        </unique>
-        <index name="FK_JOIN_PROJECT_FILE">
-            <index-column name="PROJECT_ID"/>
-        </index>
-    </table>
     <table name="FOLLOW_USER_PROJECT">
         <column name="ID_FOLLOW" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
         <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
@@ -220,10 +202,6 @@
             <option key="exported" value="true"/>
             <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
         </foreign-key>
-        <foreign-key foreignTable="FILE" name="FK_JOIN_PROJECT_FILE" onDelete="none" onUpdate="none">
-            <option key="exported" value="true"/>
-            <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
-        </foreign-key>
         <foreign-key foreignTable="FOLLOW_USER_PROJECT" name="FK_FOLLOW_USER_PROJECT" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
@@ -233,6 +211,10 @@
             <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
         </foreign-key>
         <foreign-key foreignTable="TECHNOLOGY_PROJECT_ENUMERATION" name="FK_TECHNOLOGY_PROJECT_ENUMERATION2" onDelete="none" onUpdate="none">
+            <option key="exported" value="true"/>
+            <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
+        </foreign-key>
+        <foreign-key foreignTable="UPLOADED_FILE" name="FK_JOIN_PROJECT_FILE" onDelete="none" onUpdate="none">
             <option key="exported" value="true"/>
             <reference foreign="PROJECT_ID" local="ID_PROJECT"/>
         </foreign-key>
@@ -262,6 +244,24 @@
             <index-column name="TECHNO_ENUM_ID"/>
         </index>
         <index name="FK_TECHNOLOGY_PROJECT_ENUMERATION2">
+            <index-column name="PROJECT_ID"/>
+        </index>
+    </table>
+    <table name="UPLOADED_FILE">
+        <column name="ID_FILE" primaryKey="true" required="true" scale="0" size="10" type="4,INT"/>
+        <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
+        <column name="URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
+        <column name="TITLE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
+        <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
+        <column name="DATE_UPDATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
+        <foreign-key foreignTable="PROJECT" name="FK_JOIN_PROJECT_FILE" onDelete="none" onUpdate="none">
+            <option key="exported" value="false"/>
+            <reference foreign="ID_PROJECT" local="PROJECT_ID"/>
+        </foreign-key>
+        <unique name="PRIMARY">
+            <unique-column name="ID_FILE"/>
+        </unique>
+        <index name="FK_JOIN_PROJECT_FILE">
             <index-column name="PROJECT_ID"/>
         </index>
     </table>
