@@ -11,7 +11,7 @@ import isep.rose.devstarter.domain.Forum;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Notification;
 import isep.rose.devstarter.domain.User;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -72,8 +72,8 @@ privileged aspect User_Roo_DbManaged {
     
     @Column(name = "CREATED_DATE", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date User.createdDate;
+    @DateTimeFormat(style = "MM")
+    private Calendar User.createdDate;
     
     @Column(name = "NOTIFICATION", columnDefinition = "INT")
     private Integer User.notification;
@@ -198,11 +198,11 @@ privileged aspect User_Roo_DbManaged {
         this.active = active;
     }
     
-    public Date User.getCreatedDate() {
+    public Calendar User.getCreatedDate() {
         return createdDate;
     }
     
-    public void User.setCreatedDate(Date createdDate) {
+    public void User.setCreatedDate(Calendar createdDate) {
         this.createdDate = createdDate;
     }
     

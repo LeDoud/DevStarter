@@ -1,5 +1,7 @@
 package isep.rose.devstarter.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,15 +13,18 @@ import java.util.List;
 import java.util.Set;
 
 import isep.rose.devstarter.domain.Enumeration;
-import isep.rose.devstarter.domain.File;
+import isep.rose.devstarter.domain.UploadedFile;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import isep.rose.devstarter.domain.User;
+import isep.rose.devstarter.service.MultipartFiles;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +38,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/project/**")
 @Controller
 public class ProjectController {
+	
+	private static final String UPLOAD_DIRECTORY = "/DevstarterProjectsFiles/";
+	
 
     @RequestMapping(method = RequestMethod.POST, value = "{id}")
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
@@ -62,10 +70,10 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/persistProject", produces = "text/html")
-    public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") List<MultipartFile> files) {
+    public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") MultipartFiles multipartFiles) {
     	
     	/*sauvegarde des fichiers*/
-    	
+    	List<MultipartFile> files = multipartFiles.getFiles();
     	
     	/*dates*/
     	DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -101,12 +109,20 @@ public class ProjectController {
     	project.setMaxEndDate(maxDate);
     	project.setEffectiveEndDate(maxDate);
     	project.setFund(Integer.parseInt(webRequest.getParameter("amount_fund")));
-    	project.setDateCreated(Calendar.getInstance());
+    	project.setDateCreated(new Date());
     	project.setActive(1);
+    	project.persist();
     	if(files.get(0) != null){
     		project.setPictureUrl(files.get(0).getOriginalFilename());
+    		project.persist();
+    		try {
+				this.saveMultipartToDisk(files.get(0), project);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
-    	project.persist();
+    	
     	
     	ManageUserProject manageUserProject = new ManageUserProject();
     	manageUserProject.setProjectId(Project.findProject(project.getIdProject()));
@@ -124,20 +140,25 @@ public class ProjectController {
         		language.persist();
         	}
     	}
-    	if(languages != ""){
-    	String frameworksArray[]=frameworks.split(",");
-    	for(String frameworkString:frameworksArray){
-    		TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
-    		framework.setProjectId(Project.findProject(project.getIdProject()));
-    		framework.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(frameworkString, "framework"));
-    		framework.persist();
-    	}
+    	if(frameworks != ""){
+	    	String frameworksArray[]=frameworks.split(",");
+	    	for(String frameworkString:frameworksArray){
+	    		TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
+	    		framework.setProjectId(Project.findProject(project.getIdProject()));
+	    		framework.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(frameworkString, "framework"));
+	    		framework.persist();
+	    	}
     	}
     	
     	for(int i=1;i<=5;i++){
 	    	if((webRequest.getParameter("doc"+i+"_title") != null) && (files.get(i) != null)){
-	    	
-	    		File file = new File();
+	    		try {
+					this.saveMultipartToDisk(files.get(i), project);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		UploadedFile file = new UploadedFile();
 	    		file.setProjectId(Project.findProject(project.getIdProject()));
 	    		file.setTitle(webRequest.getParameter("doc"+i+"_title"));
 	    		file.setUrl(files.get(i).getOriginalFilename());
@@ -147,6 +168,7 @@ public class ProjectController {
         return "home/index";
     }
     
+    /*----------------AUTOCOMPLETION LANGUAGES---------------*/
     @RequestMapping(value = "/languageAutocomplete", method = RequestMethod.POST)
     @ResponseBody
     public String languageAutocomplete(@RequestParam("typeahead") String name) {
@@ -164,7 +186,7 @@ public class ProjectController {
     	}
         return languages;
     }
-    
+    /*----------------AUTOCOMPLETION FRAMEWORKS---------------*/
     @RequestMapping(value = "/frameworkAutocomplete", method = RequestMethod.POST)
     @ResponseBody
     public String frameworkAutocomplete(@RequestParam("typeahead") String name) {
@@ -183,4 +205,26 @@ public class ProjectController {
         return frameworks;
     }
     
+    
+    private String calculateDestinationDirectory(Project project) {
+        String result = UPLOAD_DIRECTORY;
+        result += project.getIdProject();
+        return result;
+    }
+ 
+    private String calculateDestinationPath(MultipartFile file, Project project) {
+        String result = this.calculateDestinationDirectory(project);
+        result += "/";
+        result += file.getOriginalFilename();
+        return result;
+    }
+ 
+    private void saveMultipartToDisk(MultipartFile file, Project project) throws Exception {
+        File dir = new File(this.calculateDestinationDirectory(project));
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
+        File multipartFile = new File(this.calculateDestinationPath(file, project));
+        file.transferTo(multipartFile);
+    }
 }

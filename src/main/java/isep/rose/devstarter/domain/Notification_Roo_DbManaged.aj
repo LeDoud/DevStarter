@@ -5,7 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.Notification;
 import isep.rose.devstarter.domain.User;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,8 +27,8 @@ privileged aspect Notification_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date Notification.dateCreated;
+    @DateTimeFormat(style = "MM")
+    private Calendar Notification.dateCreated;
     
     public User Notification.getUserId() {
         return userId;
@@ -54,11 +54,11 @@ privileged aspect Notification_Roo_DbManaged {
         this.message = message;
     }
     
-    public Date Notification.getDateCreated() {
+    public Calendar Notification.getDateCreated() {
         return dateCreated;
     }
     
-    public void Notification.setDateCreated(Date dateCreated) {
+    public void Notification.setDateCreated(Calendar dateCreated) {
         this.dateCreated = dateCreated;
     }
     
