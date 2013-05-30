@@ -20,14 +20,16 @@
 </head>
 
 <body>
-	<div id="wrapper" style="min-width:960px;">
+	<div id="wrapper" style="min-width:1020px;">
 		<tiles:insertAttribute name="header" ignore="true" />
-		<div class="row-fluid">
+		<div class="row-fluid" >
 			<div class="span20 offset2">
 				<div class="message">
 					${message}
 				</div>
+				<div>
 				<tiles:insertAttribute name="body" />
+				</div>
 			</div>
 		</div>
 		<tiles:insertAttribute name="footer" ignore="true" />

@@ -41,12 +41,11 @@ public class ProjectController {
 	
 	private static final String UPLOAD_DIRECTORY = "/DevstarterProjectsFiles/";
 	
-
     @RequestMapping(method = RequestMethod.POST, value = "{id}")
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
     }
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET, value = "/index")
     public String index() {
         return "project/index";
     }
@@ -67,8 +66,7 @@ public class ProjectController {
     
     @RequestMapping(value = "/persistProject", produces = "text/html")
     public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") MultipartFiles multipartFiles ,HttpServletRequest httpServletRequest) {
-    	
-    	/*sauvegarde des fichiers*/
+   
     	List<MultipartFile> files = multipartFiles.getFiles();
     	
     	/*dates*/
@@ -107,6 +105,7 @@ public class ProjectController {
     	project.setFund(Integer.parseInt(webRequest.getParameter("amount_fund")));
     	project.setDateCreated(Calendar.getInstance());
     	project.setActive(1);
+    	project.setRank(0);
     	project.persist();
     	if(files.get(0) != null){
     		project.setPictureUrl(files.get(0).getOriginalFilename());
@@ -118,7 +117,6 @@ public class ProjectController {
 				e.printStackTrace();
 			}
     	}
-    	
     	
     	ManageUserProject manageUserProject = new ManageUserProject();
     	manageUserProject.setProjectId(Project.findProject(project.getIdProject()));
@@ -154,8 +152,7 @@ public class ProjectController {
         	}
     	}
     	
-    	
-    	
+    	/*-------------FICHIERS---------*/
     	for(int i=1;i<=5;i++){
 	    	if((webRequest.getParameter("doc"+i+"_title") != null) && (files.get(i) != null)){
 	    		try {
@@ -174,12 +171,38 @@ public class ProjectController {
         return "redirect:/project/show/"+project.getIdProject().toString();
     }
     
-    @RequestMapping(value = "/show/{id}", produces = "text/html",method=RequestMethod.GET)
+    @RequestMapping(value = "/show/{id}", produces = "text/html",method = RequestMethod.GET)
     public String show(@PathVariable String id,ModelMap model) {
     	Integer idProject = Integer.parseInt(id);
     	Project project = Project.findProject(idProject);
     	model.addAttribute("project",project);
         return "project/show";
+    }
+    
+    @RequestMapping(value = "/list/{criteria}", produces = "text/html",method = RequestMethod.GET)
+    public String list(@PathVariable String criteria,ModelMap model,HttpServletRequest request) {
+    	List<Project> listProjects=new ArrayList<Project>();
+    	String title="";
+    	if(criteria.equals("top")){
+    		listProjects=Project.findTopProjects();
+    		title="Top projects";
+    	}else if(criteria.equals("new")){
+    		listProjects=Project.findNewProjects();
+    		title="Last created projects";
+    	}else if(criteria.equals("followed")){
+    		if (request.getSession().getAttribute("idUser") != null) {
+    			listProjects=Project.findFollowedProjects((Integer)(request.getSession().getAttribute("idUser")));
+        		title="Your followed projects";
+    		}
+    	}else if(criteria.equals("funded")){
+    		if (request.getSession().getAttribute("idUser") != null) {
+	    		listProjects=Project.findFundedProjects((Integer)(request.getSession().getAttribute("idUser")));
+	    		title="Your funded projects";
+    		}
+    	}
+    	model.addAttribute("title", title);
+    	model.addAttribute("listProjects",listProjects);
+        return "project/list";
     }
     
     

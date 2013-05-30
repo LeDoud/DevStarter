@@ -64,20 +64,20 @@
 								<ul class="dropdown-menu">
 								<li class="nav-header2">General</li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/allprojects"><span
+										href="${pageContext.request.contextPath}/project/list/top"><span
 											class="icon-star"> </span>Top</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/allprojects"><span
+										href="${pageContext.request.contextPath}/project/list/new"><span
 											class="icon-eye-open"> </span>New</a></li>
 											
 								<c:if test="${sessionScope.logged =='true'}">
 									<li class="divider2"></li>			
 									<li class="nav-header2">My projects</li>
 										<li><a
-											href="${pageContext.request.contextPath}/user/myprojects"><span
+											href="${pageContext.request.contextPath}/project/list/followed"><span
 												class="icon-star"> </span>Followed</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/user/myprojects"><span
+											href="${pageContext.request.contextPath}/project/list/funded"><span
 												class="icon-eye-open"> </span>Funded</a></li>
 										
 										<li class="divider"></li>	
@@ -97,20 +97,20 @@
 								<ul class="dropdown-menu">
 								<li class="nav-header2">General</li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/allprojects"><span
+										href="${pageContext.request.contextPath}/project/list/top"><span
 											class="icon-star"> </span>Top</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/allprojects"><span
+										href="${pageContext.request.contextPath}/project/list/new"><span
 											class="icon-eye-open"> </span>New</a></li>
 											
 								<c:if test="${sessionScope.logged =='true'}">
 									<li class="divider2"></li>			
 									<li class="nav-header2">My projects</li>
 										<li><a
-											href="${pageContext.request.contextPath}/user/myprojects"><span
+											href="${pageContext.request.contextPath}/project/list/followed"><span
 												class="icon-star"> </span>Followed</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/user/myprojects"><span
+											href="${pageContext.request.contextPath}/project/list/funded"><span
 												class="icon-eye-open"> </span>Funded</a></li>
 										
 										<li class="divider"></li>	

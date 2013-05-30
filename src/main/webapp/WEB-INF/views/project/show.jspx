@@ -6,7 +6,7 @@
   <util:panel id="title" title="${title}">
   
     <h3>
-       List of projects
+       Project ${project.name}
     </h3>
     <p>
     </p>
