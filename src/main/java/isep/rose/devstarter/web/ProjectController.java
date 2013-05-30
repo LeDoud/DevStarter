@@ -56,10 +56,6 @@ public class ProjectController {
         return "project/search";
     }
     
-    @RequestMapping(value = "/show", produces = "text/html")
-    public String show() {
-        return "project/show";
-    }
     
     @RequestMapping(value = "/create", produces = "text/html")
     public String create(ModelMap model) {
@@ -70,7 +66,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/persistProject", produces = "text/html")
-    public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") MultipartFiles multipartFiles) {
+    public String persistProject(org.springframework.web.context.request.WebRequest webRequest, @ModelAttribute("uploadForm") MultipartFiles multipartFiles ,HttpServletRequest httpServletRequest) {
     	
     	/*sauvegarde des fichiers*/
     	List<MultipartFile> files = multipartFiles.getFiles();
@@ -109,7 +105,7 @@ public class ProjectController {
     	project.setMaxEndDate(maxDate);
     	project.setEffectiveEndDate(maxDate);
     	project.setFund(Integer.parseInt(webRequest.getParameter("amount_fund")));
-    	project.setDateCreated(new Date());
+    	project.setDateCreated(Calendar.getInstance());
     	project.setActive(1);
     	project.persist();
     	if(files.get(0) != null){
@@ -129,26 +125,36 @@ public class ProjectController {
     	manageUserProject.setUserId(User.findUser(Integer.parseInt(webRequest.getParameter("user_id"))));
     	manageUserProject.persist();
     	
-    	String languages=webRequest.getParameter("hidden-languages");
-    	String frameworks=webRequest.getParameter("hidden-frameworks"); 	
-    	if(languages != ""){
-    		String languagesArray[]=languages.split(",");
-    		for(String languageString:languagesArray){
-        		TechnologyProjectEnumeration language = new TechnologyProjectEnumeration();
-        		language.setProjectId(Project.findProject(project.getIdProject()));
-        		language.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(languageString, "language"));
-        		language.persist();
+    	if(webRequest.getParameter("hidden-languages") != null){
+    		String languages=webRequest.getParameter("hidden-languages").toString();
+    		if(!languages.equals("")){
+        		String languagesArray[]=languages.split(",");
+        		for(String languageString:languagesArray){
+        			if(languageString != ""){
+	            		TechnologyProjectEnumeration language = new TechnologyProjectEnumeration();
+	            		language.setProjectId(Project.findProject(project.getIdProject()));
+	            		language.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(languageString, "language"));
+	            		language.persist();
+        			}
+            	}
         	}
     	}
-    	if(frameworks != ""){
-	    	String frameworksArray[]=frameworks.split(",");
-	    	for(String frameworkString:frameworksArray){
-	    		TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
-	    		framework.setProjectId(Project.findProject(project.getIdProject()));
-	    		framework.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(frameworkString, "framework"));
-	    		framework.persist();
-	    	}
+    	if(webRequest.getParameter("hidden-frameworks") != null){
+    		String frameworks=webRequest.getParameter("hidden-frameworks").toString(); 
+    		if(!frameworks.equals("")){
+    	    	String frameworksArray[]=frameworks.split(",");
+    	    	for(String frameworkString:frameworksArray){
+    	    		if(frameworkString != ""){
+	    	    		TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
+	    	    		framework.setProjectId(Project.findProject(project.getIdProject()));
+	    	    		framework.setTechnoEnumId(Enumeration.findEnumerationByNameAndType(frameworkString, "framework"));
+	    	    		framework.persist();
+    	    		}
+    	    	}
+        	}
     	}
+    	
+    	
     	
     	for(int i=1;i<=5;i++){
 	    	if((webRequest.getParameter("doc"+i+"_title") != null) && (files.get(i) != null)){
@@ -165,8 +171,17 @@ public class ProjectController {
 	    		file.persist();
 	    	}
     	}
-        return "home/index";
+        return "redirect:/project/show/"+project.getIdProject().toString();
     }
+    
+    @RequestMapping(value = "/show/{id}", produces = "text/html",method=RequestMethod.GET)
+    public String show(@PathVariable String id,ModelMap model) {
+    	Integer idProject = Integer.parseInt(id);
+    	Project project = Project.findProject(idProject);
+    	model.addAttribute("project",project);
+        return "project/show";
+    }
+    
     
     /*----------------AUTOCOMPLETION LANGUAGES---------------*/
     @RequestMapping(value = "/languageAutocomplete", method = RequestMethod.POST)
