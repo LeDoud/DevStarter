@@ -22,4 +22,7 @@
 	<definition extends="overlay" name="user/donate">
 		<put-attribute name="body" value="/WEB-INF/views/user/donate.jspx" />
 	</definition>
+	<definition extends="overlay" name="user/addMoney">
+		<put-attribute name="body" value="/WEB-INF/views/user/addMoney.jspx" />
+	</definition>
 </tiles-definitions>

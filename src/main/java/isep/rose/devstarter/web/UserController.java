@@ -148,8 +148,26 @@ public class UserController {
 
 		
 		/* message de confirmation lors du retour sur l'accueil */
-		String newPassword = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";
-		redirectAttributes.addFlashAttribute("message", newPassword);
+		String donationDone = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";
+		redirectAttributes.addFlashAttribute("message", donationDone);
+		return "redirect:/home/index";
+	}
+	
+	/*----------USER ADD MONEY POP UP -----------------*/
+	@RequestMapping(value = "/addMoney", produces = "text/html")
+	public String addMoney(HttpServletRequest request, ModelMap model) {
+		return "user/addMoney";
+	}
+	
+	/*----------USER ADD MONEY  -----------------*/
+	@RequestMapping(value = "/userAddMoney", produces = "text/html", method = RequestMethod.POST)
+	public String userAddMoney(@RequestParam("money") int money,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+		
+		/* message de confirmation lors du retour sur l'accueil */
+		String moneyAdded = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your wallet is now quite heavy !</div>";
+		redirectAttributes.addFlashAttribute("message", moneyAdded);
 		return "redirect:/home/index";
 	}
 	

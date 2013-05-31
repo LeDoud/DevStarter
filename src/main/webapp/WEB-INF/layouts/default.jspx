@@ -44,6 +44,9 @@
 	<div id="myModal3" data-remote="${pageContext.request.contextPath}/user/donate" class="modal modal2 hide fade" style="height:120px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 		 <div class="modal-body"><!-- content will be loaded here --></div>
 	</div>
+	<div id="myModal4" data-remote="${pageContext.request.contextPath}/user/addMoney" class="modal modal2 hide fade" style="height:220px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+		 <div class="modal-body"><!-- content will be loaded here --></div>
+	</div>
 	
 	
 	

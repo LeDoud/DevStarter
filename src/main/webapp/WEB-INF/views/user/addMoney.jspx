@@ -1,0 +1,32 @@
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	class="forgot-password">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<div class="">
+
+		<form id="fill-wallet" method="post"
+			class="form-horizontal-signup" action="${pageContext.request.contextPath}/user/userAddMoney">
+
+			<fieldset>
+			<div class="modal-header">
+			<h3>Fill up your wallet !</h3>
+			</div>
+				<div class="input-prepend input-append modal-body" id="div-money">
+					<label class="control-label">Amount : </label>
+					<div class="controls">
+						<span class="add-on">$</span>
+						<input class="input-small" type="text" id="money" name="money" />
+					</div>
+				</div>
+				<div class="modal-footer">
+				<button type="submit" class="btn register">Add some money</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	
+</div>
