@@ -332,6 +332,7 @@ public class UserController {
 	public String resetPassword(@RequestParam("email") String email,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
+		String newPassword="";
 		/* Create random string */
 		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		String pass = "";
@@ -346,19 +347,26 @@ public class UserController {
 		if (user != null) {
 			user.setPassword(hashedPass);
 			user.persist();
+			
+			/*
+			 * mail pour envoyer le nouveau mot de passe
+			 */
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+					"springEmail.xml");
+			Email mm = (Email) context.getBean("email");
+			mm.sendMail("from@no-spam.com", email, "[DevStarter] New Password",
+					"Your new password is : " + pass);
+
+			/* message de confirmation lors du retour sur l'accueil */
+			newPassword = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your new password has been sent to your email account</div>";
+			
+		}else{
+			newPassword = "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>This email is not linked to an account!</div>";
+			
 		}
 
-		/*
-		 * mail pour envoyer le nouveau mot de passe
-		 */
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"springEmail.xml");
-		Email mm = (Email) context.getBean("email");
-		mm.sendMail("from@no-spam.com", email, "[DevStarter] New Password",
-				"Your new password is : " + pass);
 
 		/* message de confirmation lors du retour sur l'accueil */
-		String newPassword = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your new password has been sent to your email account</div>";
 		redirectAttributes.addFlashAttribute("message", newPassword);
 		return "redirect:/home/index";
 	}
