@@ -16,6 +16,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/user/wallet.jspx" />
 	</definition>
 	<definition extends="default" name="user/managedProjects">
-		<put-attribute name="body" value="/WEB-INF/views/user/managedProjects.jspx" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/managedProjects.jspx" />
+	</definition>
+	<definition extends="overlay" name="user/donate">
+		<put-attribute name="body" value="/WEB-INF/views/user/donate.jspx" />
 	</definition>
 </tiles-definitions>

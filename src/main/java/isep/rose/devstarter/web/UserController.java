@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import isep.rose.devstarter.service.Email;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.domain.Enumeration;
+import isep.rose.devstarter.domain.DonationUserProject;
 
 @RequestMapping("/user/**")
 @Controller
@@ -35,7 +36,7 @@ public class UserController {
 
 	@RequestMapping
 	public String index() {
-		return "user/index";
+		return "user/account";
 	}
 
 	@RequestMapping(value = "/signupForm", produces = "text/html")
@@ -72,9 +73,11 @@ public class UserController {
 			@RequestParam("passwordNew") String passwordNew,
 			@RequestParam("job") int job,
 			@RequestParam("profil") String experience,
-			@RequestParam("userId") int userId) {
-
+			@RequestParam("userId") int userId,
+			RedirectAttributes redirectAttributes) {
+		String accountUpdated = "";
 		if (userId != 0) {
+
 			User user = new User().findUser((Integer) (userId));
 			if (user != null) {
 
@@ -85,14 +88,20 @@ public class UserController {
 						PasswordEncoder encoder = new Md5PasswordEncoder();
 						String hashedPass = encoder.encodePassword(passwordOld,
 								"DevStarter");
-						if (hashedPass == pass) {
+						if (hashedPass.equals(pass)) {
 							user.setPassword(encoder.encodePassword(
 									passwordNew, "DevStarter"));
+							accountUpdated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your profile and password have been modified !</strong></div>";
+
+						}else{
+							accountUpdated = "<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your old password was not correct, only your profile has been modified !</strong></div>";
 						}
 
+					} else {
+						accountUpdated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your profile has been modified !</strong></div>";
 					}
 				}
-				
+
 				user.setEmail(email);
 				user.setFirstname(firstName);
 				user.setName(lastName);
@@ -101,12 +110,15 @@ public class UserController {
 
 				user.persist();
 			}
+			/* message de confirmation des modifs */
+			redirectAttributes.addFlashAttribute("message", accountUpdated);
+
 			return "redirect:/user/account";
 		} else {
 			return "redirect:/home/index";
 		}
 	}
-	
+
 	/*----------ACCES A LA PAGE WALLET-------------*/
 	@RequestMapping(value = "/wallet", produces = "text/html")
 	public String wallet(HttpServletRequest request, ModelMap model) {
@@ -116,12 +128,31 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("compte", user.getCompteEnumId().getName());
 
-			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
-			model.addAttribute("jobs", job);
+			List<DonationUserProject> transaction = DonationUserProject.findDonationUserProjectByUserId(user);
+			model.addAttribute("donations", transaction);
 			return "user/wallet";
 		}
 		return "resourceNotFound";
 	}
+	
+	/*----------USER DONATE POP UP-----------------*/
+	@RequestMapping(value = "/donate", produces = "text/html")
+	public String donate(HttpServletRequest request, ModelMap model) {
+		return "user/donate";
+	}
+
+	/*----------USER DONATE PROJECT-----------------*/
+	@RequestMapping(value = "/donateProject", produces = "text/html", method = RequestMethod.POST)
+	public String donateProject(@RequestParam("email") String email,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+		
+		/* message de confirmation lors du retour sur l'accueil */
+		String newPassword = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";
+		redirectAttributes.addFlashAttribute("message", newPassword);
+		return "redirect:/home/index";
+	}
+	
 
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
 	@RequestMapping(value = "/signupEmail", produces = "text/html", method = RequestMethod.POST)
