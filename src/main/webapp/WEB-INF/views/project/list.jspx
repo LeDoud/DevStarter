@@ -35,7 +35,7 @@
 							</span><br/>
 						</div>
 						<div class="span10">
-							<p class="description_project_list"><label class="label_project_list inline">Description: </label>${project.description}</p>
+							<div class="description_project_list"><label class="label_project_list inline">Description: </label><span class="inline reset_description">${project.description}</span></div>
 						</div>
 						<div class="span5">
 							<span><label class="label_project_list inline">Start:</label> ${project.startDate}</span><br/>
@@ -45,7 +45,7 @@
 						</div>
 						<div class="span2 fund_project_list">
 							<a class="btn btn-small btn-primary" href="${pageContext.request.contextPath}/project/show/${project.idProject}" >Show details</a><br/>
-							<a class="btn btn-small btn-info">Donate</a><br/>
+							<a href="${pageContext.request.contextPath}/user/donate/${project.idProject}" class="btn btn-small btn-info">Donate</a><br/>
 							<a class="btn btn-small">Follow</a><br/>
 						</div>
 					</div>

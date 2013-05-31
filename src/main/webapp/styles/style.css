@@ -187,13 +187,19 @@ margin-bottom:10px;
 
 /*-------PROJECT PAGE------*/
 .project_logo{
-	width:200px;
+	max-width:200px;
 	max-height:200px;
+	width:100%;
 	background-color:white;
 }
 
 .description_project_page{
 	text-align:justify;
+}
+
+.reset_description, .reset_description *
+{
+ color:black;
 }
 /*-----FOOTER-----------*/
 footer {
