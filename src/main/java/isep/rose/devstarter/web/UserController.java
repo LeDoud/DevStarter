@@ -34,10 +34,6 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response) {
 	}
 
-	@RequestMapping
-	public String index() {
-		return "user/account";
-	}
 
 	@RequestMapping(value = "/signupForm", produces = "text/html")
 	public ModelAndView signupForm() {
@@ -136,8 +132,9 @@ public class UserController {
 	}
 	
 	/*----------USER DONATE POP UP-----------------*/
-	@RequestMapping(value = "/donate", produces = "text/html")
-	public String donate(HttpServletRequest request, ModelMap model) {
+	@RequestMapping(value = "/donate/{idProject}", produces = "text/html")
+	public String donate(@PathVariable Integer idProject, HttpServletRequest request, ModelMap model) {
+		model.addAttribute("idProject", idProject);
 		return "user/donate";
 	}
 
