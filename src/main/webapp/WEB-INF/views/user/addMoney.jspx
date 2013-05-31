@@ -27,6 +27,34 @@
 			</fieldset>
 		</form>
 	</div>
-
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {					
+							$('#fill-wallet').validate(
+									{
+										rules : {
+											money : {
+												min : 1,
+												digits : true,
+												required : true
+											}
+										},
+										highlight : function(element) {
+											$(element)
+													.closest('.control-group')
+													.removeClass('success')
+													.addClass('error');
+										},
+										success : function(element) {
+											element.text('OK!').addClass(
+													'valid').closest(
+													'.control-group')
+													.removeClass('error')
+													.addClass('success');
+										}
+									});
+						});
+	</script>
 	
 </div>

@@ -153,6 +153,7 @@ public class UserController {
 	/*----------USER ADD MONEY POP UP -----------------*/
 	@RequestMapping(value = "/addMoney", produces = "text/html")
 	public String addMoney(HttpServletRequest request, ModelMap model) {
+
 		return "user/addMoney";
 	}
 	
@@ -160,8 +161,15 @@ public class UserController {
 	@RequestMapping(value = "/userAddMoney", produces = "text/html", method = RequestMethod.POST)
 	public String userAddMoney(@RequestParam("money") int money,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
-
+		if (request.getSession().getAttribute("idUser") != null) {
+		User user = new User().findUser((Integer) (request.getSession()
+				.getAttribute("idUser")));
+		int wallet = user.getWallet()+money;
 		
+		request.getSession().setAttribute("wallet", wallet); //pour la session
+		user.setWallet(wallet); //pour la bdd
+		user.persist();
+		}
 		/* message de confirmation lors du retour sur l'accueil */
 		String moneyAdded = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your wallet is now quite heavy !</div>";
 		redirectAttributes.addFlashAttribute("message", moneyAdded);
