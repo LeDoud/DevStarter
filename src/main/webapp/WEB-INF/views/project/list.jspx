@@ -6,7 +6,7 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:url value="/resources/images/no_image.gif" var="no_image" />
-  
+ 
   <div class="row-fluid">
   	<div class="well-small">
     <h3>
@@ -17,7 +17,7 @@
     	<c:forEach var="project" items="${listProjects}">
 			<div class="row div_project_list" style="height:100px;">
 				<div class="span3">
-					 <a href="#" class="thumbnail project_logo">
+					 <a href="#" class="thumbnail logo_project_list">
 					   <img src="${no_image}" class="" alt=""/>
 					 </a>
 				</div>

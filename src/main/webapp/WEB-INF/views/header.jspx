@@ -67,8 +67,11 @@
 										href="${pageContext.request.contextPath}/project/list/top"><span
 											class="icon-star"> </span>Top</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/list/new"><span
-											class="icon-eye-open"> </span>New</a></li>
+										href="${pageContext.request.contextPath}/project/list/newest"><span
+											class="icon-eye-open"> </span>Newest</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/list/starting"><span
+											class="icon-eye-open"> </span>Starting soon</a></li>
 											
 								<c:if test="${sessionScope.logged =='true'}">
 									<li class="divider2"></li>			
@@ -100,9 +103,11 @@
 										href="${pageContext.request.contextPath}/project/list/top"><span
 											class="icon-star"> </span>Top</a></li>
 									<li><a
-										href="${pageContext.request.contextPath}/project/list/new"><span
-											class="icon-eye-open"> </span>New</a></li>
-											
+										href="${pageContext.request.contextPath}/project/list/newest"><span
+											class="icon-eye-open"> </span>Newest</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/project/list/starting"><span
+											class="icon-eye-open"> </span>Starting soon</a></li>		
 								<c:if test="${sessionScope.logged =='true'}">
 									<li class="divider2"></li>			
 									<li class="nav-header2">My projects</li>
@@ -148,8 +153,8 @@
 							<ul class="dropdown-menu login">
 								<li class="nav-header2">Login with</li>
 								<div class="social-icons">
-									<span id="btnFacebook" onclick="FB.login(function(response) {}, {scope: 'email'})"><span class="iconFacebook"><!-- --></span><span class="buttonText">Facebook</span></span>
-									<span id="btnGoogle" onclick="btnGoogle()" class="customGPlusSignIn btnGoogle" data-gapiattached="true"><span class="iconGoogle"><!-- --></span><span class="buttonText">Google</span></span>
+									<span id="btnFacebook" class="btnFacebook" onclick="FB.login(function(response) {}, {scope: 'email'})"><span class="iconFacebook"><!-- --></span><span class="buttonText">Facebook</span></span>
+									<span id="btnGoogle2" onclick="btnGoogle2()" class="customGPlusSignIn btnGoogle" data-gapiattached="true"><span class="iconGoogle"><!-- --></span><span class="buttonText">Google</span></span>
 								</div>
 								<li class="nav-header2">or</li>
 								<li>

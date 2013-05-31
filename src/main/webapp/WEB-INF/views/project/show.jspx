@@ -1,14 +1,37 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" 
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
-  <spring:message var="app_name" code="application_name" htmlEscape="false" />
-  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-  
+    <spring:url value="/resources/images/no_image.gif" var="no_image" />
+      <div class="row-fluid">
+  	<div class="well-small">
     <h3>
-       Project ${project.name}
+       ${project.name}
     </h3>
-    <p>
-    </p>
-  </util:panel>
+    </div>
+    <div class="well">
+    		<h4>Informations</h4>
+			<div class="row-fluid">
+				<div class="span6">
+						   <a href="#" class="thumbnail project_logo">
+								   <img src="${no_image}" class="" alt=""/>
+								 </a><br/>
+
+			   <span><label class="label_project_list inline">Type:</label> ${project.typeId.name}</span><br/>
+							<span style="overflow-y:hidden;height:60px;"><label class="label_project_list inline">Technologies: </label>
+								<c:forEach var="technology" items="${project.technologyProjectEnumerations}">
+								${technology.technoEnumId.name},
+								</c:forEach>
+							</span><br/>
+			   </div>
+			   <div class="span17">
+			   		<label class="label_project_list inline">Description</label><br/><p class="description_project_page">${project.description}</p>
+			   </div>
+			</div>
+</div>
+</div>
 </div>

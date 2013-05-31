@@ -186,9 +186,12 @@ public class ProjectController {
     	if(criteria.equals("top")){
     		listProjects=Project.findTopProjects();
     		title="Top projects";
-    	}else if(criteria.equals("new")){
+    	}else if(criteria.equals("newest")){
     		listProjects=Project.findNewProjects();
     		title="Last created projects";
+    	}else if(criteria.equals("starting")){
+    		listProjects=Project.findStartingSoonProjects();
+    		title="Projects starting soon";
     	}else if(criteria.equals("followed")){
     		if (request.getSession().getAttribute("idUser") != null) {
     			listProjects=Project.findFollowedProjects((Integer)(request.getSession().getAttribute("idUser")));
