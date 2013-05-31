@@ -34,17 +34,23 @@
 								</c:forEach>
 							</span><br/>
 						</div>
-						<div class="span10">
-							<div class="description_project_list"><label class="label_project_list inline">Description: </label><span class="inline reset_description">${project.description}</span></div>
-						</div>
 						<div class="span5">
 							<span><label class="label_project_list inline">Start:</label> ${project.startDate}</span><br/>
 							<span><label class="label_project_list inline">Min end date:</label> ${project.minEndDate}</span><br/>
-							<span><label class="label_project_list inline">Max end date:</label> ${project.maxEndDate}</span><br/>
-							<span><label class="label_project_list inline">Fund reaped:</label> ${project.fund}$</span><br/>
+							<span><label class="label_project_list inline">Current end date:</label> ${project.effectiveEndDate}</span><br/>
+							<span><label class="label_project_list inline">Fund reaped:</label>
+								<c:set var="sum" value="${0}"/>  
+								<c:forEach var="donation" items="${project.donationUserProjects}">
+									<c:set var="sum" value="${sum + donation.amount}"/>
+								</c:forEach>
+								${sum}/${project.fund}$
+							</span><br/>
 						</div>
-						<div class="span2 fund_project_list">
-							<a class="btn btn-small btn-primary" href="${pageContext.request.contextPath}/project/show/${project.idProject}" >Show details</a><br/>
+						<div class="span10">
+							<div class="description_project_list"><span class="inline reset_description_list">${project.description}</span></div>
+						</div>
+						<div class="span2 offset1 fund_project_list">
+							<a class="btn btn-small btn-primary" href="${pageContext.request.contextPath}/project/show/${project.idProject}" >Details</a><br/>
 							<a data-target="#myModal3" data-backdrop="true"
 								data-toggle="modal" href="${pageContext.request.contextPath}/user/donate/${project.idProject}" class="btn btn-small btn-info">Donate</a><br/>
 							<a class="btn btn-small">Follow</a><br/>

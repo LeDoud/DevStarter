@@ -155,8 +155,8 @@ margin-bottom:10px;
 
 /*------------LISTE DE PROJETS------------*/
 .div_project_list{
-	padding-bottom:13px;
-	margin-bottom:13px;
+	padding-bottom:20px;
+	margin-bottom:15px;
 	border-bottom:1px solid #d2d2d0;
 }
 
@@ -172,8 +172,8 @@ margin-bottom:10px;
 	height:80px;
 }
 .fund_project_list a{
-	margin-bottom:2px;
-	width:75px;
+	margin-bottom:4px;
+	width:40px;
 }
 .label_project_list{
 	color:gray;
@@ -184,12 +184,22 @@ margin-bottom:10px;
 	max-height:100%;
 	background-color:white;
 }
+.reset_description_list, .reset_description_list *
+{
+	font-size:12px;
+	margin-bottom:0px;
+ color:black;
+}
+.reset_description_list h1,.reset_description_list h2,.reset_description_list h3,.reset_description_list h4,.reset_description_list h5,.reset_description_list h6{
+	line-height:0px;
+	margin-bottom:10px;
+}
 
 /*-------PROJECT PAGE------*/
 .project_logo{
 	max-width:200px;
 	max-height:200px;
-	width:100%;
+	width:92%;
 	background-color:white;
 }
 
@@ -199,8 +209,9 @@ margin-bottom:10px;
 
 .reset_description, .reset_description *
 {
- color:black;
+ 	color:black;
 }
+
 /*-----FOOTER-----------*/
 footer {
 	margin-top:50px;

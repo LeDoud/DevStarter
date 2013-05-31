@@ -1,16 +1,13 @@
 package isep.rose.devstarter.web;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.UploadedFile;
@@ -20,11 +17,9 @@ import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.service.MultipartFiles;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
