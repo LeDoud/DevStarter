@@ -61,6 +61,20 @@ public class UserController {
 		}
 		return "resourceNotFound";
 	}
+	
+	/*----------ACCES A LA PAGE PROFILE-------------*/
+	@RequestMapping(value = "/profile/{idUser}", produces = "text/html", method = RequestMethod.GET)
+	public String profile(@PathVariable Integer idUser, HttpServletRequest request, ModelMap model) {
+
+			User user = new User().findUser((Integer) (idUser));
+			model.addAttribute("user", user);
+			model.addAttribute("compte", user.getCompteEnumId().getName());
+
+			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
+			model.addAttribute("jobs", job);
+			return "user/profile";
+
+	}
 
 	/*----------UPDATE ACCOUNT-------------*/
 	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)

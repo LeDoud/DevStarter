@@ -1,0 +1,56 @@
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name"
+		htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane"
+		arguments="${app_name}" htmlEscape="false" />
+
+	<div class="row-fluid">
+		<div class="well-small">
+			<h3>User profile</h3>
+			<p>
+				Your watching ${user.firstname} ${user.name}'s profile !
+			</p>
+		</div>
+	</div>
+	<div class="row-fluid well">
+			<div class="span16">
+				<p>
+				<table class="table table-striped">
+					<tr>
+						<td>Job</td>
+						<td>${user.jobEnumId.name}</td>
+					</tr>
+					<tr>
+						<td>Experience</td>
+						<td>${user.profil}</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+			<div class="span8">
+				<p>
+				<table class="table table-striped">
+					<tr>
+						<td>Firstname</td>
+						<td>${user.firstname}</td>
+					</tr>
+					<tr>
+						<td>Lastname</td>
+						<td>${user.name}</td>
+					</tr>
+					
+						<tr>
+							<td>Email</td>
+							<td>${user.email}</td>
+						</tr>
+						
+				</table>
+				</p>
+			</div>
+	</div>
+</div>

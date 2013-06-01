@@ -8,6 +8,9 @@
 	<definition extends="default" name="user/account">
 		<put-attribute name="body" value="/WEB-INF/views/user/account.jspx" />
 	</definition>
+		<definition extends="default" name="user/profile">
+		<put-attribute name="body" value="/WEB-INF/views/user/profile.jspx" />
+	</definition>
 	<definition extends="overlay" name="user/forgotPassword">
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/forgotPassword.jspx" />

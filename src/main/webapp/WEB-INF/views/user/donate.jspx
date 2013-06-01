@@ -1,15 +1,57 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" 
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-  
-    <h3>
-       Donate
-    </h3>
-    <p>
-     
-    </p>
-  </util:panel>
+<form id="donate-project" method="post"
+			class="form-horizontal-signup" action="${pageContext.request.contextPath}/user/donateProject">
+
+			<fieldset>
+			<div class="modal-header">
+			<h3> Contribute to this project by giving a hand to the developer!</h3>
+			</div>
+				<div class="input-prepend input-append modal-body" id="div-donation">
+					<label class="control-label">Amount : </label>
+					<div class="controls">
+						<span class="add-on">$</span>
+						<input class="input-small" type="text" id="amount" name="amount" value="${idProject}"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+				<button type="submit" class="btn register">Donate!</button>
+				</div>
+			</fieldset>
+		</form>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {					
+							$('#donate-project').validate(
+									{
+										rules : {
+											amount : {
+												min : 1,
+												digits : true,
+												required : true
+											}
+										},
+										highlight : function(element) {
+											$(element)
+													.closest('.control-group')
+													.removeClass('success')
+													.addClass('error');
+										},
+										success : function(element) {
+											element.text('OK!').addClass(
+													'valid').closest(
+													'.control-group')
+													.removeClass('error')
+													.addClass('success');
+										}
+									});
+						});
+	</script>
+	
 </div>
