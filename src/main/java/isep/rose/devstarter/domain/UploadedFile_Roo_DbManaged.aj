@@ -5,7 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.UploadedFile;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,15 +25,18 @@ privileged aspect UploadedFile_Roo_DbManaged {
     @Column(name = "TITLE", columnDefinition = "VARCHAR", length = 255)
     private String UploadedFile.title;
     
+    @Column(name = "BYTES", columnDefinition = "LONGBLOB")
+    private byte[] UploadedFile.bytes;
+    
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar UploadedFile.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date UploadedFile.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar UploadedFile.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date UploadedFile.dateUpdated;
     
     public Project UploadedFile.getProjectId() {
         return projectId;
@@ -59,19 +62,27 @@ privileged aspect UploadedFile_Roo_DbManaged {
         this.title = title;
     }
     
-    public Calendar UploadedFile.getDateCreated() {
+    public byte[] UploadedFile.getBytes() {
+        return bytes;
+    }
+    
+    public void UploadedFile.setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+    
+    public Date UploadedFile.getDateCreated() {
         return dateCreated;
     }
     
-    public void UploadedFile.setDateCreated(Calendar dateCreated) {
+    public void UploadedFile.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar UploadedFile.getDateUpdated() {
+    public Date UploadedFile.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void UploadedFile.setDateUpdated(Calendar dateUpdated) {
+    public void UploadedFile.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     
