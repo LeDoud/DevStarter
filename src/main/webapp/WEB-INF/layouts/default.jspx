@@ -41,7 +41,7 @@
 	<div id="myModal2" data-remote="${pageContext.request.contextPath}/user/forgotPassword" class="modal modal2 hide fade" style="height:220px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 		 <div class="modal-body"><!-- content will be loaded here --></div>
 	</div>
-	<div id="myModal3" data-remote="${pageContext.request.contextPath}/user/donate/2" class="modal modal2 hide fade" style="height:260px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="myModal3" class="modal modal2 hide fade" style="height:260px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 		 <div class="modal-body"><!-- content will be loaded here --></div>
 	</div>
 	<div id="myModal4" data-remote="${pageContext.request.contextPath}/user/addMoney" class="modal modal2 hide fade" style="height:220px" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

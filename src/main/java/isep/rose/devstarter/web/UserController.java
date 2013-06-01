@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import isep.rose.devstarter.service.Email;
 import isep.rose.devstarter.domain.User;
+import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.Enumeration;
 import isep.rose.devstarter.domain.DonationUserProject;
 
@@ -68,10 +69,7 @@ public class UserController {
 
 			User user = new User().findUser((Integer) (idUser));
 			model.addAttribute("user", user);
-			model.addAttribute("compte", user.getCompteEnumId().getName());
 
-			List<Enumeration> job = Enumeration.findEnumerationsByType("job");
-			model.addAttribute("jobs", job);
 			return "user/profile";
 
 	}
@@ -156,9 +154,30 @@ public class UserController {
 
 	/*----------USER DONATE PROJECT-----------------*/
 	@RequestMapping(value = "/donateProject", produces = "text/html", method = RequestMethod.POST)
-	public String donateProject(@RequestParam("email") String email,
+	public String donateProject(@RequestParam("projectId") int projectId, @RequestParam("amount") int amount,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
-
+		if (request.getSession().getAttribute("idUser") != null) {
+		User user = new User().findUser((Integer) (request.getSession()
+				.getAttribute("idUser")));
+		int wallet = user.getWallet()-amount;
+		
+		request.getSession().setAttribute("wallet", wallet); //pour la session
+		user.setWallet(wallet); //pour la bdd
+		user.persist();
+		
+		Project project = new Project().findProject(projectId);
+		
+		DonationUserProject history = new DonationUserProject();
+		history.setAmount(amount);
+		history.setType("less");
+		history.setUserId(user);
+		history.setProjectId(project);
+		history.setTransactionDetail("Donation to project : "+ project.getName());
+		history.setDate(Calendar.getInstance());
+		
+		history.persist();
+		
+		}
 		
 		/* message de confirmation lors du retour sur l'accueil */
 		String donationDone = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";

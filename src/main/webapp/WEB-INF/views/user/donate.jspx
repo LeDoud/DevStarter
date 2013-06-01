@@ -7,7 +7,7 @@ xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
 <form id="donate-project" method="post"
 			class="form-horizontal-signup" action="${pageContext.request.contextPath}/user/donateProject">
-
+<input type="hidden" id="projectId" name="projectId" value="${idProject}"/>
 			<fieldset>
 			<div class="modal-header">
 			<h3> Contribute to this project by giving a hand to the developer!</h3>
@@ -16,7 +16,7 @@ xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 					<label class="control-label">Amount : </label>
 					<div class="controls">
 						<span class="add-on">$</span>
-						<input class="input-small" type="text" id="amount" name="amount" value="${idProject}"/>
+						<input class="input-small" type="text" id="amount" name="amount" value=""/>
 					</div>
 				</div>
 				<div class="modal-footer">

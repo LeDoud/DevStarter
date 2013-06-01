@@ -1,7 +1,8 @@
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -38,7 +39,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="donation" items="${donations}">
-						<tr><td>${donation.date}</td><td>${donation.amount}</td><td>${donation.projectId}</td><td>${donation.transactionDetail}</td></tr>
+						<tr><td><fmt:formatDate type="both" dateStyle="long" value="${donation.date.getTime()}" /></td><td><c:if test="${donation.type=='less'}">- ${donation.amount} $</c:if><c:if test="${donation.type=='add'}">+ ${donation.amount} $</c:if></td><td>${donation.projectId.name}</td><td>${donation.transactionDetail}</td></tr>
 					</c:forEach>
 				</tbody>
 			</table>
