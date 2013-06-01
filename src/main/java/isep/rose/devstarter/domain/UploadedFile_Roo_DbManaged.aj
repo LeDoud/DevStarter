@@ -5,7 +5,7 @@ package isep.rose.devstarter.domain;
 
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.UploadedFile;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,13 +30,13 @@ privileged aspect UploadedFile_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date UploadedFile.dateCreated;
+    @DateTimeFormat(style = "MM")
+    private Calendar UploadedFile.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date UploadedFile.dateUpdated;
+    @DateTimeFormat(style = "MM")
+    private Calendar UploadedFile.dateUpdated;
     
     public Project UploadedFile.getProjectId() {
         return projectId;
@@ -70,19 +70,19 @@ privileged aspect UploadedFile_Roo_DbManaged {
         this.bytes = bytes;
     }
     
-    public Date UploadedFile.getDateCreated() {
+    public Calendar UploadedFile.getDateCreated() {
         return dateCreated;
     }
     
-    public void UploadedFile.setDateCreated(Date dateCreated) {
+    public void UploadedFile.setDateCreated(Calendar dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Date UploadedFile.getDateUpdated() {
+    public Calendar UploadedFile.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void UploadedFile.setDateUpdated(Date dateUpdated) {
+    public void UploadedFile.setDateUpdated(Calendar dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

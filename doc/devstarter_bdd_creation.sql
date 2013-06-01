@@ -3,7 +3,7 @@
 /* Date de création :  01/06/2013 15:34:49                      */
 /*==============================================================*/
 
-
+use devstarter;
 DROP TABLE IF EXISTS COMMENT_USER_PROJECT;
 
 DROP TABLE IF EXISTS DONATION_USER_PROJECT;
