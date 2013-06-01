@@ -1,5 +1,7 @@
 package isep.rose.devstarter.web;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,6 +171,16 @@ public class UserController {
 		request.getSession().setAttribute("wallet", wallet); //pour la session
 		user.setWallet(wallet); //pour la bdd
 		user.persist();
+		
+		DonationUserProject history = new DonationUserProject();
+		history.setAmount(money);
+		history.setType("add");
+		history.setUserId(user);
+		history.setTransactionDetail("Money added");
+		history.setDate(Calendar.getInstance());
+		
+		history.persist();
+		
 		}
 		/* message de confirmation lors du retour sur l'accueil */
 		String moneyAdded = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your wallet is now quite heavy !</div>";
@@ -199,6 +211,7 @@ public class UserController {
 				"account"));
 		user.setWallet(0);
 		user.setActive(1);
+		user.setCreatedDate(Calendar.getInstance());
 
 		/* enregistrement en bdd */
 		user.persist();
@@ -260,6 +273,7 @@ public class UserController {
 						.findEnumerationByNameAndType(provider, "account"));
 				userInsert.setWallet(0);
 				userInsert.setActive(2);
+				userInsert.setCreatedDate(Calendar.getInstance());
 				userInsert.persist();
 
 			}
