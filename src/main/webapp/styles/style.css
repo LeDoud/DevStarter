@@ -211,6 +211,13 @@ margin-bottom:10px;
 {
  	color:black;
 }
+.min_date_project{
+	float:left;
+}
+.max_date_project{
+	float:right;
+
+}
 
 /*-----FOOTER-----------*/
 footer {
