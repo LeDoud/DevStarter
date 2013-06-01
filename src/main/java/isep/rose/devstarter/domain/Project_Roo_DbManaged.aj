@@ -11,7 +11,6 @@ import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import isep.rose.devstarter.domain.UploadedFile;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
@@ -55,6 +54,9 @@ privileged aspect Project_Roo_DbManaged {
     @Column(name = "PICTURE_URL", columnDefinition = "VARCHAR", length = 255)
     private String Project.pictureUrl;
     
+    @Column(name = "PICTURE_BYTES", columnDefinition = "LONGBLOB")
+    private byte[] Project.pictureBytes;
+    
     @Column(name = "START_DATE", columnDefinition = "DATE")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
@@ -86,13 +88,13 @@ privileged aspect Project_Roo_DbManaged {
     
     @Column(name = "DATE_CREATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateCreated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateCreated;
     
     @Column(name = "DATE_UPDATED", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "MM")
-    private Calendar Project.dateUpdated;
+    @DateTimeFormat(style = "M-")
+    private Date Project.dateUpdated;
     
     public Set<CommentUserProject> Project.getCommentUserProjects() {
         return commentUserProjects;
@@ -174,6 +176,14 @@ privileged aspect Project_Roo_DbManaged {
         this.pictureUrl = pictureUrl;
     }
     
+    public byte[] Project.getPictureBytes() {
+        return pictureBytes;
+    }
+    
+    public void Project.setPictureBytes(byte[] pictureBytes) {
+        this.pictureBytes = pictureBytes;
+    }
+    
     public Date Project.getStartDate() {
         return startDate;
     }
@@ -230,19 +240,19 @@ privileged aspect Project_Roo_DbManaged {
         this.active = active;
     }
     
-    public Calendar Project.getDateCreated() {
+    public Date Project.getDateCreated() {
         return dateCreated;
     }
     
-    public void Project.setDateCreated(Calendar dateCreated) {
+    public void Project.setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
-    public Calendar Project.getDateUpdated() {
+    public Date Project.getDateUpdated() {
         return dateUpdated;
     }
     
-    public void Project.setDateUpdated(Calendar dateUpdated) {
+    public void Project.setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
     

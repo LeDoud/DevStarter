@@ -181,6 +181,7 @@
         <column name="NAME" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="DESCRIPTION" primaryKey="false" required="false" scale="0" size="65535" type="-1,TEXT"/>
         <column name="PICTURE_URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
+        <column name="PICTURE_BYTES" primaryKey="false" required="false" scale="0" size="2147483647" type="-4,LONGBLOB"/>
         <column name="START_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
         <column name="MIN_END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
         <column name="EFFECTIVE_END_DATE" primaryKey="false" required="false" scale="0" size="10" type="91,DATE"/>
@@ -252,6 +253,7 @@
         <column name="PROJECT_ID" primaryKey="false" required="true" scale="0" size="10" type="4,INT"/>
         <column name="URL" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
         <column name="TITLE" primaryKey="false" required="false" scale="0" size="255" type="12,VARCHAR"/>
+        <column name="BYTES" primaryKey="false" required="false" scale="0" size="2147483647" type="-4,LONGBLOB"/>
         <column name="DATE_CREATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
         <column name="DATE_UPDATED" primaryKey="false" required="false" scale="0" size="19" type="93,DATETIME"/>
         <foreign-key foreignTable="PROJECT" name="FK_JOIN_PROJECT_FILE" onDelete="none" onUpdate="none">
