@@ -14,7 +14,7 @@
        ${title}
     </h3>
     </div>
-    <div class="well">
+    <div class="well list_projects">
     	<c:forEach var="project" items="${listProjects}">
 			<div class="row div_project_list" style="height:100px;">
 				<div class="span3">
@@ -50,7 +50,7 @@
 								<c:forEach var="donation" items="${project.donationUserProjects}">
 									<c:set var="sum" value="${sum + donation.amount}"/>
 								</c:forEach>
-								${sum}/${project.fund}$
+								${sum} / ${project.fund}$
 							</span><br/>
 						</div>
 						<div class="span10">

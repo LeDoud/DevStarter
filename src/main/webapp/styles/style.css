@@ -158,6 +158,7 @@ margin-bottom:10px;
 	padding-bottom:20px;
 	margin-bottom:15px;
 	border-bottom:1px solid #d2d2d0;
+	font-weight:bold;
 }
 
 .title_project_list{
@@ -170,6 +171,7 @@ margin-bottom:10px;
 	text-align:justify;
 	overflow-y:hidden;
 	height:80px;
+	font-weight:normal;
 }
 .fund_project_list a{
 	margin-bottom:4px;
@@ -178,6 +180,7 @@ margin-bottom:10px;
 .label_project_list{
 	color:gray;
 	font-size:0.9em;
+	font-weight:normal;
 }
 .logo_project_list{
 	max-width:100%;
@@ -196,6 +199,10 @@ margin-bottom:10px;
 }
 
 /*-------PROJECT PAGE------*/
+.show_project_page{
+	font-size:1.1em;
+	
+}
 .project_logo{
 	max-width:200px;
 	max-height:200px;
@@ -205,6 +212,8 @@ margin-bottom:10px;
 
 .description_project_page{
 	text-align:justify;
+	font-weight:normal;
+	
 }
 
 .reset_description, .reset_description *
