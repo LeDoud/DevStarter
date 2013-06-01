@@ -37,7 +37,6 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response) {
 	}
 
-
 	@RequestMapping(value = "/signupForm", produces = "text/html")
 	public ModelAndView signupForm() {
 		return new ModelAndView("user/signupForm");
@@ -62,15 +61,16 @@ public class UserController {
 		}
 		return "resourceNotFound";
 	}
-	
+
 	/*----------ACCES A LA PAGE PROFILE-------------*/
 	@RequestMapping(value = "/profile/{idUser}", produces = "text/html", method = RequestMethod.GET)
-	public String profile(@PathVariable Integer idUser, HttpServletRequest request, ModelMap model) {
+	public String profile(@PathVariable Integer idUser,
+			HttpServletRequest request, ModelMap model) {
 
-			User user = new User().findUser((Integer) (idUser));
-			model.addAttribute("user", user);
+		User user = new User().findUser((Integer) (idUser));
+		model.addAttribute("user", user);
 
-			return "user/profile";
+		return "user/profile";
 
 	}
 
@@ -103,7 +103,7 @@ public class UserController {
 									passwordNew, "DevStarter"));
 							accountUpdated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your profile and password have been modified !</strong></div>";
 
-						}else{
+						} else {
 							accountUpdated = "<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your old password was not correct, only your profile has been modified !</strong></div>";
 						}
 
@@ -138,89 +138,100 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("compte", user.getCompteEnumId().getName());
 
-			List<DonationUserProject> transaction = DonationUserProject.findDonationUserProjectByUserId(user);
+			List<DonationUserProject> transaction = DonationUserProject
+					.findDonationUserProjectByUserId(user);
 			model.addAttribute("donations", transaction);
 			return "user/wallet";
 		}
 		return "resourceNotFound";
 	}
-	
+
 	/*----------USER DONATE POP UP-----------------*/
 	@RequestMapping(value = "/donate/{idProject}", produces = "text/html")
-	public String donate(@PathVariable Integer idProject, HttpServletRequest request, ModelMap model) {
+	public String donate(@PathVariable Integer idProject,
+			HttpServletRequest request, ModelMap model) {
 		model.addAttribute("idProject", idProject);
 		return "user/donate";
 	}
 
 	/*----------USER DONATE PROJECT-----------------*/
 	@RequestMapping(value = "/donateProject", produces = "text/html", method = RequestMethod.POST)
-	public String donateProject(@RequestParam("projectId") int projectId, @RequestParam("amount") int amount,
+	public String donateProject(@RequestParam("projectId") int projectId,
+			@RequestParam("amount") int amount,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		String donationDone = "";
 		if (request.getSession().getAttribute("idUser") != null) {
-		User user = new User().findUser((Integer) (request.getSession()
-				.getAttribute("idUser")));
-		int wallet = user.getWallet()-amount;
-		
-		request.getSession().setAttribute("wallet", wallet); //pour la session
-		user.setWallet(wallet); //pour la bdd
-		user.persist();
-		
-		Project project = new Project().findProject(projectId);
-		
-		DonationUserProject history = new DonationUserProject();
-		history.setAmount(amount);
-		history.setType("less");
-		history.setUserId(user);
-		history.setProjectId(project);
-		history.setTransactionDetail("Donation to project : "+ project.getName());
-		history.setDate(Calendar.getInstance());
-		
-		history.persist();
-		
+
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			int wallet = user.getWallet() - amount;
+			if (wallet >= 0) {
+
+				request.getSession().setAttribute("wallet", wallet); // pour la
+																		// session
+				user.setWallet(wallet); // pour la bdd
+				user.persist();
+
+				Project project = new Project().findProject(projectId);
+
+				DonationUserProject history = new DonationUserProject();
+				history.setAmount(amount);
+				history.setType("less");
+				history.setUserId(user);
+				history.setProjectId(project);
+				history.setTransactionDetail("Donation to project : "
+						+ project.getName());
+				history.setDate(Calendar.getInstance());
+
+				history.persist();
+				donationDone = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";
+			} else {
+				donationDone = "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation has not been completed because you don't have the funds !</div>";
+
+			}
 		}
-		
+
 		/* message de confirmation lors du retour sur l'accueil */
-		String donationDone = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your donation is most welcomed !</div>";
 		redirectAttributes.addFlashAttribute("message", donationDone);
-		return "redirect:/home/index";
+		return "redirect:/project/list/funded";
 	}
-	
+
 	/*----------USER ADD MONEY POP UP -----------------*/
 	@RequestMapping(value = "/addMoney", produces = "text/html")
 	public String addMoney(HttpServletRequest request, ModelMap model) {
 
 		return "user/addMoney";
 	}
-	
+
 	/*----------USER ADD MONEY  -----------------*/
 	@RequestMapping(value = "/userAddMoney", produces = "text/html", method = RequestMethod.POST)
 	public String userAddMoney(@RequestParam("money") int money,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		if (request.getSession().getAttribute("idUser") != null) {
-		User user = new User().findUser((Integer) (request.getSession()
-				.getAttribute("idUser")));
-		int wallet = user.getWallet()+money;
-		
-		request.getSession().setAttribute("wallet", wallet); //pour la session
-		user.setWallet(wallet); //pour la bdd
-		user.persist();
-		
-		DonationUserProject history = new DonationUserProject();
-		history.setAmount(money);
-		history.setType("add");
-		history.setUserId(user);
-		history.setTransactionDetail("Money added");
-		history.setDate(Calendar.getInstance());
-		
-		history.persist();
-		
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			int wallet = user.getWallet() + money;
+
+			request.getSession().setAttribute("wallet", wallet); // pour la
+																	// session
+			user.setWallet(wallet); // pour la bdd
+			user.persist();
+
+			DonationUserProject history = new DonationUserProject();
+			history.setAmount(money);
+			history.setType("add");
+			history.setUserId(user);
+			history.setTransactionDetail("Money added");
+			history.setDate(Calendar.getInstance());
+
+			history.persist();
+
 		}
 		/* message de confirmation lors du retour sur l'accueil */
 		String moneyAdded = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your wallet is now quite heavy !</div>";
 		redirectAttributes.addFlashAttribute("message", moneyAdded);
-		return "redirect:/home/index";
+		return "redirect:/user/wallet";
 	}
-	
 
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
 	@RequestMapping(value = "/signupEmail", produces = "text/html", method = RequestMethod.POST)
@@ -379,7 +390,7 @@ public class UserController {
 	public String resetPassword(@RequestParam("email") String email,
 			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
-		String newPassword="";
+		String newPassword = "";
 		/* Create random string */
 		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		String pass = "";
@@ -394,7 +405,7 @@ public class UserController {
 		if (user != null) {
 			user.setPassword(hashedPass);
 			user.persist();
-			
+
 			/*
 			 * mail pour envoyer le nouveau mot de passe
 			 */
@@ -406,12 +417,11 @@ public class UserController {
 
 			/* message de confirmation lors du retour sur l'accueil */
 			newPassword = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your new password has been sent to your email account</div>";
-			
-		}else{
-			newPassword = "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>This email is not linked to an account!</div>";
-			
-		}
 
+		} else {
+			newPassword = "<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>This email is not linked to an account!</div>";
+
+		}
 
 		/* message de confirmation lors du retour sur l'accueil */
 		redirectAttributes.addFlashAttribute("message", newPassword);

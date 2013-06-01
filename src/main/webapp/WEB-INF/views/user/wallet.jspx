@@ -24,6 +24,7 @@
 			<h2>
 				<img src="${wallet_logo}"></img> ${user.wallet} $
 			</h2>
+			<button class="btn btn-primary" href="${pageContext.request.contextPath}/user/addMoney" data-target="#myModal4" data-backdrop="true" data-toggle="modal"> Add some money </button>
 		</div>
 
 		<div class="span18 well">
@@ -45,8 +46,4 @@
 			</table>
 		</div>
 	</div>
-	<div class="row-fluid">
-	<button class="btn btn-primary" href="${pageContext.request.contextPath}/user/addMoney" data-target="#myModal4" data-backdrop="true" data-toggle="modal"> Add some money </button>
-	</div>
-
 </div>
