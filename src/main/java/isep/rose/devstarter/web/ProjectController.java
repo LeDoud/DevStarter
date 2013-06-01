@@ -17,9 +17,11 @@ import isep.rose.devstarter.domain.TechnologyProjectEnumeration;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.service.MultipartFiles;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +36,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ProjectController {
 	
-	private static final String UPLOAD_DIRECTORY = "/DevstarterProjectsFiles/";
+	private static final String UPLOAD_DIRECTORY = "/projectsFiles/";
+	
+	@Autowired
+	private ServletContext context;
 	
     @RequestMapping(method = RequestMethod.POST, value = "{id}")
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
@@ -243,7 +248,8 @@ public class ProjectController {
     
     
     private String calculateDestinationDirectory(Project project) {
-        String result = UPLOAD_DIRECTORY;
+        String result = this.context.getRealPath("WEB-INF");
+        result+=UPLOAD_DIRECTORY;
         result += project.getIdProject();
         return result;
     }
