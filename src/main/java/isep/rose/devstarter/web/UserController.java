@@ -88,8 +88,7 @@ public class UserController {
 		}
 		return "resourceNotFound";
 	}
-
-
+	
 	/*----------UPDATE ACCOUNT-------------*/
 	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)
 	public String update(@RequestParam("firstname") String firstName,

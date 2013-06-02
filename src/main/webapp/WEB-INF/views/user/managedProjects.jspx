@@ -59,8 +59,7 @@
 						</div>
 						<div class="span2 offset1 fund_project_list">
 							<a class="btn btn-small btn-primary" href="${pageContext.request.contextPath}/project/show/${project.idProject}" >Details</a><br/>
-							<a data-target="#myModal3" data-backdrop="true"
-								data-toggle="modal" href="${pageContext.request.contextPath}/user/donate/${project.idProject}" class="btn btn-small btn-info">Donate</a><br/>
+							<a href="${pageContext.request.contextPath}/project/editProject/${project.idProject}" class="btn btn-small btn-warning">Edit</a><br/>
 							<a class="btn btn-small">Follow</a><br/>
 						</div>
 					</div>

@@ -22,11 +22,11 @@
 				<p>
 				<table class="table table-striped">
 					<tr>
-						<td>Job</td>
+						<td><strong>Job</strong></td>
 						<td>${user.jobEnumId.name}</td>
 					</tr>
 					<tr>
-						<td>Experience</td>
+						<td><strong>Experience</strong></td>
 						<td>${user.profil}</td>
 					</tr>
 				</table>
@@ -36,16 +36,16 @@
 				<p>
 				<table class="table table-striped">
 					<tr>
-						<td>Firstname</td>
+						<td><strong>Firstname</strong></td>
 						<td>${user.firstname}</td>
 					</tr>
 					<tr>
-						<td>Lastname</td>
+						<td><strong>Lastname</strong></td>
 						<td>${user.name}</td>
 					</tr>
 					
 						<tr>
-							<td>Email</td>
+							<td><strong>Email</strong></td>
 							<td>${user.email}</td>
 						</tr>
 						

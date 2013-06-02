@@ -227,6 +227,17 @@ public class ProjectController {
     	}
         return languages;
     }
+    
+	/*----------ACCES A LA EDITION DE PROJET-------------*/
+	@RequestMapping(value = "/editProject/{idProject}", produces = "text/html", method = RequestMethod.GET)
+	public String editProject(@PathVariable Integer idProject,
+			HttpServletRequest request, ModelMap model) {
+
+
+		return "project/edit";
+
+	}
+    
     /*----------------AUTOCOMPLETION FRAMEWORKS---------------*/
     @RequestMapping(value = "/frameworkAutocomplete", method = RequestMethod.POST)
     @ResponseBody

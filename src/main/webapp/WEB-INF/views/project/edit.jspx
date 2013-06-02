@@ -1,0 +1,172 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  <spring:message var="app_name" code="application_name" htmlEscape="false" />
+  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+
+  
+<spring:url value="/resources/scripts/bootstrap-wysihtml5.js" var="bootstrap_wysi_url" />
+<script type="text/javascript" src="${bootstrap_wysi_url}"><!-- --></script>
+<spring:url value="/resources/scripts/bootstrap-fileupload.js" var="bootstrap_fileupload_url" />
+<script type="text/javascript" src="${bootstrap_fileupload_url}"><!-- --></script>
+<spring:url value="/resources/scripts/bootstrap-tagmanager.js" var="bootstrap_tagmanager_url" />
+<script type="text/javascript" src="${bootstrap_tagmanager_url}"><!-- --></script>
+<spring:url value="/resources/scripts/bootstrap-datepicker.js" var="bootstrap_datepicker_url" />
+<script type="text/javascript" src="${bootstrap_datepicker_url}"><!-- --></script>
+	
+    <div class="row-fluid">
+    	<div class="well-small">
+			<h3>Fund your project. </h3>
+			<p><spring:message code="create_project_message" /></p>
+		</div>
+		<form  id="createProjectForm" method="POST" action="${pageContext.request.contextPath}/project/persistProject" modelAttribute="uploadForm" enctype="multipart/form-data">
+		<div class="well">
+			<h4>Informations</h4>
+			<div class="row-fluid">
+				<div class="span8 inline">
+					<label class="label-big">Title</label>
+					<input class="span21 title" name="title" id="title" type="text"/>
+					<br/><br/>
+					<div class="row-fluid">
+						<label class="label-big inline span6">Logo</label>
+						<div class="fileupload fileupload-new span18" data-provides="fileupload">
+						  <div class="fileupload-preview thumbnail" style="width: 170px; height: 170px;"><!-- --></div>
+						  <div>
+						    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="files[0]" id="logo"/></span>
+						    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="span16">
+					<label class="label-big">Description</label>
+					<textarea name="description" id="description" class="span23" style="height:230px;"><!-- --></textarea>
+				</div>
+			</div>
+			<br/>
+			<div class="row-fluid">
+				<div class="span8">
+					<label class="label-big">Application type</label>
+					<select name="project_type" id="project_type">
+						<c:forEach var="project_type" items="${project_types}">
+							<option value="${project_type.idEnumeration}">${project_type.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="span8">
+					<label class="label-big">Languages</label>
+					<input type="text" name="languages" id="languages" style="display:block;" class="tagManager"/>
+				</div>
+				<div class="span8">
+					<label class="label-big">Frameworks</label>
+					<input type="text" name="frameworks" id="frameworks" style="display:block;" class="tagManager"/>
+				</div>
+			</div>
+		</div>
+		<div class="well">
+			<h4>Funding</h4>
+			<p class="alert alert-info">You can reap funds until the start date of your project. Then, the effective duration of the project will be calculated with the funds reaped.</p>
+			<div class="row-fluid">
+				<div class="span6">
+					<label class="label-big">Start date</label>
+					<input type="text" name="start_date" class="datepicker" id="start_date"/>
+				</div>
+				<div class="span6">
+					<label class="label-big">Minimum expected end date</label>
+					<input type="text" name="min_date" class="datepicker" id="min_date"/>
+				</div>
+				<div class="span6">
+					<label class="label-big">Maximum expected end date</label>
+					<input type="text" name="max_date" class="datepicker" id="max_date" />
+				</div>
+				<div class="span6">
+					<label class="label-big">Funds to reap</label>
+					<input type="text" placeholder="$" name="amount_fund" class="number" id="amount_fund" />
+				</div>
+			</div>
+		</div>
+		<div class="well">
+			<h4>Documentation</h4>
+			<div id="divAddFile" class="row-fluid">
+				<div class="span8 offset3">
+					<span class="btn inline" id="addFile" style="margin-right:15px;">+ Add file</span><span class="btn inline" style="display:none;" id="removeFile">Remove</span>
+					<input type="hidden" id="fileCount" value="0"/>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="user_id" name="user_id" value="${sessionScope.idUser}"/>
+		<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</form>
+	</div>
+	
+	<spring:url value="/resources/scripts/createProject.js" var="create_project_js" />
+<script type="text/javascript" src="${create_project_js}"><!-- --></script>
+	<script type="text/javascript">
+		$("#description").wysihtml5();
+		$(".datepicker").datepicker();
+		jQuery("#languages").tagsManager({
+			preventSubmitOnEnter: true,
+	        typeahead: true,
+	        typeaheadAjaxSource: '${pageContext.request.contextPath}/project/languageAutocomplete',
+	        typeaheadAjaxPolling: true,
+	        blinkBGColor_1: '#b1cdea',
+	        blinkBGColor_2: '#8fb8d6'
+		        });
+		jQuery("#frameworks").tagsManager({
+			preventSubmitOnEnter: true,
+	        typeahead: true,
+	        typeaheadAjaxSource: '${pageContext.request.contextPath}/project/frameworkAutocomplete',
+	        typeaheadAjaxPolling: true,
+	        blinkBGColor_1: '#b1cdea',
+	        blinkBGColor_2: '#8fb8d6'
+		        });
+		
+		$(document).ready(
+				function() {
+					$('#createProjectForm').validate(
+							{
+								rules : {
+									title : {
+										minlength : 2,
+										required : true,
+									},
+									description : {
+										minlength : 2,
+										required : true,
+									},
+									start_date : {
+										required : true,
+										date : true,
+									},
+									min_date : {
+										required : true,
+										date : true,
+									},
+									max_date : {
+										required : true,
+										date : true,
+									},
+									amount_fund : {
+										required : true,
+										number : true,
+									},
+				
+								},
+								highlight : function(element) {
+									$(element).closest('.control-group')
+											.removeClass('success').addClass(
+													'error');
+								},
+								success : function(element) {
+									element.text('OK!').addClass('valid')
+											.closest('.control-group')
+											.removeClass('error').addClass(
+													'success');
+								}
+							});
+				});
+	</script>
+</div>

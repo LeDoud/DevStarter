@@ -13,4 +13,7 @@
     <definition extends="default" name="project/list">
         <put-attribute name="body" value="/WEB-INF/views/project/list.jspx"/>
     </definition>
+        <definition extends="default" name="project/edit">
+        <put-attribute name="body" value="/WEB-INF/views/project/edit.jspx"/>
+    </definition>
 </tiles-definitions>
