@@ -1,10 +1,24 @@
 <div xmlns:spring="http://www.springframework.org/tags" 
 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
-xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+  <c:set var="logged" value="${sessionScope.logged}" />
+<c:if test="${empty sessionScope.logged}">
+<div class="modal-header">
+<h3>You should be connected with your account to donate to this project!</h3>
+</div>
+<br/>
+<div class="modal-body">
+<p><a href="${pageContext.request.contextPath}/project/show/${idProject}"><strong>Register</strong></a> or <a href="${pageContext.request.contextPath}/project/show/${idProject}">login to your account</a>
+</p></div>
+
+</c:if>
+				
+				<c:if test="${sessionScope.logged =='true'}">
 <form id="donate-project" method="post"
 			class="form-horizontal-signup" action="${pageContext.request.contextPath}/user/donateProject">
 <input type="hidden" id="projectId" name="projectId" value="${idProject}"/>
@@ -53,5 +67,5 @@ xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 									});
 						});
 	</script>
-	
+	</c:if>
 </div>

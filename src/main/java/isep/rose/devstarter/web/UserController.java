@@ -73,6 +73,19 @@ public class UserController {
 		return "user/profile";
 
 	}
+	
+	/*----------ACCES A LA PAGE MY PROJECTS-------------*/
+	@RequestMapping(value = "/myprojects", produces = "text/html", method = RequestMethod.GET)
+	public String myprojects(HttpServletRequest request, ModelMap model) {
+		if (request.getSession().getAttribute("idUser") != null) {
+		User user = new User().findUser((Integer) (request.getSession().getAttribute("idUser")));
+		model.addAttribute("user", user);
+
+		return "user/managedProjects";
+		}
+		return "resourceNotFound";
+	}
+
 
 	/*----------UPDATE ACCOUNT-------------*/
 	@RequestMapping(value = "/update", produces = "text/html", method = RequestMethod.POST)
@@ -193,7 +206,7 @@ public class UserController {
 
 		/* message de confirmation lors du retour sur l'accueil */
 		redirectAttributes.addFlashAttribute("message", donationDone);
-		return "redirect:/project/list/funded";
+		return "redirect:/project/show/"+projectId;
 	}
 
 	/*----------USER ADD MONEY POP UP -----------------*/
