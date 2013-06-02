@@ -2,9 +2,11 @@
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/images/no_image.gif" var="no_image" />
 	<div class="row-fluid">
 		<div class="well-small">
 			<h3>List of all your projects</h3>
@@ -13,8 +15,58 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-	<div class="span21 well">
-	List of projects...
-	</div>
+<div class="well list_projects">
+    	<c:forEach var="project" items="${myprojects}">
+			<div class="row div_project_list" style="height:100px;">
+				<div class="span3">
+					 <a href="#" class="thumbnail logo_project_list">
+					   <img src="${no_image}" class="" alt=""/>
+					 </a>
+				</div>
+				<div class="span21">
+					<div class="row-fluid" style="margin-bottom:3px;">
+						<a href="${pageContext.request.contextPath}/project/show/${project.idProject}" class="title_project_list">${project.name}</a>
+					</div>
+					<div class="row-fluid font_project_list">
+						<div class="span6">
+							<span><label class="label_project_list inline">Type:</label> ${project.typeId.name}</span><br/>
+							<span style="overflow-y:hidden;height:60px;"><label class="label_project_list inline">Technologies: </label>
+								<c:forEach var="technology" items="${project.technologyProjectEnumerations}">
+								${technology.technoEnumId.name},
+								</c:forEach>
+							</span><br/>
+						</div>
+						<div class="span5">
+							<span><label class="label_project_list inline">Start: </label>
+								<fmt:formatDate type="date" dateStyle="short" value="${project.startDate}" />
+								 </span><br/>
+							<span><label class="label_project_list inline">Min end date: </label>
+								<fmt:formatDate type="date" dateStyle="short" value="${project.minEndDate}" />
+							</span><br/>
+							<span><label class="label_project_list inline">Current end date: </label>
+								<fmt:formatDate type="date" dateStyle="short" value="${project.effectiveEndDate}" />
+							</span><br/>
+							<span><label class="label_project_list inline">Fund reaped: </label>
+								<c:set var="sum" value="${0}"/>  
+								<c:forEach var="donation" items="${project.donationUserProjects}">
+									<c:set var="sum" value="${sum + donation.amount}"/>
+								</c:forEach>
+								${sum} / ${project.fund}$
+							</span><br/>
+						</div>
+						<div class="span10">
+							<div class="description_project_list"><span class="inline reset_description_list">${project.description}</span></div>
+						</div>
+						<div class="span2 offset1 fund_project_list">
+							<a class="btn btn-small btn-primary" href="${pageContext.request.contextPath}/project/show/${project.idProject}" >Details</a><br/>
+							<a data-target="#myModal3" data-backdrop="true"
+								data-toggle="modal" href="${pageContext.request.contextPath}/user/donate/${project.idProject}" class="btn btn-small btn-info">Donate</a><br/>
+							<a class="btn btn-small">Follow</a><br/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+    </div>
 	</div>
 </div>

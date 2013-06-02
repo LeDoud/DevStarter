@@ -1,5 +1,6 @@
 package isep.rose.devstarter.web;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -80,6 +81,8 @@ public class UserController {
 		if (request.getSession().getAttribute("idUser") != null) {
 		User user = new User().findUser((Integer) (request.getSession().getAttribute("idUser")));
 		model.addAttribute("user", user);
+		List<Project> myprojects = Project.findUserProjects((Integer)(request.getSession().getAttribute("idUser")));
+		model.addAttribute("myprojects",myprojects);
 
 		return "user/managedProjects";
 		}

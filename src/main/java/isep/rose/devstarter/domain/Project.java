@@ -67,4 +67,17 @@ public class Project {
         }
         return projects;
     }
+    
+
+    public static List<isep.rose.devstarter.domain.Project> findUserProjects(Integer idUser) {
+        List<Project> projects = new ArrayList<Project>();
+        User user = User.findUser(idUser);
+        Query query = entityManager().createQuery("select project from Project project where idProject IN (SELECT managed.projectId FROM ManageUserProject managed WHERE userId = :user) " + "ORDER BY start_date DESC ", Project.class);
+        query.setParameter("user", user);
+        projects = query.getResultList();
+        if (projects.isEmpty()) {
+            return null;
+        }
+        return projects;
+    }
 }
