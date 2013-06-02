@@ -338,7 +338,8 @@ public class ProjectController {
 				String languagesArray[] = languages.split(",");
 				for (String languageString : languagesArray) {
 					if (languageString != "") {
-						TechnologyProjectEnumeration language = TechnologyProjectEnumeration.findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						//TechnologyProjectEnumeration language = TechnologyProjectEnumeration.findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						TechnologyProjectEnumeration language = new TechnologyProjectEnumeration();
 						language.setProjectId(Project.findProject(project
 								.getIdProject()));
 						language.setTechnoEnumId(Enumeration
@@ -356,7 +357,8 @@ public class ProjectController {
 				String frameworksArray[] = frameworks.split(",");
 				for (String frameworkString : frameworksArray) {
 					if (frameworkString != "") {
-						TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration().findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						//TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration().findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
 						framework.setProjectId(Project.findProject(project
 								.getIdProject()));
 						framework.setTechnoEnumId(Enumeration
