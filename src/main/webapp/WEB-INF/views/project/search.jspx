@@ -8,6 +8,8 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message var="app_name" code="application_name"
 		htmlEscape="false" />
+		
+		<spring:url value="/resources/images/no_image.gif" var="no_image" />
 
 	<spring:url value="/resources/scripts/bootstrap-tagmanager.js"
 		var="bootstrap_tagmanager_url" />
