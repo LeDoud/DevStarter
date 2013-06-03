@@ -67,7 +67,6 @@ public class Project {
         }
         return projects;
     }
-    
 
     public static List<isep.rose.devstarter.domain.Project> findUserProjects(Integer idUser) {
         List<Project> projects = new ArrayList<Project>();

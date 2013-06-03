@@ -16,7 +16,7 @@
 			<div class="row-fluid">
 				<div class="span5">
 					<a href="#" class="thumbnail project_logo"> <img
-						src="${no_image}" class="" alt="" />
+						src="${pageContext.request.contextPath}/project/downloadImage/${project.idProject}" class="" alt="" />
 					</a><br />
 				</div>
 				<div class="span6">

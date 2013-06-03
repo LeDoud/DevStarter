@@ -19,7 +19,7 @@
 			<div class="row div_project_list" style="height:100px;">
 				<div class="span3">
 					 <a href="#" class="thumbnail logo_project_list">
-					   <img src="${no_image}" class="" alt=""/>
+					   <img src="${pageContext.request.contextPath}/project/downloadImage/${project.idProject}" class="" alt=""/>
 					 </a>
 				</div>
 				<div class="span21">

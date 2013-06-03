@@ -1,6 +1,8 @@
 package isep.rose.devstarter.web;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -114,13 +116,19 @@ public class ProjectController {
 		project.persist();
 		if (files.get(0) != null) {
 			project.setPictureUrl(files.get(0).getOriginalFilename());
-			project.persist();
 			try {
+				project.setPictureBytes(files.get(0).getBytes());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			project.persist();
+			/*try {
 				this.saveMultipartToDisk(files.get(0), project);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
 
 		ManageUserProject manageUserProject = new ManageUserProject();
@@ -193,6 +201,16 @@ public class ProjectController {
 		Project project = Project.findProject(idProject);
 		model.addAttribute("project", project);
 		return "project/show";
+	}
+	
+	@RequestMapping(value = "/downloadImage/{idProject}", produces = "text/html", method = RequestMethod.GET)
+	public void downloadImage(@PathVariable int idProject, ModelMap model,HttpServletResponse response) throws IOException {
+		byte[] pictureBytes=Project.findProject(idProject).getPictureBytes();
+
+		OutputStream o = response.getOutputStream();
+        o.write(pictureBytes);
+        o.flush(); 
+        o.close();
 	}
 
 	@RequestMapping(value = "/list/{criteria}", produces = "text/html", method = RequestMethod.GET)
