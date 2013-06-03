@@ -94,7 +94,7 @@
 				
 				<c:choose>
 						<c:when test="${empty project.uploadedFiles}">
-							<p class="alert alert-info"><strong>There is no documents attached to this project.</strong></p>
+							<p class="alert alert-info"><strong>There is no document attached to this project.</strong></p>
 						</c:when>
 						<c:otherwise>
 							<div class="span2"><!--  --></div>
@@ -111,7 +111,7 @@
 			<h4>Comments</h4>
 			<div class="row-fluid">
 				<div class="span24">
-				<p class="alert alert-info"><strong>There is no comments yet</strong></p>
+				<p class="alert alert-info"><strong>There is no comment yet</strong></p>
 				</div>
 			</div>
 		</div>
