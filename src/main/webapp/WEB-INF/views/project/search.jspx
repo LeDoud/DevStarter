@@ -1,12 +1,13 @@
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message var="app_name" code="application_name"
 		htmlEscape="false" />
-	<spring:message var="title" code="welcome_titlepane"
-		arguments="${app_name}" htmlEscape="false" />
 
 	<spring:url value="/resources/scripts/bootstrap-tagmanager.js"
 		var="bootstrap_tagmanager_url" />
@@ -24,52 +25,152 @@
 		<div class="well-small">
 			<!--  les champs c'est "type d'application" "framework" "langage" "titre" "date de départ" -->
 			<h3>Search a project</h3>
-			<p>
-				<spring:message code="search_project_message" />
-			</p>
 		</div>
-		<form ENCTYPE="multipart/form-data" method="POST">
+		
 			<div class="well">
-				<h4>Search by :</h4>
+			<form class="form-inline" method="POST" action="${pageContext.request.contextPath}/project/find">
 				<div class="row-fluid">
-					<div class="span8 inline">
-						<label class="label-big">Title</label> <input class="span21"
-							name="title" id="title" type="text" /> <br /> <br />
+					<div class="span10">
+						<label class="inline">Title  </label>
+						<input class="span20" value="${title}" name="title" id="title" type="text" />
 					</div>
-					<div class="span8">
-						<label class="label-big">Date</label> <input type="text"
-							name="search_date" class="datepicker" id="search_date" />
+					<div class="span7">
+						<label class="inline label_search_small">Start after</label> 
+						<input type="text" value="${startDate}" name="start_date" class="datepicker" id="start_date" />
+					</div>
+					<div class="span7">
+						<label class="inline label_search_small">End before</label>
+						<input type="text" value="${endDate}" name="end_date" class="datepicker" id="end_date" />
 					</div>
 
 				</div>
 				<br />
 				<div class="row-fluid">
-					<div class="span8">
-						<label class="label-big">Application type</label> <select
-							name="project_type" id="project_type">
-							<!--  	<c:forEach var="project_type" items="${project_types}">-->
-							<option value="Not implemented">Not Implemented</option>
-							<!-- </c:forEach> -->
+					<div class="span10">
+						<label class="inline">Application type  </label>
+						<select name="application_type" class="span10" id="application_type">
+							<option selected="selected" value="-1">-</option>
+						<c:forEach var="project_type" items="${project_types}">
+									<c:choose>
+										<c:when
+											test="${project_type.idEnumeration==application_type}">
+
+											<option value="${project_type.idEnumeration}" selected="selected">${project_type.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${project_type.idEnumeration}">${project_type.name}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 						</select>
 					</div>
-					<div class="span8">
-						<label class="label-big">Languages</label> <input type="text"
-							name="languages" id="languages" style="display: block;"
+					<div class="span7">
+						<label class="inline label_search_small">Languages</label> <input type="text"
+							name="languages" id="languages"
 							class="tagManager" />
 					</div>
-					<div class="span8">
-						<label class="label-big">Frameworks</label><input type="text" name="frameworks" id="frameworks" style="display: block;" class="tagManager" />
+					<div class="span7">
+						<label class="inline label_search_small">Frameworks</label><input type="text" name="frameworks" id="frameworks"  class="tagManager" />
 					</div>
 
+				</div><br/>
+				<div class="row-fluid">
+					<div class="span2 offset22">
+					<button type="submit" id="btnFind" class="btn btn-primary">Find</button>
+					</div>
 				</div>
+				</form>
+				
+		<c:if test="${firstCall}">
+			<c:choose>
+				<c:when test="${empty projects}">
+					<p class="alert alert-info">
+						<strong>There is no project matching.</strong>
+					</p>
+				</c:when>
+			
+			<c:otherwise>
+				<div class="list_projects">
+					<div class="row div_project_list"><!--  -->
+					</div>
+					<c:forEach var="project" items="${projects}">
+						<div class="row div_project_list" style="height: 100px;">
+							<div class="span3">
+								<c:choose>
+									<c:when test="${project.pictureUrl==''}">
+										<a href="#" class="thumbnail logo_project_list"> <img
+											src="${no_image}" class="" alt="" />
+										</a>
 
-			</div>
-			<button type="submit" class="btn btn-primary pull-right">Submit</button>
-		</form>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="thumbnail logo_project_list"> <img
+											src="${pageContext.request.contextPath}/project/downloadImage/${project.idProject}"
+											class="" alt="" />
+										</a>
+									</c:otherwise>
+								</c:choose>
 
+							</div>
+							<div class="span21">
+								<div class="row-fluid" style="margin-bottom: 3px;">
+									<a
+										href="${pageContext.request.contextPath}/project/show/${project.idProject}"
+										class="title_project_list">${project.name}</a>
+								</div>
+								<div class="row-fluid font_project_list">
+									<div class="span6">
+										<span><label class="label_project_list inline">Type:</label>
+											${project.typeId.name}</span><br /> <span
+											style="overflow-y: hidden; height: 60px;"><label
+											class="label_project_list inline">Technologies: </label> <c:forEach
+												var="technology"
+												items="${project.technologyProjectEnumerations}">
+								${technology.technoEnumId.name},
+								</c:forEach> </span><br />
+									</div>
+									<div class="span5">
+										<span><label class="label_project_list inline">Start:
+										</label> <fmt:formatDate type="date" dateStyle="short"
+												value="${project.startDate}" /> </span><br /> <span><label
+											class="label_project_list inline">Min end date: </label> <fmt:formatDate
+												type="date" dateStyle="short" value="${project.minEndDate}" />
+										</span><br /> <span><label class="label_project_list inline">Current
+												end date: </label> <fmt:formatDate type="date" dateStyle="short"
+												value="${project.effectiveEndDate}" /> </span><br /> <span><label
+											class="label_project_list inline">Fund reaped: </label> <c:set
+												var="sum" value="${0}" /> <c:forEach var="donation"
+												items="${project.donationUserProjects}">
+												<c:set var="sum" value="${sum + donation.amount}" />
+											</c:forEach> ${sum} / ${project.fund}$ </span><br />
+									</div>
+									<div class="span10">
+										<div class="description_project_list">
+											<span class="inline reset_description_list">${project.description}</span>
+										</div>
+									</div>
+									<div class="span2 offset1 fund_project_list">
+										<a class="btn btn-small btn-primary"
+											href="${pageContext.request.contextPath}/project/show/${project.idProject}">Details</a><br />
+										<a data-target="#myModal3" data-backdrop="true"
+											data-toggle="modal"
+											href="${pageContext.request.contextPath}/user/donate/${project.idProject}"
+											class="btn btn-small btn-info">Donate</a><br /> <a
+											class="btn btn-small">Follow</a><br />
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:otherwise>
+		</c:choose>	
+		</c:if>
+		</div>
 	</div>
 
 	<script type="text/javascript">
+		
 		$(".datepicker").datepicker();
 		jQuery("#languages")
 				.tagsManager(

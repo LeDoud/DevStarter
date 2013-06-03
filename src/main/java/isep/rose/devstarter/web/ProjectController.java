@@ -54,7 +54,10 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = "/search", produces = "text/html")
-	public String search() {
+	public String search(ModelMap model) {
+		List<Enumeration> project_types = Enumeration
+				.findEnumerationsByType("project_type");
+		model.addAttribute("project_types", project_types);
 		return "project/search";
 	}
 
@@ -65,6 +68,77 @@ public class ProjectController {
 				.findEnumerationsByType("project_type");
 		model.addAttribute("project_types", project_types);
 		return "project/create";
+	}
+
+	/*----------RECHERCHE----------------*/
+	@RequestMapping(value = "/find", produces = "text/html")
+	public String find(
+			org.springframework.web.context.request.WebRequest webRequest,
+			HttpServletRequest httpServletRequest,ModelMap model) {
+
+		/* dates */
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date startDate = null;
+		String startDateString="";
+		String endDateString="";
+		if(!webRequest.getParameter("start_date").equals("")){
+			startDateString = webRequest.getParameter("start_date");
+			startDate = new Date();
+			try {
+				startDate = df.parse(startDateString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		Date endDate = null;
+		if(!webRequest.getParameter("end_date").equals("")){
+			endDateString = webRequest.getParameter("end_date");
+			endDate = new Date();
+			try {
+				endDate = df.parse(endDateString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String title="";
+		if(!webRequest.getParameter("title").equals("")){
+			title=webRequest.getParameter("title");
+		}
+
+		String languagesArray[] = null;
+		if (webRequest.getParameter("hidden-languages") != null) {
+			String languages = webRequest.getParameter("hidden-languages").toString();
+			if (!languages.equals("")) {
+				languagesArray = languages.split(",");
+				}
+			}
+		
+		String frameworksArray[] =null;
+		if (webRequest.getParameter("hidden-frameworks") != null) {
+			String frameworks = webRequest.getParameter("hidden-frameworks")
+					.toString();
+			if (!frameworks.equals("")) {
+				frameworksArray = frameworks.split(",");
+			}
+		}
+		
+		Integer application_type=null;
+		if(webRequest.getParameter("application_type") != null){
+			application_type=Integer.parseInt(webRequest.getParameter("application_type"));
+		}
+		List<Project> projects=Project.searchProjects(title,startDate,endDate,application_type,languagesArray,frameworksArray);
+		
+		boolean firstCall=true;
+		model.addAttribute("projects", projects);
+		model.addAttribute("title", title);
+		model.addAttribute("startDate", startDateString);
+		model.addAttribute("endDate", endDateString);
+		model.addAttribute("application_type", application_type);
+		model.addAttribute("firstCall", firstCall);
+		List<Enumeration> project_types = Enumeration.findEnumerationsByType("project_type");
+		model.addAttribute("project_types", project_types);
+		return "project/search";
 	}
 
 	/*----------CREATION PROJET----------------*/
@@ -124,12 +198,11 @@ public class ProjectController {
 				e1.printStackTrace();
 			}
 			project.persist();
-			/*try {
-				this.saveMultipartToDisk(files.get(0), project);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+			/*
+			 * try { this.saveMultipartToDisk(files.get(0), project); } catch
+			 * (Exception e) { // TODO Auto-generated catch block
+			 * e.printStackTrace(); }
+			 */
 		}
 
 		ManageUserProject manageUserProject = new ManageUserProject();
@@ -187,7 +260,7 @@ public class ProjectController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				file.setProjectId(Project.findProject(project.getIdProject()));
 				file.setTitle(webRequest.getParameter("doc" + i + "_title"));
 				file.setUrl(files.get(i).getOriginalFilename());
@@ -201,27 +274,32 @@ public class ProjectController {
 	public String show(@PathVariable String id, ModelMap model) {
 		Integer idProject = Integer.parseInt(id);
 		Project project = Project.findProject(idProject);
+		project.setRank(project.getRank() + 1);
+		project.persist();
 		model.addAttribute("project", project);
 		return "project/show";
 	}
-	
+
 	@RequestMapping(value = "/downloadImage/{idProject}", produces = "text/html", method = RequestMethod.GET)
-	public void downloadImage(@PathVariable int idProject, ModelMap model,HttpServletResponse response) throws IOException {
-		byte[] pictureBytes=Project.findProject(idProject).getPictureBytes();
+	public void downloadImage(@PathVariable int idProject, ModelMap model,
+			HttpServletResponse response) throws IOException {
+		byte[] pictureBytes = Project.findProject(idProject).getPictureBytes();
 
 		OutputStream o = response.getOutputStream();
-        o.write(pictureBytes);
-        o.flush(); 
-        o.close();
+		o.write(pictureBytes);
+		o.flush();
+		o.close();
 	}
-	
+
 	@RequestMapping(value = "/downloadFile/{idFile}/{filename}", produces = "text/html", method = RequestMethod.GET)
-	public void downloadFile(@PathVariable int idFile,@PathVariable String filename, ModelMap model,HttpServletResponse response) throws IOException {
-		byte[] fileBytes=UploadedFile.findUploadedFile(idFile).getBytes();
+	public void downloadFile(@PathVariable int idFile,
+			@PathVariable String filename, ModelMap model,
+			HttpServletResponse response) throws IOException {
+		byte[] fileBytes = UploadedFile.findUploadedFile(idFile).getBytes();
 		OutputStream o = response.getOutputStream();
-        o.write(fileBytes);
-        o.flush(); 
-        o.close();
+		o.write(fileBytes);
+		o.flush();
+		o.close();
 	}
 
 	@RequestMapping(value = "/list/{criteria}", produces = "text/html", method = RequestMethod.GET)
@@ -255,8 +333,6 @@ public class ProjectController {
 		model.addAttribute("listProjects", listProjects);
 		return "project/list";
 	}
-
-	
 
 	/*----------ACCES A EDITION DE PROJET-------------*/
 	@RequestMapping(value = "/editProject/{idProject}", produces = "text/html", method = RequestMethod.GET)
@@ -325,9 +401,9 @@ public class ProjectController {
 		project.setRank(0);
 		project.persist();
 		if (files.get(0) != null) {
-			if(!files.get(0).getOriginalFilename().equals("")){
+			if (!files.get(0).getOriginalFilename().equals("")) {
 				project.setPictureUrl(files.get(0).getOriginalFilename());
-				
+
 				try {
 					project.setPictureBytes(files.get(0).getBytes());
 				} catch (Exception e) {
@@ -338,7 +414,9 @@ public class ProjectController {
 			}
 		}
 
-		ManageUserProject manageUserProject = ManageUserProject.findManageUserProject(Integer.parseInt(webRequest.getParameter("idManage")));
+		ManageUserProject manageUserProject = ManageUserProject
+				.findManageUserProject(Integer.parseInt(webRequest
+						.getParameter("idManage")));
 		manageUserProject.setProjectId(Project.findProject(project
 				.getIdProject()));
 		manageUserProject.setUserId(User.findUser(Integer.parseInt(webRequest
@@ -352,7 +430,8 @@ public class ProjectController {
 				String languagesArray[] = languages.split(",");
 				for (String languageString : languagesArray) {
 					if (languageString != "") {
-						//TechnologyProjectEnumeration language = TechnologyProjectEnumeration.findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						// TechnologyProjectEnumeration language =
+						// TechnologyProjectEnumeration.findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
 						TechnologyProjectEnumeration language = new TechnologyProjectEnumeration();
 						language.setProjectId(Project.findProject(project
 								.getIdProject()));
@@ -371,7 +450,8 @@ public class ProjectController {
 				String frameworksArray[] = frameworks.split(",");
 				for (String frameworkString : frameworksArray) {
 					if (frameworkString != "") {
-						//TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration().findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
+						// TechnologyProjectEnumeration framework = new
+						// TechnologyProjectEnumeration().findTechnologyProjectEnumeration(Integer.parseInt(webRequest.getParameter("idTechnology")));
 						TechnologyProjectEnumeration framework = new TechnologyProjectEnumeration();
 						framework.setProjectId(Project.findProject(project
 								.getIdProject()));
@@ -395,7 +475,7 @@ public class ProjectController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				file.setProjectId(Project.findProject(project.getIdProject()));
 				file.setTitle(webRequest.getParameter("doc" + i + "_title"));
 				file.setUrl(files.get(i).getOriginalFilename());
@@ -424,7 +504,7 @@ public class ProjectController {
 		}
 		return languages;
 	}
-	
+
 	/*----------------AUTOCOMPLETION FRAMEWORKS---------------*/
 	@RequestMapping(value = "/frameworkAutocomplete", method = RequestMethod.POST)
 	@ResponseBody

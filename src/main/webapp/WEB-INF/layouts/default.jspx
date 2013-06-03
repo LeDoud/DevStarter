@@ -32,7 +32,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="row-fluid" >
+			<div class="span20 offset2">
 		<tiles:insertAttribute name="footer" ignore="true" />
+		</div>
+		</div>
 	</div>
 	
 	<div id="myModal" data-remote="${pageContext.request.contextPath}/user/signupForm" class="modal modal2 hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

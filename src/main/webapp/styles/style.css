@@ -228,12 +228,21 @@ margin-bottom:10px;
 
 }
 
+
+/*--------RECHERCHE----------*/
+.label_search_small{
+	width:85px;
+}
+
+
+
 /*-----FOOTER-----------*/
 footer {
 	margin-top:50px;
 	padding-top:20px;
 	border-top: 1px solid silver;
 	text-align: center;
+	
 }
 /*.content-info {color: #999;background-image: url(../img/gray_jean.png);background-color: #f8f8f8;text-align: center;}*/
 

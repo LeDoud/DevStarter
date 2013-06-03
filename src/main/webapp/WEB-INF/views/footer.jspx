@@ -8,7 +8,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url value="/resources/images/springsource-logo.png" var="springsource_logo" />
 
-	<footer class="container-fluid content-info" role="contentinfo">
+	<footer class="well container-fluid content-info" role="contentinfo">
 		<div class="row-fluid">
 			<p>Copyright © 2013 - DevStarter</p>
 		</div>
