@@ -179,13 +179,14 @@ public class ProjectController {
 		for (int i = 1; i <= 5; i++) {
 			if ((webRequest.getParameter("doc" + i + "_title") != null)
 					&& (files.get(i) != null)) {
+				UploadedFile file = new UploadedFile();
 				try {
-					this.saveMultipartToDisk(files.get(i), project);
+					file.setBytes(files.get(i).getBytes());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				UploadedFile file = new UploadedFile();
+				
 				file.setProjectId(Project.findProject(project.getIdProject()));
 				file.setTitle(webRequest.getParameter("doc" + i + "_title"));
 				file.setUrl(files.get(i).getOriginalFilename());
@@ -209,6 +210,15 @@ public class ProjectController {
 
 		OutputStream o = response.getOutputStream();
         o.write(pictureBytes);
+        o.flush(); 
+        o.close();
+	}
+	
+	@RequestMapping(value = "/downloadFile/{idFile}", produces = "text/html", method = RequestMethod.GET)
+	public void downloadFile(@PathVariable int idFile, ModelMap model,HttpServletResponse response) throws IOException {
+		byte[] fileBytes=UploadedFile.findUploadedFile(idFile).getBytes();
+		OutputStream o = response.getOutputStream();
+        o.write(fileBytes);
         o.flush(); 
         o.close();
 	}

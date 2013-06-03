@@ -25,7 +25,7 @@
 	    </div>
 	    <div class="span12 well">
 		    <h3>
-		      Followed projects
+		      Projects starting soon
 		    </h3>
 		    <p>
 		      <spring:message code="welcome_text" />
