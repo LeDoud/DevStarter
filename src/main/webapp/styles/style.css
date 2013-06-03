@@ -183,8 +183,8 @@ margin-bottom:10px;
 	font-weight:normal;
 }
 .logo_project_list{
-	max-width:100%;
-	max-height:100%;
+	max-width:110px;
+	max-height:110px;
 	background-color:white;
 }
 .reset_description_list, .reset_description_list *

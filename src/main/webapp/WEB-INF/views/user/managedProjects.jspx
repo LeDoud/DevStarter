@@ -19,9 +19,20 @@
     	<c:forEach var="project" items="${myprojects}">
 			<div class="row div_project_list" style="height:100px;">
 				<div class="span3">
-					 <a href="#" class="thumbnail logo_project_list">
+					 <c:choose>
+						<c:when
+							test="${project.pictureUrl==''}">
+							<a href="#" class="thumbnail logo_project_list">
 					   <img src="${no_image}" class="" alt=""/>
 					 </a>
+
+						</c:when>
+						<c:otherwise>
+						<a href="#" class="thumbnail logo_project_list">
+					   <img src="${pageContext.request.contextPath}/project/downloadImage/${project.idProject}" class="" alt=""/>
+					 </a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="span21">
 					<div class="row-fluid" style="margin-bottom:3px;">

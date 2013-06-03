@@ -67,6 +67,7 @@ public class ProjectController {
 		return "project/create";
 	}
 
+	/*----------CREATION PROJET----------------*/
 	@RequestMapping(value = "/persistProject", produces = "text/html")
 	public String persistProject(
 			org.springframework.web.context.request.WebRequest webRequest,
@@ -214,8 +215,8 @@ public class ProjectController {
         o.close();
 	}
 	
-	@RequestMapping(value = "/downloadFile/{idFile}", produces = "text/html", method = RequestMethod.GET)
-	public void downloadFile(@PathVariable int idFile, ModelMap model,HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/downloadFile/{idFile}/{filename}", produces = "text/html", method = RequestMethod.GET)
+	public void downloadFile(@PathVariable int idFile,@PathVariable String filename, ModelMap model,HttpServletResponse response) throws IOException {
 		byte[] fileBytes=UploadedFile.findUploadedFile(idFile).getBytes();
 		OutputStream o = response.getOutputStream();
         o.write(fileBytes);
@@ -255,25 +256,7 @@ public class ProjectController {
 		return "project/list";
 	}
 
-	/*----------------AUTOCOMPLETION LANGUAGES---------------*/
-	@RequestMapping(value = "/languageAutocomplete", method = RequestMethod.POST)
-	@ResponseBody
-	public String languageAutocomplete(@RequestParam("typeahead") String name) {
-		List<Enumeration> enums = Enumeration.searchEnumerationsByNameAndType(
-				name, "language");
-		String languages = "";
-		if (enums != null) {
-			int i = 0;
-			for (Enumeration enumf : enums) {
-				if (i != 0) {
-					languages += ";";
-				}
-				languages += enumf.getName();
-				i++;
-			}
-		}
-		return languages;
-	}
+	
 
 	/*----------ACCES A EDITION DE PROJET-------------*/
 	@RequestMapping(value = "/editProject/{idProject}", produces = "text/html", method = RequestMethod.GET)
@@ -342,13 +325,16 @@ public class ProjectController {
 		project.setRank(0);
 		project.persist();
 		if (files.get(0) != null) {
-			project.setPictureUrl(files.get(0).getOriginalFilename());
-			project.persist();
-			try {
-				this.saveMultipartToDisk(files.get(0), project);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(!files.get(0).getOriginalFilename().equals("")){
+				project.setPictureUrl(files.get(0).getOriginalFilename());
+				
+				try {
+					project.setPictureBytes(files.get(0).getBytes());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				project.persist();
 			}
 		}
 
@@ -402,13 +388,14 @@ public class ProjectController {
 		for (int i = 1; i <= 5; i++) {
 			if ((webRequest.getParameter("doc" + i + "_title") != null)
 					&& (files.get(i) != null)) {
+				UploadedFile file = new UploadedFile();
 				try {
-					this.saveMultipartToDisk(files.get(i), project);
+					file.setBytes(files.get(i).getBytes());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				UploadedFile file = new UploadedFile();
+				
 				file.setProjectId(Project.findProject(project.getIdProject()));
 				file.setTitle(webRequest.getParameter("doc" + i + "_title"));
 				file.setUrl(files.get(i).getOriginalFilename());
@@ -418,6 +405,26 @@ public class ProjectController {
 		return "redirect:/project/show/" + project.getIdProject().toString();
 	}
 
+	/*----------------AUTOCOMPLETION LANGUAGES---------------*/
+	@RequestMapping(value = "/languageAutocomplete", method = RequestMethod.POST)
+	@ResponseBody
+	public String languageAutocomplete(@RequestParam("typeahead") String name) {
+		List<Enumeration> enums = Enumeration.searchEnumerationsByNameAndType(
+				name, "language");
+		String languages = "";
+		if (enums != null) {
+			int i = 0;
+			for (Enumeration enumf : enums) {
+				if (i != 0) {
+					languages += ";";
+				}
+				languages += enumf.getName();
+				i++;
+			}
+		}
+		return languages;
+	}
+	
 	/*----------------AUTOCOMPLETION FRAMEWORKS---------------*/
 	@RequestMapping(value = "/frameworkAutocomplete", method = RequestMethod.POST)
 	@ResponseBody
@@ -438,28 +445,4 @@ public class ProjectController {
 		return frameworks;
 	}
 
-	private String calculateDestinationDirectory(Project project) {
-		String result = this.context.getRealPath("WEB-INF");
-		result += UPLOAD_DIRECTORY;
-		result += project.getIdProject();
-		return result;
-	}
-
-	private String calculateDestinationPath(MultipartFile file, Project project) {
-		String result = this.calculateDestinationDirectory(project);
-		result += "/";
-		result += file.getOriginalFilename();
-		return result;
-	}
-
-	private void saveMultipartToDisk(MultipartFile file, Project project)
-			throws Exception {
-		File dir = new File(this.calculateDestinationDirectory(project));
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		File multipartFile = new File(this.calculateDestinationPath(file,
-				project));
-		file.transferTo(multipartFile);
-	}
 }
