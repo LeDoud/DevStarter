@@ -91,21 +91,27 @@
 			
 			<h4>Documentation</h4>
 			<div class="row-fluid">
-				<div class="span2"><!--  -->
-				</div>
-				<c:forEach var="file" items="${project.uploadedFiles}">
+				
+				<c:choose>
+						<c:when test="${empty project.uploadedFiles}">
+							<p class="alert alert-info"><strong>There is no documents attached to this project.</strong></p>
+						</c:when>
+						<c:otherwise>
+							<div class="span2"><!--  --></div>
+							<c:forEach var="file" items="${project.uploadedFiles}">
 							<div class="span4" style="text-align:center;">
 								<strong>${file.title}</strong><br/>
 								<a class="btn" target="_blank" href="${pageContext.request.contextPath}/project/downloadFile/${file.idFile}/${file.url}">Download</a>
 								</div>
 						</c:forEach> 
-				
+						</c:otherwise>
+					</c:choose>
 			</div><br/>
 			
 			<h4>Comments</h4>
 			<div class="row-fluid">
 				<div class="span24">
-				<span>a</span>
+				<p class="alert alert-info"><strong>There is no comments yet</strong></p>
 				</div>
 			</div>
 		</div>
