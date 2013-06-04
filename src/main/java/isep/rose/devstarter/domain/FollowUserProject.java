@@ -16,15 +16,15 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooDbManaged(automaticallyDelete = true)
 public class FollowUserProject {
 
-    public static List<isep.rose.devstarter.domain.FollowUserProject> findFollowUserProjectByUserId(User user, Project project) {
+    public static boolean findFollowUserProjectByUserId(User user, Project project) {
         List<FollowUserProject> followUserProject = new ArrayList<FollowUserProject>();
-        Query query = entityManager().createQuery("select follow from FollowUserProject donation " + "where userId = :userId and projectId = :projectId", FollowUserProject.class);
+        Query query = entityManager().createQuery("select follow from FollowUserProject follow " + "where userId = :userId and projectId = :projectId", FollowUserProject.class);
         query.setParameter("userId", user);
         query.setParameter("projectId", project);
         followUserProject = query.getResultList();
         if (followUserProject.isEmpty()) {
-            return null;
+            return false;
         }
-        return followUserProject;
+        return true;
     }
 }

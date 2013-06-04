@@ -259,13 +259,20 @@ public class UserController {
 			User user = new User().findUser((Integer) (request.getSession()
 					.getAttribute("idUser")));
 			Project project = new Project().findProject(idProject);
-			
-			FollowUserProject follow = new FollowUserProject();
-			follow.setProjectId(project);
-			follow.setUserId(user);
-			follow.persist();
-			followDone="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You are now following this project!</div>";
-		
+			FollowUserProject followed = new FollowUserProject();
+			if(followed.findFollowUserProjectByUserId( user, project)==false){
+				
+				FollowUserProject follow = new FollowUserProject();
+				follow.setProjectId(project);
+				follow.setUserId(user);
+				follow.persist();
+				followDone="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You are now following this project!</div>";
+					
+			}else{
+				followDone="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You are already following this project!</div>";
+				
+			}
+
 		}else{
 			followDone="<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You must be logged to follow a project!</div>";			
 		}
