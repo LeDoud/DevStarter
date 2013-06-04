@@ -1,16 +1,56 @@
-<div xmlns:spring="http://www.springframework.org/tags"  xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags"  
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+ xmlns:jsp="http://java.sun.com/JSP/Page" 
+ xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
 	
+	<spring:url value="/resources/scripts/contentflow.js" var="contentflow_url" />
+<script type="text/javascript" src="${contentflow_url}"><!-- --></script>
+
 	<div class="row-fluid">
 	    <div class="well">
 		    <h3>
 		      Top projects
 		    </h3>
-		    <p>
-		      <spring:message code="welcome_text" />
-		    </p>
+		    
+		    <c:choose>
+				<c:when test="${empty topProjects}">
+					<p class="alert alert-info">
+						<strong>There is no projects yet.</strong>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<div id="contentFlow" class="ContentFlow">
+		        <!-- should be place before flow so that contained images will be loaded first -->
+		        <div class="loadIndicator"><div class="indicator"><!--  --></div></div>
+		
+		        <div class="flow">
+					<c:forEach var="project" items="${topProjects}">
+							<c:if test="${project.pictureUrl != ''}">
+								<div class="item">
+					                <img class="content" src="${pageContext.request.contextPath}/project/downloadImage/${project.idProject}"/>
+					                <div class="caption">
+					                	<a href="${pageContext.request.contextPath}/project/show/${project.idProject}">${project.name}</a>
+					                	<br/><span>Type : ${project.typeId.name}</span>
+					                </div>
+					            </div>
+							</c:if>
+			
+					
+					</c:forEach>
+		        </div>
+		        <div class="globalCaption"></div>
+		        <div class="scrollbar">
+		            <div class="slider"><div class="position"><!--  --></div></div>
+		        </div>
+		
+		    </div>
+		    </c:otherwise>
+	    </c:choose>
 	    </div>
 	</div>
 	
@@ -19,17 +59,47 @@
 		    <h3>
 		      New projects
 		    </h3>
-		    <p>
-		      <spring:message code="welcome_text" />
-		    </p>
+		    <c:choose>
+				<c:when test="${empty newProjects}">
+					<p class="alert alert-info">
+						<strong>There is no projects yet.</strong>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<div class="small_list">
+					<c:forEach var="project" items="${topProjects}">
+							<c:if test="${project.pictureUrl != ''}">
+								<div class="small_item_list">
+					                <a href="${pageContext.request.contextPath}/project/show/${project.idProject}">${project.name}</a>
+					            </div>
+							</c:if>
+					</c:forEach>
+					</div>
+				</c:otherwise>
+				</c:choose>
 	    </div>
 	    <div class="span12 well">
 		    <h3>
 		      Projects starting soon
 		    </h3>
-		    <p>
-		      <spring:message code="welcome_text" />
-		    </p>
+		    <c:choose>
+				<c:when test="${empty startingSoonProjects}">
+					<p class="alert alert-info">
+						<strong>There is no projects yet.</strong>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<div class="small_list">
+					<c:forEach var="project" items="${topProjects}">
+							<c:if test="${project.pictureUrl != ''}">
+								<div class="small_item_list">
+					                <a href="${pageContext.request.contextPath}/project/show/${project.idProject}">${project.name}</a>
+					            </div>
+							</c:if>
+					</c:forEach>
+					</div>
+				</c:otherwise>
+				</c:choose>
 	    </div>
 	</div>
 </div>

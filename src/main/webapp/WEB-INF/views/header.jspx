@@ -29,14 +29,14 @@
 				<ul class="nav">
 					<c:choose>
 						<c:when
-							test="${(fn:contains(url,'home/index')) || (url=='/DevStarter/')}">
+							test="${(url=='/DevStarter/')}">
 							<li class="active divider-vertical"><a
-								href="${pageContext.request.contextPath}/home/index"><span
+								href="${pageContext.request.contextPath}/"><span
 									class="icon-home"> </span>Home</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class=" divider-vertical"><a
-								href="${pageContext.request.contextPath}/home/index"><span
+								href="${pageContext.request.contextPath}/"><span
 									class="icon-home"> </span>Home</a></li>
 						</c:otherwise>
 					</c:choose>

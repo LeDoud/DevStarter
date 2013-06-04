@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@RequestMapping("/home/**")
+@RequestMapping("/")
 @Controller
 public class HomeController {
 
@@ -22,7 +22,7 @@ public class HomeController {
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/index")
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public String index(ModelMap model) {
     	List<Project> topProjects = Project.findTopProjects();
     	List<Project> newProjects = Project.findNewProjects();

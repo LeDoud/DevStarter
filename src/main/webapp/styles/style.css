@@ -15,6 +15,13 @@ label.error {
   color: red;
 }
 
+
+/*----------HOME----------*/
+.small_list{
+	height:150px;
+	overflow-y:scroll;
+}
+
 /*---------HEADER-----------*/
 .custom-banner {
 position: relative;
@@ -286,7 +293,6 @@ footer {
 }
 
 /*---------autre-------*/
-
 
 
 
