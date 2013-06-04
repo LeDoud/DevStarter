@@ -48,14 +48,14 @@
 						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
 					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
 				
-							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -6px;" type="submit"><span
+							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -5px;" type="submit"><span
 									class="icon-search"> </span>Search</button></li></form>
 						</c:when>
 						<c:otherwise>
 						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
 					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
 				
-							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -6px;" type="submit"><span
+							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -5px;" type="submit"><span
 									class="icon-search"> </span>Search</button></li></form>
 						</c:otherwise>
 					</c:choose>
