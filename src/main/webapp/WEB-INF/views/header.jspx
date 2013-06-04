@@ -41,24 +41,26 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
-				<form class="navbar-search pull-left">
-					<input type="text" class="search-query input-medium" placeHolder="Quick search" />
-				</form>
+				
 				<ul class="nav">
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/search'))}">
-							<li class="active divider-vertical"><a
-								href="${pageContext.request.contextPath}/project/search"><span
-									class="icon-search"> </span>Search</a></li>
+						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
+					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
+				
+							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -6px;" type="submit"><span
+									class="icon-search"> </span>Search</button></li></form>
 						</c:when>
 						<c:otherwise>
-							<li class="divider-vertical"><a
-								href="${pageContext.request.contextPath}/project/search"><span
-									class="icon-search"> </span>Search</a></li>
+						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
+					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
+				
+							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -6px;" type="submit"><span
+									class="icon-search"> </span>Search</button></li></form>
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${(fn:contains(url,'project/myprojects')) || (fn:contains(url,'project/create'))}">
+						<c:when test="${(fn:contains(url,'project/list')) ||(fn:contains(url,'user/myprojects')) || (fn:contains(url,'project/create'))}">
 							<li class="active dropdown"><a href="" class="dropdown-toggle" role="button" data-toggle="dropdown"><span
 									class="icon-briefcase"> </span>Projects</a>
 								<ul class="dropdown-menu">

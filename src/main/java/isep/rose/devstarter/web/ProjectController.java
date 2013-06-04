@@ -71,7 +71,7 @@ public class ProjectController {
 	}
 
 	/*----------RECHERCHE----------------*/
-	@RequestMapping(value = "/find", produces = "text/html")
+	@RequestMapping(value = "/find", produces = "text/html" , method = RequestMethod.POST)
 	public String find(
 			org.springframework.web.context.request.WebRequest webRequest,
 			HttpServletRequest httpServletRequest,ModelMap model) {
@@ -81,23 +81,27 @@ public class ProjectController {
 		Date startDate = null;
 		String startDateString="";
 		String endDateString="";
-		if(!webRequest.getParameter("start_date").equals("")){
-			startDateString = webRequest.getParameter("start_date");
-			startDate = new Date();
-			try {
-				startDate = df.parse(startDateString);
-			} catch (ParseException e) {
-				e.printStackTrace();
+		if(webRequest.getParameter("start_date") != null){
+			if(!webRequest.getParameter("start_date").equals("")){
+				startDateString = webRequest.getParameter("start_date");
+				startDate = new Date();
+				try {
+					startDate = df.parse(startDateString);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		Date endDate = null;
-		if(!webRequest.getParameter("end_date").equals("")){
-			endDateString = webRequest.getParameter("end_date");
-			endDate = new Date();
-			try {
-				endDate = df.parse(endDateString);
-			} catch (ParseException e) {
-				e.printStackTrace();
+		if(webRequest.getParameter("end_date") != null){
+			if(!webRequest.getParameter("end_date").equals("")){
+				endDateString = webRequest.getParameter("end_date");
+				endDate = new Date();
+				try {
+					endDate = df.parse(endDateString);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -123,7 +127,7 @@ public class ProjectController {
 			}
 		}
 		
-		Integer application_type=null;
+		Integer application_type=-1;
 		if(webRequest.getParameter("application_type") != null){
 			application_type=Integer.parseInt(webRequest.getParameter("application_type"));
 		}
