@@ -89,8 +89,7 @@
 											href="${pageContext.request.contextPath}/user/donate/${project.idProject}"
 											class="btn btn-small btn-info">Donate</a>
 										</c:if>
-								<br /> <a
-											class="btn btn-small">Follow</a><br />
+								<br /> <a href="${pageContext.request.contextPath}/user/follow/${project.idProject}" class="btn btn-small">Follow</a><br />
 									</div>
 								</div>
 							</div>

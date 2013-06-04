@@ -84,6 +84,7 @@
 				</div>
 				
 				<div class="span3 offset1">
+				<a href="${pageContext.request.contextPath}/user/follow/${project.idProject}" class="btn btn-large btn-warning">Follow</a><br/><br/>
 					<a data-target="#myModal3" data-backdrop="true"
 								data-toggle="modal" href="${pageContext.request.contextPath}/user/donate/${project.idProject}" class="btn btn-large btn-primary">Donate</a>
 				</div>

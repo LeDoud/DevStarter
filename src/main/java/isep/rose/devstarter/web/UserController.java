@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import isep.rose.devstarter.service.Email;
+import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.User;
 import isep.rose.devstarter.domain.Project;
 import isep.rose.devstarter.domain.Enumeration;
@@ -242,10 +243,36 @@ public class UserController {
 			history.persist();
 
 		}
-		/* message de confirmation lors du retour sur l'accueil */
+		/* message de confirmation lors du retour sur le wallet */
 		String moneyAdded = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your wallet is now quite heavy !</div>";
 		redirectAttributes.addFlashAttribute("message", moneyAdded);
 		return "redirect:/user/wallet";
+	}
+	
+	/*----------USER FOLLOW PROJECT  -----------------*/
+	@RequestMapping(value = "/follow/{idProject}", produces = "text/html")
+	public String follow(@PathVariable Integer idProject,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		String followDone="";
+		if (request.getSession().getAttribute("idUser") != null) {
+			
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			Project project = new Project().findProject(idProject);
+			
+			FollowUserProject follow = new FollowUserProject();
+			follow.setProjectId(project);
+			follow.setUserId(user);
+			follow.persist();
+			followDone="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You are now following this project!</div>";
+		
+		}else{
+			followDone="<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You must be logged to follow a project!</div>";			
+		}
+		
+		/* message de confirmation lors du retour sur le projet */
+		redirectAttributes.addFlashAttribute("message", followDone);
+		return "redirect:/project/show/"+ idProject;
 	}
 
 	/*------TRAITEMENT DU FORM DINSCRIPTION PAR EMAIL----------*/
