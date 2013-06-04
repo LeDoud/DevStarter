@@ -26,7 +26,7 @@
         }
         * html .ContentFlow .flow .item .caption {
             background-image: none;
-            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='img/1x1_0.5_black.png');
+            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='../images/1x1_0.5_black.png');
         }
             .ContentFlow .flow .item .caption a,
             .ContentFlow .flow .item .caption a:link,
@@ -51,20 +51,20 @@
         margin: 0px auto;
         margin-top: 10px;
         height: 16px;
-        background: url(img/scrollbar_white.png) left center repeat-x;
+        background: url(../images/scrollbar_white.png) left center repeat-x;
         position: relative;
     }
 
         .ContentFlow .scrollbar .slider {
             width: 16px;
             height: 16px;
-            background: url(img/slider_white.png) center center no-repeat;
+            background: url(../images/slider_white.png) center center no-repeat;
         }
         
         /* only for IE <= 6 and a alphatransparent slider image */
         * html .ContentFlow .scrollbar .slider {
             background-image: none;
-            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src='img/slider_white.png');
+            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src='../images/slider_white.png');
         }
             .ContentFlow .scrollbar .slider .position {
                 top: 120%;
@@ -107,7 +107,7 @@
         left: 0px;
     }
         .ContentFlow .loadIndicator .indicator {
-            background: url(img/loader.gif) center center no-repeat;
+            background: url(../images/loader.gif) center center no-repeat;
             width: 100%;
             height: 100%;
         }
