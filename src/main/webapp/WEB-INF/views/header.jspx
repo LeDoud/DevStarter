@@ -46,14 +46,14 @@
 					<c:choose>
 						<c:when test="${(fn:contains(url,'project/search'))}">
 						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
-					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
+					<input type="text" name="title" style="margin-top:-5px;" class="search-query input-medium inline" placeHolder="Quick search" />
 				
-							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -4px;" type="submit"><span
+							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -5px;" type="submit"><span
 									class="icon-search"> </span>Search</button></li></form>
 						</c:when>
 						<c:otherwise>
 						<form class="navbar-search pull-left" method="post" action="${pageContext.request.contextPath}/project/find">
-					<input type="text" name="title" class="search-query input-medium inline" placeHolder="Quick search" />
+					<input type="text" name="title" style="margin-top:-5px;" class="search-query input-medium inline" placeHolder="Quick search" />
 				
 							<li class="active divider-vertical inline"><button class="btn btn_search" style="margin-top: -5px;" type="submit"><span
 									class="icon-search"> </span>Search</button></li></form>
