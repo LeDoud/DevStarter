@@ -136,12 +136,12 @@
 					<c:choose>
 						<c:when test="${(fn:contains(url,'forum'))}">
 							<li class="active divider-vertical"><a
-								href="${pageContext.request.contextPath}/forum/index"><span
+								href="${pageContext.request.contextPath}/forum/topics"><span
 									class="icon-comment"> </span>Forum</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="divider-vertical"><a
-								href="${pageContext.request.contextPath}/forum/index"><span
+								href="${pageContext.request.contextPath}/forum/topics"><span
 									class="icon-comment"> </span>Forum</a></li>
 						</c:otherwise>
 					</c:choose>

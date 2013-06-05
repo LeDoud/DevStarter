@@ -1,0 +1,49 @@
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name"
+		htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane"
+		arguments="${app_name}" htmlEscape="false" />
+	<util:panel id="title" title="${title}">
+	</util:panel>
+	<h3>Forum</h3>
+	<br />
+	<div class="forum">
+		<table cellspacing="0" cellpadding="0" width="100%" border="0"
+			class="well" style="background-color: white;">
+			<tr>
+				<td class="divider-vertical">Topics</td>
+				<td>Posts</td>
+				<td>Last Post</td>
+			</tr>
+			<tr>
+				<td><a href="${pageContext.request.contextPath}/forum/topics">[HELP]
+						How to developp an Apps for Windows Phone</a></td>
+				<td>3</td>
+				<td><a><i>12/05/2013 at 10 pm <br />by Bob
+					</i></a></td>
+			</tr>
+			<tr>
+				<td><a>Looking for a web developper</a></td>
+				<td>12</td>
+				<td><a><i>27/05/2013 at 11 am <br />by Tom
+					</i></a></td>
+			</tr>
+			<tr>
+				<td><a>Need of an application for accounting !</a></td>
+				<td>5</td>
+				<td><a><i>30/05/2013 at 16 pm <br />by Ted
+					</i></a></td>
+			</tr>
+			<tr>
+				<td><a>[INFO] How to deal with publishing iOS apps</a></td>
+				<td>7</td>
+				<td><a><i>6/06/2013 at 21 pm <br />by Oliver
+					</i></a></td>
+			</tr>
+		</table>
+	</div>
+</div>

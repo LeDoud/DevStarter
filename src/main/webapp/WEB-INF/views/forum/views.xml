@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="forum/index">
-        <put-attribute name="body" value="/WEB-INF/views/forum/index.jspx"/>
-    </definition>
+	<definition extends="default" name="forum/topics">
+		<put-attribute name="body" value="/WEB-INF/views/forum/list.jspx" />
+	</definition>
+	<definition extends="default" name="forum/show">
+		<put-attribute name="body" value="/WEB-INF/views/forum/show.jspx" />
+	</definition>
+	<definition extends="default" name="forum/create">
+		<put-attribute name="body" value="/WEB-INF/views/forum/create.jspx" />
+	</definition>
+	<definition extends="default" name="forum/edit">
+		<put-attribute name="body" value="/WEB-INF/views/forum/edit.jspx" />
+	</definition>
 </tiles-definitions>
