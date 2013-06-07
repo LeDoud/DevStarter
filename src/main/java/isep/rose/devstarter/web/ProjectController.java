@@ -11,7 +11,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import isep.rose.devstarter.domain.CommentUserProject;
 import isep.rose.devstarter.domain.Enumeration;
+import isep.rose.devstarter.domain.FollowUserProject;
 import isep.rose.devstarter.domain.UploadedFile;
 import isep.rose.devstarter.domain.ManageUserProject;
 import isep.rose.devstarter.domain.Project;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequestMapping("/project/**")
 @Controller
@@ -68,6 +71,37 @@ public class ProjectController {
 				.findEnumerationsByType("project_type");
 		model.addAttribute("project_types", project_types);
 		return "project/create";
+	}
+	
+	/*----------COMMENT PROJECT----------------*/
+	@RequestMapping(value = "/comment", produces = "text/html", method = RequestMethod.POST)
+	public String comment(@RequestParam("comment") String comment, @RequestParam("project") int idProject,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		String messageDone="";
+		if (request.getSession().getAttribute("idUser") != null) {
+			
+			User user = new User().findUser((Integer) (request.getSession()
+					.getAttribute("idUser")));
+			Project project = new Project().findProject(idProject);
+			//FollowUserProject followed = new FollowUserProject();
+			CommentUserProject newComment = new CommentUserProject();
+
+				newComment.setProjectId(project);
+				newComment.setUserId(user);
+				newComment.setMessage(comment);
+				newComment.setTitle("Comment");
+				newComment.setCreatedDate(Calendar.getInstance());
+				newComment.persist();
+				messageDone="<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your comment has been posted!</div>";
+
+
+		}else{
+			messageDone="<div class=\"alert alert-warning\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>You must be logged to leave a comment to this project!</div>";			
+		}
+		
+		/* message de confirmation lors du retour sur le projet */
+		redirectAttributes.addFlashAttribute("message", messageDone);
+		return "redirect:/project/show/"+ idProject;
 	}
 
 	/*----------RECHERCHE----------------*/
@@ -280,7 +314,9 @@ public class ProjectController {
 		Project project = Project.findProject(idProject);
 		project.setRank(project.getRank() + 1);
 		project.persist();
+		List<CommentUserProject> comments = CommentUserProject.findCommentUserProjectByProjectId(project);
 		model.addAttribute("project", project);
+		model.addAttribute("comments", comments);
 		return "project/show";
 	}
 

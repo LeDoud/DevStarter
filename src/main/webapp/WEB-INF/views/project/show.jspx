@@ -7,6 +7,12 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url value="/resources/images/no_image.gif" var="no_image" />
+	<spring:url value="/resources/scripts/bootstrap-wysihtml5.js"
+		var="bootstrap_wysi_url" />
+	<script type="text/javascript" src="${bootstrap_wysi_url}">
+	<!-- -->
+		
+	</script>
 	<div class="row-fluid">
 		<div class="well-small">
 			<h3>${project.name}</h3>
@@ -67,11 +73,11 @@
 					<div class="row-fluid">
 						<span class="min_date_project inline"><label
 							class="label_project_list inline">Minimum end date</label><br />
-						<strong><fmt:formatDate type="date" dateStyle="short"
+							<strong><fmt:formatDate type="date" dateStyle="short"
 									value="${project.minEndDate}" /></strong></span> <span
 							class="max_date_project"><label
 							class="label_project_list inline">Maximum end date</label><br />
-						<strong><fmt:formatDate type="date" dateStyle="short"
+							<strong><fmt:formatDate type="date" dateStyle="short"
 									value="${project.maxEndDate}" /></strong></span>
 					</div>
 					<div class="row-fluid">
@@ -97,8 +103,7 @@
 				<div class="span3 offset1">
 					<a
 						href="${pageContext.request.contextPath}/user/follow/${project.idProject}"
-						class="btn btn-large btn-warning">Follow</a><br />
-					<br />
+						class="btn btn-large btn-warning">Follow</a><br /> <br />
 					<c:if test="${ project.fund > sum}">
 						<a data-target="#myModal3" data-backdrop="true"
 							data-toggle="modal"
@@ -140,11 +145,53 @@
 			<h4>Comments</h4>
 			<div class="row-fluid">
 				<div class="span24">
-					<p class="alert alert-info">
-						<strong>There is no comment yet</strong>
-					</p>
+					<c:if test="${empty comments}"><p class="alert alert-info"><strong>There is no comment yet</strong></p></c:if>
+					<table class="table table-condensed table-striped" style="width:60%"><c:forEach var="comments" items="${comments}">
+					<tr><td>${comments.message}</td><td><fmt:formatDate type="both" dateStyle="short"
+									value="${comments.createdDate.getTime()}" /></td><td><a href="${pageContext.request.contextPath}/user/profile/${comments.userId.idUser}">${comments.userId.firstname} ${comments.userId.name} </a></td>
+					</tr></c:forEach></table>
+					<br/>
+						<form id="leave-comment" method="POST"
+			action="${pageContext.request.contextPath}/project/comment">
+						<textarea id="comment" name="comment" style="width:60%; height:100px;"
+							placeholder="Please leave a comment !"><!--  --></textarea>
+							<!--<input type="hidden" id="user" name="user" value="${sessionScope.idUser}"/>-->
+							<input type="hidden" id="project" name="project" value="${project.idProject}"/>
+							<br/>
+							<button type="submit" class="btn btn-medium btn-success">Send!</button>
+							</form>
+
 				</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#comment").wysihtml5();
+	</script>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					$('#leave-comment').validate(
+							{
+								rules : {
+									comment : {
+										minlength : 15,
+										required : true,
+									}
+
+								},
+								highlight : function(element) {
+									$(element).closest('.control-group')
+											.removeClass('success').addClass(
+													'error');
+								},
+								success : function(element) {
+									element.text('OK!').addClass('valid')
+											.closest('.control-group')
+											.removeClass('error').addClass(
+													'success');
+								}
+							});
+				});
+	</script>
 </div>
