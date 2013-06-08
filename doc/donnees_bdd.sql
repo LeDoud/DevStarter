@@ -838,3 +838,7 @@ INSERT INTO enumeration(name,type_id) Values('Java EE',(SELECT id_enumeration fr
 INSERT INTO enumeration(name,type_id) Values('Java ME',(SELECT id_enumeration from enumeration e where e.name='framework'));
 INSERT INTO enumeration(name,type_id) Values('Java FX',(SELECT id_enumeration from enumeration e where e.name='framework'));
 
+-- Forum
+
+INSERT INTO ENUMERATION(name) Values('topic');
+INSERT INTO ENUMERATION(name) Values('message');
