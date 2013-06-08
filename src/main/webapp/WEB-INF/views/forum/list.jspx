@@ -45,5 +45,7 @@
 					</i></a></td>
 			</tr>
 		</table>
+		
+		<a href="${pageContext.request.contextPath}/forum/newTopic" class="btn btn-medium btn-primary">Add a topic</a>
 	</div>
 </div>

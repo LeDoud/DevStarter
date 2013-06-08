@@ -20,12 +20,14 @@ public class ForumController {
 			HttpServletRequest request, HttpServletResponse response) {
 	}
 
+	/*----------LIST OF TOPICS----------------*/
 	@RequestMapping(value = "/topics", produces = "text/html")
 	public String topics(HttpServletRequest request, ModelMap model) {
 
 		return "forum/topics";
 	}
 	
+	/*----------ACCESS TO TOPIC MESSAGES----------------*/
 	@RequestMapping(value = "/topic/{idTopic}", produces = "text/html", method = RequestMethod.GET)
 	public String showTopic(@PathVariable Integer idTopic,
 			HttpServletRequest request, ModelMap model) {
@@ -36,18 +38,21 @@ public class ForumController {
 		return "forum/show";
 	}
 
+	/*----------ACCESS TO NEW TOPIC----------------*/
 	@RequestMapping(value = "/newTopic", produces = "text/html")
 	public String newTopic(HttpServletRequest request, ModelMap model) {
 
 		return "forum/create";
 	}
 
+	/*----------CREATE NEW MESSAGE ON TOPIC----------------*/
 	@RequestMapping(value = "/newMessage", produces = "text/html")
 	public String newMessage(HttpServletRequest request, ModelMap model) {
 
 		return "forum/show";
 	}
 
+	/*----------EDIT MESSAGE----------------*/
 	@RequestMapping(value = "/editMessage", produces = "text/html")
 	public String editMessage(HttpServletRequest request, ModelMap model) {
 
