@@ -23,7 +23,7 @@
 			<c:choose>
 				<c:when test="${empty topProjects}">
 					<p class="alert alert-info">
-						<strong>There is no projects yet.</strong>
+						<strong>There is no project yet.</strong>
 					</p>
 				</c:when>
 				<c:otherwise>
@@ -79,7 +79,7 @@
 			<c:choose>
 				<c:when test="${empty newProjects}">
 					<p class="alert alert-info">
-						<strong>There is no projects yet.</strong>
+						<strong>There is no project yet.</strong>
 					</p>
 				</c:when>
 				<c:otherwise>
@@ -124,7 +124,7 @@
 			<c:choose>
 				<c:when test="${empty startingSoonProjects}">
 					<p class="alert alert-info">
-						<strong>There is no projects yet.</strong>
+						<strong>There is no project yet.</strong>
 					</p>
 				</c:when>
 				<c:otherwise>

@@ -1,6 +1,9 @@
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:message var="app_name" code="application_name"
@@ -9,7 +12,11 @@
 		arguments="${app_name}" htmlEscape="false" />
 	<util:panel id="title" title="${title}">
 	</util:panel>
-	<h3>Forum</h3>
+	<div class="row-fluid">
+		<div class="well-small">
+			<h3>Forum</h3>
+		</div>
+	</div>
 	<br />
 	<div class="forum">
 		<table cellspacing="0" cellpadding="0" width="100%" border="0"
@@ -19,33 +26,23 @@
 				<td>Posts</td>
 				<td>Last Post</td>
 			</tr>
-			<tr>
-				<td><a href="${pageContext.request.contextPath}/forum/topics">[HELP]
-						How to developp an Apps for Windows Phone</a></td>
-				<td>3</td>
-				<td><a><i>12/05/2013 at 10 pm <br />by Bob
-					</i></a></td>
-			</tr>
-			<tr>
-				<td><a>Looking for a web developper</a></td>
-				<td>12</td>
-				<td><a><i>27/05/2013 at 11 am <br />by Tom
-					</i></a></td>
-			</tr>
-			<tr>
-				<td><a>Need of an application for accounting !</a></td>
-				<td>5</td>
-				<td><a><i>30/05/2013 at 16 pm <br />by Ted
-					</i></a></td>
-			</tr>
-			<tr>
-				<td><a>[INFO] How to deal with publishing iOS apps</a></td>
-				<td>7</td>
-				<td><a><i>6/06/2013 at 21 pm <br />by Oliver
-					</i></a></td>
-			</tr>
+			<c:if test="${empty topics}"><tr><td colspan="3" style="text-align:center">No topic yet</td></tr>
+			</c:if>
+			<c:forEach var="topics" items="${topics}">
+				<tr>
+					<td><a
+						href="${pageContext.request.contextPath}/forum/topic/${topics.idForum}">${topics.title
+							}</a></td>
+					<td>${posts}</td>
+					<td><i><fmt:formatDate type="both" dateStyle="short"
+								value="${topics.dateCreated.getTime()}" /> <br />by <a
+							href="${pageContext.request.contextPath}/user/profile/${topics.userId.idUser}">${topics.userId.firstname
+								} ${topics.userId.name }</a></i></td>
+				</tr>
+			</c:forEach>
 		</table>
-		
-		<a href="${pageContext.request.contextPath}/forum/newTopic" class="btn btn-medium btn-primary">Add a topic</a>
+
+		<a href="${pageContext.request.contextPath}/forum/newTopic"
+			class="btn btn-medium btn-primary">Add a topic</a>
 	</div>
 </div>

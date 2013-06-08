@@ -1,9 +1,101 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8" />
-  <jsp:output omit-xml-declaration="yes" />
-  <spring:message var="app_name" code="application_name" htmlEscape="false" />
-  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-  </util:panel>
-  <h3>Show Topic</h3>
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name"
+		htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane"
+		arguments="${app_name}" htmlEscape="false" />
+	<spring:url value="/resources/scripts/bootstrap-wysihtml5.js"
+		var="bootstrap_wysi_url" />
+	<script type="text/javascript" src="${bootstrap_wysi_url}">
+	<!-- -->
+		
+	</script>
+	<util:panel id="title" title="${title}">
+	</util:panel>
+	<div class="row-fluid">
+		<div class="well-small">
+			<h3>${topic.title }</h3>
+		</div>
+	</div>
+<div class="row-fluid">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<td>Author</td>
+				<td>Message</td>
+				<td>Post Date</td>
+			</tr>
+		</thead>
+		<tr>
+			<td><a
+				href="${pageContext.request.contextPath}/user/profile/${topic.userId.idUser}">${topic.userId.firstname
+					} ${topic.userId.name }</a></td>
+			<td>${topic.message }</td>
+			<td><fmt:formatDate type="both" dateStyle="long"
+					value="${topic.dateCreated.getTime()}" /></td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: center">ANSWERS</td>
+		</tr>
+		<c:forEach var="post" items="${posts}">
+			<tr>
+				<td><a
+					href="${pageContext.request.contextPath}/user/profile/${post.userId.idUser}">${post.userId.firstname
+						} ${post.userId.name }</a></td>
+				<td>${post.message }</td>
+				<td><fmt:formatDate type="both" dateStyle="long"
+						value="${post.dateCreated.getTime()}" /></td>
+			</tr>
+		</c:forEach>
+	</table>
+
+			<br />
+			<form id="leave-message" method="POST"
+				action="${pageContext.request.contextPath}/forum/newMessage">
+				<textarea id="comment" name="comment"
+					style="width: 60%; height: 100px;"
+					placeholder="Please reply to this conversation !">
+					<!--  -->
+				</textarea>
+				<!--<input type="hidden" id="user" name="user" value="${sessionScope.idUser}"/>-->
+				<input type="hidden" id="topic" name="topic"
+					value="${topic.idForum}" /> <br />
+				<button type="submit" class="btn btn-medium btn-success">Reply!</button>
+			</form>
+</div>
+	<script type="text/javascript">
+		$("#comment").wysihtml5();
+	</script>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					$('#leave-message').validate(
+							{
+								rules : {
+									comment : {
+										minlength : 15,
+										required : true,
+									}
+
+								},
+								highlight : function(element) {
+									$(element).closest('.control-group')
+											.removeClass('success').addClass(
+													'error');
+								},
+								success : function(element) {
+									element.text('OK!').addClass('valid')
+											.closest('.control-group')
+											.removeClass('error').addClass(
+													'success');
+								}
+							});
+				});
+	</script>
 </div>

@@ -1,10 +1,82 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8" />
-  <jsp:output omit-xml-declaration="yes" />
-  <spring:message var="app_name" code="application_name" htmlEscape="false" />
-  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-  </util:panel>
-  
-  <h3>New Topic</h3>
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name"
+		htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane"
+		arguments="${app_name}" htmlEscape="false" />
+	<spring:url value="/resources/scripts/bootstrap-wysihtml5.js"
+		var="bootstrap_wysi_url" />
+	<script type="text/javascript" src="${bootstrap_wysi_url}">
+	<!-- -->
+		
+	</script>
+	<util:panel id="title" title="${title}">
+	</util:panel>
+	<div class="row-fluid">
+		<div class="well-small">
+			<h3>New Topic</h3>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<form id="new-topic" method="POST"
+			action="${pageContext.request.contextPath}/forum/createTopic">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">Title </label>
+					<div class="controls">
+						<input id="title" name="title" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Message </label>
+					<div class="controls">
+						<textarea id="message" name="message" class="span14" style="height:200px;"><!--  --></textarea>
+					</div>
+				</div>
+				<div class="control-group">
+					<button type="submit" class="btn btn-medium btn-success">Create!</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$("#message").wysihtml5();
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+						
+							$('#new-topic').validate(
+									{
+										rules : {
+											title : {
+												minlength : 4,
+												required : true
+											},
+											message : {
+												minlength : 20,
+												required : true
+											}
+
+										},
+										highlight : function(element) {
+											$(element)
+													.closest('.control-group')
+													.removeClass('success')
+													.addClass('error');
+										},
+										success : function(element) {
+											element.text('OK!').addClass(
+													'valid').closest(
+													'.control-group')
+													.removeClass('error')
+													.addClass('success');
+										}
+									});
+						});
+	</script>
 </div>

@@ -14,7 +14,18 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooDbManaged(automaticallyDelete = true)
 public class Enumeration {
 
-    public static isep.rose.devstarter.domain.Enumeration findEnumerationByNameAndType(String name, String type) {
+    public static isep.rose.devstarter.domain.Enumeration findEnumerationByName(String name) {
+        List<Enumeration> enums = new ArrayList<Enumeration>();
+        Query query = entityManager().createQuery("select enumeration from Enumeration enumeration " + "where name = :name ", Enumeration.class);
+        query.setParameter("name", name);
+        enums = query.getResultList();
+        if (enums.isEmpty()) {
+            return null;
+        }
+        return enums.get(0);
+    }
+	
+	public static isep.rose.devstarter.domain.Enumeration findEnumerationByNameAndType(String name, String type) {
         List<Enumeration> enums = new ArrayList<Enumeration>();
         Query query = entityManager().createQuery("select enumeration from Enumeration enumeration " + "where name = :name " + " and type_id=(SELECT type.idEnumeration from Enumeration type where name= :type)", Enumeration.class);
         query.setParameter("name", name);
