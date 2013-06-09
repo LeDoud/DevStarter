@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `comment_user_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comment_user_project` (
-  `ID_COMMENT` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_COMMENT` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   `TITLE` varchar(255) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `comment_user_project` (
   KEY `FK_COMMENT_USER_PROJECT2` (`PROJECT_ID`),
   CONSTRAINT `FK_COMMENT_USER_PROJECT2` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`),
   CONSTRAINT `FK_COMMENT_USER_PROJECT` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `donation_user_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `donation_user_project` (
-  `ID_DONATION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_DONATION` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) DEFAULT NULL,
   `AMOUNT` int(11) DEFAULT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `donation_user_project` (
   KEY `FK_DONATION_USER_PROJECT2` (`PROJECT_ID`),
   CONSTRAINT `FK_DONATION_USER_PROJECT2` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`),
   CONSTRAINT `FK_DONATION_USER_PROJECT` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `enumeration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `enumeration` (
-  `ID_ENUMERATION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ENUMERATION` int(11) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `VALUE` varchar(255) DEFAULT NULL,
   `RANK` int(11) DEFAULT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE `enumeration` (
   `PARENT_ID` int(11) DEFAULT NULL,
   `TYPE_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_ENUMERATION`)
-) ENGINE=InnoDB AUTO_INCREMENT=787 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `follow_user_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `follow_user_project` (
-  `ID_FOLLOW` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_FOLLOW` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_FOLLOW`),
@@ -126,7 +126,7 @@ CREATE TABLE `follow_user_project` (
   KEY `FK_FOLLOW_USER_PROJECT2` (`USER_ID`),
   CONSTRAINT `FK_FOLLOW_USER_PROJECT2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`),
   CONSTRAINT `FK_FOLLOW_USER_PROJECT` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ DROP TABLE IF EXISTS `forum`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `forum` (
-  `ID_FORUM` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_FORUM` int(11) NOT NULL,
   `TYPE_ENUM_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `TITLE` varchar(255) DEFAULT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `forum` (
   KEY `FK_SE_DEFINIT2` (`TYPE_ENUM_ID`),
   CONSTRAINT `FK_SE_DEFINIT2` FOREIGN KEY (`TYPE_ENUM_ID`) REFERENCES `enumeration` (`ID_ENUMERATION`),
   CONSTRAINT `FK_ECHANGE` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ DROP TABLE IF EXISTS `manage_user_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `manage_user_project` (
-  `ID_MANAGE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MANAGE` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_MANAGE`),
@@ -187,7 +187,7 @@ CREATE TABLE `manage_user_project` (
   KEY `FK_MANAGE_USER_PROJECT2` (`USER_ID`),
   CONSTRAINT `FK_MANAGE_USER_PROJECT2` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`),
   CONSTRAINT `FK_MANAGE_USER_PROJECT` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ DROP TABLE IF EXISTS `notification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notification` (
-  `ID_NOTIFICATION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_NOTIFICATION` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `TITLE` longtext,
   `MESSAGE` longtext,
@@ -216,7 +216,7 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`ID_NOTIFICATION`),
   KEY `FK_RECOIT` (`USER_ID`),
   CONSTRAINT `FK_RECOIT` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID_USER`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ DROP TABLE IF EXISTS `project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project` (
-  `ID_PROJECT` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PROJECT` int(11) NOT NULL,
   `TYPE_ID` int(11) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `DESCRIPTION` text,
@@ -254,7 +254,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`ID_PROJECT`),
   KEY `FK_TYPE_PROJET` (`TYPE_ID`),
   CONSTRAINT `FK_TYPE_PROJET` FOREIGN KEY (`TYPE_ID`) REFERENCES `enumeration` (`ID_ENUMERATION`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ DROP TABLE IF EXISTS `technology_project_enumeration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `technology_project_enumeration` (
-  `ID_TECHNOLOGY` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_TECHNOLOGY` int(11) NOT NULL,
   `TECHNO_ENUM_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_TECHNOLOGY`),
@@ -283,7 +283,7 @@ CREATE TABLE `technology_project_enumeration` (
   KEY `FK_TECHNOLOGY_PROJECT_ENUMERATION2` (`PROJECT_ID`),
   CONSTRAINT `FK_TECHNOLOGY_PROJECT_ENUMERATION2` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`),
   CONSTRAINT `FK_TECHNOLOGY_PROJECT_ENUMERATION` FOREIGN KEY (`TECHNO_ENUM_ID`) REFERENCES `enumeration` (`ID_ENUMERATION`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +304,7 @@ DROP TABLE IF EXISTS `uploaded_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `uploaded_file` (
-  `ID_FILE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_FILE` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   `URL` varchar(255) DEFAULT NULL,
   `TITLE` varchar(255) DEFAULT NULL,
@@ -314,7 +314,7 @@ CREATE TABLE `uploaded_file` (
   PRIMARY KEY (`ID_FILE`),
   KEY `FK_JOIN_PROJECT_FILE` (`PROJECT_ID`),
   CONSTRAINT `FK_JOIN_PROJECT_FILE` FOREIGN KEY (`PROJECT_ID`) REFERENCES `project` (`ID_PROJECT`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +335,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `ID_USER` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_USER` int(11) NOT NULL,
   `JOB_ENUM_ID` int(11) DEFAULT NULL,
   `COMPTE_ENUM_ID` int(11) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
@@ -352,7 +352,7 @@ CREATE TABLE `user` (
   KEY `FK_S_AUTHENTIFIE` (`COMPTE_ENUM_ID`),
   CONSTRAINT `FK_S_AUTHENTIFIE` FOREIGN KEY (`COMPTE_ENUM_ID`) REFERENCES `enumeration` (`ID_ENUMERATION`),
   CONSTRAINT `FK_EXERCE` FOREIGN KEY (`JOB_ENUM_ID`) REFERENCES `enumeration` (`ID_ENUMERATION`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-09 22:13:55
+-- Dump completed on 2013-06-09 23:13:13
