@@ -361,7 +361,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,7,4,'Guerin','Florian','flo.guerin.21@gmail.com','4ec5f6d7116af9659f292c687ecf788a',NULL,350,2,'2013-06-09 21:05:01',NULL),(2,7,2,'Van Yen','Edouard','evanyen@isep.fr','c0f7e05c97303e9d9449262e09436ce9',NULL,0,1,'2013-06-09 21:07:24',NULL);
+INSERT INTO `user` VALUES (1,7,4,'Guerin','Florian','flo.guerin.21@gmail.com','4ec5f6d7116af9659f292c687ecf788a',NULL,350,2,'2013-06-09 21:05:01',NULL),(2,7,2,'Van Yen','Edouard','evan-yen@juniorisep.com','c0f7e05c97303e9d9449262e09436ce9',NULL,0,1,'2013-06-09 21:07:24',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
