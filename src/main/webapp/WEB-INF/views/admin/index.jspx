@@ -9,4 +9,9 @@
       <spring:message arguments="${app_name}" code="welcome_titlepane"/>
     </h3>
   </util:panel>
+  	<div class="row-fluid">
+		<div class="well-small">
+			<h3>Administration</h3>
+		</div>
+	</div>
 </div>

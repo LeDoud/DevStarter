@@ -26,19 +26,19 @@
 				<td>Posts</td>
 				<td>Last Post</td>
 			</tr>
-			<c:if test="${empty topics}"><tr><td colspan="3" style="text-align:center">No topic yet</td></tr>
+			<c:if test="${empty topics}"><tr><td colspan="3" style="text-align:center">There is no topic yet</td></tr>
 			</c:if>
+			<c:set var="i" value="0"/>
 			<c:forEach var="topics" items="${topics}">
 				<tr>
 					<td><a
 						href="${pageContext.request.contextPath}/forum/topic/${topics.idForum}">${topics.title
 							}</a></td>
-					<td>${posts}</td>
+					<td>${posts[i]}</td>
 					<td><i><fmt:formatDate type="both" dateStyle="short"
-								value="${topics.dateCreated.getTime()}" /> <br />by <a
-							href="${pageContext.request.contextPath}/user/profile/${topics.userId.idUser}">${topics.userId.firstname
-								} ${topics.userId.name }</a></i></td>
+								value="${lastPostDate[i].getTime()}" /> <br />by ${lastPost[i]}</i></td>
 				</tr>
+				<c:set var="i" value="${i + 1}"/>
 			</c:forEach>
 		</table>
 
