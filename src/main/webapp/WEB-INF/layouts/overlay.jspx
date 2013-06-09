@@ -30,7 +30,7 @@
       function renderGoogle2() {
   	    gapi.signin.render('btnGoogle2', {
   	      'clientid': '850028130802.apps.googleusercontent.com',
-  	      'cookiepolicy': 'http://localhost:8080/DevStarter',
+  	      'cookiepolicy': 'single_host_origin',
   	      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
   	      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
   	    });
