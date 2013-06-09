@@ -76,7 +76,7 @@ public class Project {
 
     public static List<isep.rose.devstarter.domain.Project> findStartingSoonProjects() {
         List<Project> projects = new ArrayList<Project>();
-        Query query = entityManager().createQuery("select project from Project project where active=1 and start_date>=NOW()" + "ORDER BY start_date", Project.class);
+        Query query = entityManager().createQuery("select project from Project project where active=1 and start_date>=NOW() " + "ORDER BY start_date", Project.class);
         projects = query.getResultList();
         if (projects.isEmpty()) {
             return null;
