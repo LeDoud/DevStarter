@@ -146,14 +146,14 @@
 			<div class="row-fluid">
 				<div class="span24">
 					<c:if test="${empty comments}"><p class="alert alert-info"><strong>There is no comment yet</strong></p></c:if>
-					<table class="table table-condensed table-striped" style="width:60%"><c:forEach var="comments" items="${comments}">
+					<table class="table table-condensed table-striped" ><c:forEach var="comments" items="${comments}">
 					<tr><td>${comments.message}</td><td><fmt:formatDate type="both" dateStyle="short"
 									value="${comments.createdDate.getTime()}" /></td><td><a href="${pageContext.request.contextPath}/user/profile/${comments.userId.idUser}">${comments.userId.firstname} ${comments.userId.name} </a></td>
 					</tr></c:forEach></table>
 					<br/>
 						<form id="leave-comment" method="POST"
 			action="${pageContext.request.contextPath}/project/comment">
-						<textarea id="comment" name="comment" style="width:60%; height:100px;"
+						<textarea id="comment" name="comment" style="width:70%; height:100px;"
 							placeholder="Please leave a comment !"><!--  --></textarea>
 							<!--<input type="hidden" id="user" name="user" value="${sessionScope.idUser}"/>-->
 							<input type="hidden" id="project" name="project" value="${project.idProject}"/>
