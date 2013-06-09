@@ -290,7 +290,7 @@ public class ProjectController {
 
 		/*-------------FICHIERS---------*/
 		for (int i = 1; i <= 5; i++) {
-			if ((webRequest.getParameter("doc" + i + "_title") != null)
+			if ((webRequest.getParameter("doc" + String.valueOf(i) + "_title") != null)
 					&& (files.get(i) != null)) {
 				UploadedFile file = new UploadedFile();
 				try {
