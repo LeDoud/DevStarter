@@ -105,7 +105,7 @@ public class ProjectController {
 	}
 
 	/*----------RECHERCHE----------------*/
-	@RequestMapping(value = "/find", produces = "text/html" , method = RequestMethod.POST)
+	@RequestMapping(value = "/find", produces = "text/html")
 	public String find(
 			org.springframework.web.context.request.WebRequest webRequest,
 			HttpServletRequest httpServletRequest,ModelMap model) {
@@ -140,10 +140,11 @@ public class ProjectController {
 		}
 		
 		String title="";
+		if(webRequest.getParameter("title") != null){
 		if(!webRequest.getParameter("title").equals("")){
 			title=webRequest.getParameter("title");
 		}
-
+		}
 		String languagesArray[] = null;
 		if (webRequest.getParameter("hidden-languages") != null) {
 			String languages = webRequest.getParameter("hidden-languages").toString();

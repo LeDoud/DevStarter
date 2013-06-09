@@ -123,7 +123,7 @@ function logoutFacebook() {
 			async : false,
 			type : "POST",
 			success : function(result) {
-				window.location.href='${pageContext.request.contextPath}/home/index';
+				window.location.href='${pageContext.request.contextPath}';
 			}
 		});
 	});
@@ -224,7 +224,7 @@ function logoutFacebook() {
     				async : false,
     				type : "GET",
     				success : function(result) {
-    					window.location.href='${pageContext.request.contextPath}/home/index';
+    					window.location.href='${pageContext.request.contextPath}';
     				}
     			});
     	    },

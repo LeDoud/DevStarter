@@ -141,7 +141,7 @@ public class UserController {
 
 			return "redirect:/user/account";
 		} else {
-			return "redirect:/home/index";
+			return "redirect:/";
 		}
 	}
 
@@ -323,7 +323,7 @@ public class UserController {
 		/* message de confirmation lors du retour sur l'accueil */
 		String accountCreated = "<div class=\"alert alert-success\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Your account has been created. You can sign in now !</strong> However, we have sent you an email so you can validate your account for good.</div>";
 		redirectAttributes.addFlashAttribute("message", accountCreated);
-		return "redirect:/home/index";
+		return "redirect:/";
 	}
 
 	/*------VERIFICATION DE LUNICITE DU MAIL POUR INSCRIPTION--------------*/
@@ -418,13 +418,13 @@ public class UserController {
 				String infoMessage = "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Warning !</strong> You didn't validate your account yet. Please follow the instructions sent by mail. <a href=\"\">Re-send email.</a></div>";
 				redirectAttributes.addFlashAttribute("message", infoMessage);
 			}
-			return "redirect:/home/index";
+			return "redirect:/";
 		} else {
 
 			String errorMessage = "<div class=\"alert alert-error\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Cannot sign in !</strong> Wrong email or password. Forgot your password ? <a href=\"/DevStarter/user/forgotPassword\" data-target=\"#myModal2\" data-backdrop=\"true\" data-toggle=\"modal\">Click here.</a></div>";
 			redirectAttributes.addFlashAttribute("message", errorMessage);
 
-			return "redirect:/home/index";
+			return "redirect:/";
 		}
 	}
 
@@ -474,7 +474,7 @@ public class UserController {
 
 		/* message de confirmation lors du retour sur l'accueil */
 		redirectAttributes.addFlashAttribute("message", newPassword);
-		return "redirect:/home/index";
+		return "redirect:/";
 	}
 
 	/*----------LOGOUT---------------*/
@@ -482,7 +482,7 @@ public class UserController {
 	public String logout(HttpServletRequest request) {
 
 		request.getSession().invalidate();
-		return "redirect:/home/index";
+		return "redirect:/";
 	}
 
 }
