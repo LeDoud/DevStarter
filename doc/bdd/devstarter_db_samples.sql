@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `COMMENT_USER_PROJECT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `COMMENT_USER_PROJECT` (
-  `ID_COMMENT` int(11) NOT NULL,
+  `ID_COMMENT` int(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   `TITLE` varchar(255) NOT NULL,
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `DONATION_USER_PROJECT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DONATION_USER_PROJECT` (
-  `ID_DONATION` int(11) NOT NULL,
+  `ID_DONATION` int(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) DEFAULT NULL,
   `AMOUNT` int(11) DEFAULT NULL,
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `ENUMERATION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ENUMERATION` (
-  `ID_ENUMERATION` int(11) NOT NULL,
+  `ID_ENUMERATION` int(11) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) DEFAULT NULL,
   `VALUE` varchar(255) DEFAULT NULL,
   `RANK` int(11) DEFAULT NULL,
@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `FOLLOW_USER_PROJECT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `FOLLOW_USER_PROJECT` (
-  `ID_FOLLOW` int(11) NOT NULL,
+  `ID_FOLLOW` int(11) NOT NULL AUTO_INCREMENT,
   `PROJECT_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_FOLLOW`)
@@ -134,7 +134,7 @@ DROP TABLE IF EXISTS `FORUM`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `FORUM` (
-  `ID_FORUM` int(11) NOT NULL,
+  `ID_FORUM` int(11) NOT NULL AUTO_INCREMENT,
   `TYPE_ENUM_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `TITLE` varchar(255) DEFAULT NULL,
@@ -163,7 +163,7 @@ DROP TABLE IF EXISTS `MANAGE_USER_PROJECT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MANAGE_USER_PROJECT` (
-  `ID_MANAGE` int(11) NOT NULL,
+  `ID_MANAGE` int(11) NOT NULL AUTO_INCREMENT,
   `PROJECT_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_MANAGE`)
@@ -188,7 +188,7 @@ DROP TABLE IF EXISTS `NOTIFICATION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `NOTIFICATION` (
-  `ID_NOTIFICATION` int(11) NOT NULL,
+  `ID_NOTIFICATION` int(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` int(11) NOT NULL,
   `TITLE` longtext,
   `MESSAGE` longtext,
@@ -214,7 +214,7 @@ DROP TABLE IF EXISTS `PROJECT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PROJECT` (
-  `ID_PROJECT` int(11) NOT NULL,
+  `ID_PROJECT` int(11) NOT NULL AUTO_INCREMENT,
   `TYPE_ID` int(11) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `DESCRIPTION` text,
@@ -251,7 +251,7 @@ DROP TABLE IF EXISTS `TECHNOLOGY_PROJECT_ENUMERATION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TECHNOLOGY_PROJECT_ENUMERATION` (
-  `ID_TECHNOLOGY` int(11) NOT NULL,
+  `ID_TECHNOLOGY` int(11) NOT NULL AUTO_INCREMENT,
   `TECHNO_ENUM_ID` int(11) NOT NULL,
   `PROJECT_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID_TECHNOLOGY`)
@@ -276,7 +276,7 @@ DROP TABLE IF EXISTS `UPLOADED_FILE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `UPLOADED_FILE` (
-  `ID_FILE` int(11) NOT NULL,
+  `ID_FILE` int(11) NOT NULL AUTO_INCREMENT,
   `PROJECT_ID` int(11) NOT NULL,
   `URL` varchar(255) DEFAULT NULL,
   `TITLE` varchar(255) DEFAULT NULL,
@@ -305,7 +305,7 @@ DROP TABLE IF EXISTS `USER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `USER` (
-  `ID_USER` int(11) NOT NULL,
+  `ID_USER` int(11) NOT NULL AUTO_INCREMENT,
   `JOB_ENUM_ID` int(11) DEFAULT NULL,
   `COMPTE_ENUM_ID` int(11) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
