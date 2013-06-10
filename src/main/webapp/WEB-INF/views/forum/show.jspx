@@ -38,7 +38,7 @@
 					} ${topic.userId.name }</a></td>
 			<td>${topic.message }</td>
 			<td><fmt:formatDate type="both" dateStyle="long"
-					value="${topic.dateCreated.getTime()}" /></td>
+					value="${topic.dateCreated.time}" /></td>
 		</tr>
 		<tr>
 			<td colspan="3" style="text-align: center">ANSWERS</td>
@@ -50,7 +50,7 @@
 						} ${post.userId.name }</a></td>
 				<td>${post.message }</td>
 				<td><fmt:formatDate type="both" dateStyle="long"
-						value="${post.dateCreated.getTime()}" /></td>
+						value="${post.dateCreated.time}" /></td>
 			</tr>
 		</c:forEach>
 	</table>

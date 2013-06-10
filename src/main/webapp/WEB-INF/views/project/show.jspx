@@ -146,14 +146,19 @@
 			<div class="row-fluid">
 				<div class="span24">
 				<c:choose>
-					<c:when test="${empty comments}">
+					<c:when test="${empty project.commentUserProjects}">
 						<p class="alert alert-info"><strong>There is no comment yet</strong></p>
 					</c:when>
 					<c:otherwise>
-						<table class="table table-condensed table-striped" ><c:forEach var="comments" items="${comments}">
-					<tr><td>${comments.message}</td><td><fmt:formatDate type="both" dateStyle="short"
-									value="${comments.createdDate.getTime()}" /></td><td><a href="${pageContext.request.contextPath}/user/profile/${comments.userId.idUser}">${comments.userId.firstname} ${comments.userId.name} </a></td>
-					</tr></c:forEach></table>
+						<table class="table table-condensed table-striped" >
+							<c:forEach var="comment" items="${project.commentUserProjects}">
+								<tr>
+									<td>${comment.message}</td>
+									<td><fmt:formatDate type="both" dateStyle="short" value="${comment.createdDate.time}" /></td>
+									<td><a href="${pageContext.request.contextPath}/user/profile/${comment.userId.idUser}">${comment.userId.firstname} ${comment.userId.name} </a></td>
+								</tr>
+							</c:forEach>
+					</table>
 					<br/>
 					</c:otherwise>
 				</c:choose>

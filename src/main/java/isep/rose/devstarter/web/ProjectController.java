@@ -315,9 +315,7 @@ public class ProjectController {
 		Project project = Project.findProject(idProject);
 		project.setRank(project.getRank() + 1);
 		project.persist();
-		List<CommentUserProject> comments = CommentUserProject.findCommentUserProjectByProjectId(project);
 		model.addAttribute("project", project);
-		model.addAttribute("comments", comments);
 		return "project/show";
 	}
 

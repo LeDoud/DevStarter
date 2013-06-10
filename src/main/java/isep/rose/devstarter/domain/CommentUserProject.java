@@ -16,18 +16,4 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooDbManaged(automaticallyDelete = true)
 public class CommentUserProject {
 
-	public static List<isep.rose.devstarter.domain.CommentUserProject> findCommentUserProjectByProjectId(
-			Project project) {
-		List<CommentUserProject> commentUserProject = new ArrayList<CommentUserProject>();
-		Query query = entityManager().createQuery(
-				"select comments from CommentUserProject comments "
-						+ "where projectId = :projectId",
-				CommentUserProject.class);
-		query.setParameter("projectId", project);
-		commentUserProject = query.getResultList();
-		if (commentUserProject.isEmpty()) {
-			return null;
-		}
-		return commentUserProject;
-	}
 }

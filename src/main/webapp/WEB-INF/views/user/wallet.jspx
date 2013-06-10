@@ -40,7 +40,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="donation" items="${donations}">
-						<tr><td><fmt:formatDate type="both" dateStyle="long" value="${donation.date.getTime()}" /></td><td><c:if test="${donation.type=='less'}">- ${donation.amount} $</c:if><c:if test="${donation.type=='add'}">+ ${donation.amount} $</c:if></td><td>${donation.projectId.name}</td><td>${donation.transactionDetail}</td></tr>
+						<tr><td><fmt:formatDate type="both" dateStyle="long" value="${donation.date.time}" /></td><td><c:if test="${donation.type=='less'}">- ${donation.amount} $</c:if><c:if test="${donation.type=='add'}">+ ${donation.amount} $</c:if></td><td>${donation.projectId.name}</td><td>${donation.transactionDetail}</td></tr>
 					</c:forEach>
 				</tbody>
 			</table>

@@ -36,7 +36,7 @@
 							}</a></td>
 					<td>${posts[i]}</td>
 					<td><i><fmt:formatDate type="both" dateStyle="short"
-								value="${lastPostDate[i].getTime()}" /> <br />by ${lastPost[i]}</i></td>
+								value="${lastPostDate[i].time}" /> <br />by ${lastPost[i]}</i></td>
 				</tr>
 				<c:set var="i" value="${i + 1}"/>
 			</c:forEach>
