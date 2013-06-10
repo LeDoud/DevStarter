@@ -415,8 +415,8 @@ public class UserController {
 					user.getCompteEnumId().getName());
 
 			if (user.getActive() == 1) {
-				String infoMessage = "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Warning !</strong> You didn't validate your account yet. Please follow the instructions sent by mail. <a href=\"\">Re-send email.</a></div>";
-				redirectAttributes.addFlashAttribute("message", infoMessage);
+				//String infoMessage = "<div class=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Warning !</strong> You didn't validate your account yet. Please follow the instructions sent by mail. <a href=\"\">Re-send email.</a></div>";
+				//redirectAttributes.addFlashAttribute("message", infoMessage);
 			}
 			return "redirect:/";
 		} else {
