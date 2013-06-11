@@ -16,8 +16,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooDbManaged(automaticallyDelete = true)
 public class Forum {
 	
-    public static List<isep.rose.devstarter.domain.Forum > findAllTopics() {
-        List<Forum > topics = new ArrayList<Forum >();
+    public static List<isep.rose.devstarter.domain.Forum> findAllTopics() {
+        List<Forum> topics = new ArrayList<Forum>();
         Query query = entityManager().createQuery("select topics from Forum topics " + "where parentId = :parentId"+ " ORDER BY dateCreated DESC" , Forum.class);
         query.setParameter("parentId", 0);
         topics = query.getResultList();
@@ -27,8 +27,8 @@ public class Forum {
         return topics;
     }
     
-    public static List<isep.rose.devstarter.domain.Forum > findAllMessageTopic(int topicId) {
-        List<Forum > messages = new ArrayList<Forum >();
+    public static List<isep.rose.devstarter.domain.Forum> findAllMessageTopic(int topicId) {
+        List<Forum> messages = new ArrayList<Forum>();
         Query query = entityManager().createQuery("select topics from Forum topics " + "where parentId = :parentId" +" ORDER BY dateCreated" , Forum.class);
         query.setParameter("parentId", topicId);
         messages = query.getResultList();
@@ -39,7 +39,7 @@ public class Forum {
     }
     
     public static int findCountMessageTopic(int topicId) {
-        List<Forum > messages = new ArrayList<Forum >();
+        List<Forum> messages = new ArrayList<Forum>();
         Query query = entityManager().createQuery("select topics from Forum topics " + "where parentId = :parentId" +" ORDER BY dateCreated" , Forum.class);
         query.setParameter("parentId", topicId);
         messages = query.getResultList();
@@ -50,7 +50,7 @@ public class Forum {
     }
     
     public static isep.rose.devstarter.domain.Forum findLastMessageTopic(int topicId) {
-        List<Forum > messages = new ArrayList<Forum >();
+        List<Forum> messages = new ArrayList<Forum>();
         Query query = entityManager().createQuery("select topics from Forum topics " + "where parentId = :parentId or idForum = :parentId" +" ORDER BY dateCreated DESC" , Forum.class);
         query.setParameter("parentId", topicId);
         messages = query.getResultList();
