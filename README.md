@@ -17,6 +17,7 @@ Afin de les aider dans leur travail, cet outil aura pour vocation de leur permet
 - Spring 3.1.1
 - Roo 1.2.3
 - Maven 3
+- Tomcat 6
 
 ## Installation
 
