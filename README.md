@@ -25,8 +25,8 @@ Fonction réalisées au cours de ce projet :
 
 ## Technologies utilisées
 
-Nous avons tout d'abord réalisé un Modèle Conceptuel de Données à l'aide de Power AMC. Ce dernier nous ayant générer le script de création de notre base de données en MySQL.
-Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectuer un Reverse Engineering et avons donc génerer toutes les classes du Modèle.
+Nous avons tout d'abord réalisé un Modèle Conceptuel de Données à l'aide de Power AMC. Ce dernier nous ayant généré le script de création de notre base de données MySQL.
+Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectué un Reverse Engineering afin de génerer toutes les classes du Modèle.
 
 - Java 6
 - MySQL 5
