@@ -10,7 +10,7 @@ Florian GUERIN - Edouard VAN YEN - Pierre LE TEXIER - Gustave NGUYEN - Narjisse 
 Un club d’informaticien souhaite promouvoir le développement de logiciels libres par la création d’un outil permettant aux développeurs de vivre de leur passion. 
 Afin de les aider dans leur travail, cet outil aura pour vocation de leur permettre de décrire les fonctionnalités des logiciels qu’ils développent afin de percevoir des dons de la part des personnes intéressées par ces projets.
 
-Fonction réalisées au cours de ce projet :
+Fonctions réalisées au cours de ce projet :
 
 - Inscription et authentification par email, Facebook et Google.
 - Création d'une page de présentation d'un projet
@@ -40,7 +40,7 @@ Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectu
 1.  Dézipper le projet dans le répertoire voulu
 2.  Exécuter le script SQL "devstarter_db_samples.sql" du répertoire "doc/bdd/", ce dernier contient également des données d'exemple.
 3.  Aller dans le fichier "src/main/ressources/META-INF/spring/database.properties" et modifier les informations de connexion à la base MySQL si nécessaire (user="root", password="", port="8889")
-4.	Si vous souhaitez utiliser la fonction de login avec Facebook, l'application doit être lancée sur un serveur dont l'ip et le port sont : localhost:8080
+4.  Si vous souhaitez utiliser la fonction de login avec Facebook, l'application doit être lancée sur un serveur dont l'ip et le port sont : localhost:8080
 5.  Ouvrir un terminal et se positionner dans le répertoire racine "DevStarter" du projet et exécuter les commandes suivantes :
   
   - mvn clean install
