@@ -39,7 +39,8 @@ Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectu
 1.  Dézipper le projet dans le répertoire voulu
 2.  Exécuter le script SQL "devstarter_db_samples.sql" du répertoire "doc/bdd/", ce dernier contient également des données d'exemple.
 3.  Aller dans le fichier "src/main/ressources/META-INF/spring/database.properties" et modifier les informations de connexion à la base MySQL si nécessaire (user="root", password="", port="8889")
-4.  Ouvrir un terminal et se positionner dans le répertoire racine "DevStarter" du projet et exécuter les commandes suivantes :
+4.	Si vous souhaitez utiliser la fonction de login avec Facebook, l'application doit être lancée sur un serveur dont l'ip et le port sont : localhost:8080
+5.  Ouvrir un terminal et se positionner dans le répertoire racine "DevStarter" du projet et exécuter les commandes suivantes :
   
   - mvn clean install
   - mvn tomcat:run
