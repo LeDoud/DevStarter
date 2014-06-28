@@ -1,9 +1,8 @@
 DevStarter
 ==========
 
-Projet de web avancé 2013 Groupe ROSE - Spring ROO - Reverse Engineering
+Projet de web avancé 2013 - ISEP Groupe ROSE - Spring ROO - Reverse Engineering
 
-Florian GUERIN - Edouard VAN YEN - Pierre LE TEXIER - Gustave NGUYEN - Narjisse HIMMI
 
 ## Conception et spécifications
 
@@ -26,7 +25,7 @@ Fonctions réalisées au cours de ce projet :
 ## Technologies utilisées
 
 Nous avons tout d'abord réalisé un Modèle Conceptuel de Données à l'aide de Power AMC. Ce dernier nous ayant généré le script de création de notre base de données MySQL.
-Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectué un Reverse Engineering afin de génerer toutes les classes du Modèle.
+Nous avons ensuite créé un projet Spring ROO sous STS, puis nous avons effectué un Reverse Engineering afin de générer toutes les classes du Modèle.
 
 - Java 6
 - MySQL 5
